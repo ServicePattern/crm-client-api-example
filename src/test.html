@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>API test</title>
+    <script type="application/javascript" src="<%= brightpatternOrigin %>/agent/communicator/adapters/api.js"></script>
+    <style>
+        html, body {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+        body > main {
+            width: calc(100% - 501px);
+        }
+        body > aside {
+            border-left: 1px solid #3d3e3f;
+        }
+        #controls {
+            height: 60%;
+            box-sizing: border-box;
+            padding: 1rem;
+            overflow: auto;
+        }
+        #log {
+            height: 40%;
+            box-sizing: border-box;
+            padding: 1rem;
+            overflow: auto;
+            border-top: 1px solid #3d3e3f;
+            font-family: monospace;
+        }
+        .log-msg {
+            display: flex;
+            border-top: 1px solid #ebeef0;
+            padding: 4px 0;
+        }
+        .log-msg:last-child {
+            border-bottom: 1px solid #ebeef0;
+        }
+        .log-msg > div:nth-child(1) {
+            width: 340px;
+            flex-shrink: 0;
+            margin-right: 1rem;
+            display: flex;
+            flex-flow: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .log-msg > div:nth-child(1) > div {
+            border-radius: 8px;
+            padding: 2px 8px;
+            border: 1px solid black;
+            color: #fff;
+            display: inline-block;
+        }
+        .log-msg.outgoing > div:nth-child(1) > div {
+            background-color: #00b5ad;
+        }
+        .log-msg.outgoing-result > div:nth-child(1) > div {
+            background-color: #7f38c3;
+        }
+        .log-msg.incoming > div:nth-child(1) > div {
+            background-color: #2185d0;
+        }
+        .log-msg.incoming-result > div:nth-child(1) > div {
+            background-color: #21ba45;
+        }
+        .log-msg.error > div:nth-child(1) > div {
+            background-color: #db2828;
+        }
+        .log-msg > div:nth-child(2) {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            line-break: anywhere;
+        }
+        #controls > .row {
+            display: flex;
+            margin: 4px;
+        }
+        #controls > .row > button,
+        #controls > .row > input,
+        #controls > .row > label,
+        #controls > .row > div,
+        #controls > .row > textarea {
+            margin-right: 8px;
+        }
+        #controls > .row > div {
+            display: flex;
+            align-items: center;
+        }
+        textarea {
+            width: 500px;
+        }
+        .highlighted {
+            outline: 3px solid #e03997a6;
+        }
+        #controls button {
+            cursor: pointer;
+        }
+        #controls button:hover {
+            outline: 3px solid black;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div id="controls">
+        <div class="row">
+            <button id="get_agent_state_button">getAgentState</button>
+            <button id="set_agent_state_button">setAgentState</button>
+            <input id="agent_state_input" type="text" placeholder="agent state" />
+            <input id="not_ready_reason_input" type="text" placeholder="not ready reason" />
+        </div>
+        <div class="row">
+            <button id="start_call_button">startCall</button>
+            <button id="start_sms_chat_button">startSMSChat</button>
+            <input id="phone_number_input" type="text" placeholder="phone number" />
+        </div>
+        <div class="row">
+            <button id="start_email_button">startEmail</button>
+            <input id="email_address_input" type="text" placeholder="email address" />
+        </div>
+        <div class="row">
+            <label for="interaction_id_input">Interaction ID</label>
+            <input id="interaction_id_input" type="text" placeholder="interaction id" />
+        </div>
+        <div class="row">
+            <button id="terminate_call_button">terminateCall</button>
+            <button id="complete_interaction_button">completeInteraction</button>
+            <button id="switch_active_interaction_button">switchActiveInteraction</button>
+        </div>
+        <div class="row">
+            <button id="change_service">changeService</button>
+            <input id="service_name_input" type="text" placeholder="service name" />
+        </div>
+        <div class="row">
+            <button id="set_disposition">setDisposition</button>
+            <input id="disposition_name_input" type="text" placeholder="disposition name" />
+            <label>or</label>
+            <input id="disposition_code_input" type="text" placeholder="disposition code" />
+        </div>
+        <div class="row">
+            <button id="get_call_recording_status_button">getCallRecordingStatus</button>
+            <button id="set_call_recording_status_button">setCallRecordingStatus</button>
+            <label for="call_recording_checkbox">Call recording</label>
+            <input id="call_recording_checkbox" type="checkbox" />
+        </div>
+        <div class="row">
+            <button id="get_screen_recording_status_button">getScreenRecordingStatus</button>
+            <button id="set_screen_recording_status_button">setScreenRecordingStatus</button>
+            <label for="screen_recording_checkbox">Screen recording</label>
+            <input id="screen_recording_checkbox" type="checkbox" />
+        </div>
+        <div class="row">
+            <button id="mute_all_button">muteAll</button>
+            <button id="unmute_all_button">unmuteAll</button>
+            <select id="mute_target_select">
+                <option value="CALLS" selected>CALLS</option>
+                <option value="SCREEN">SCREEN</option>
+            </select>
+        </div>
+        <div class="row">
+            <button id="set_variable_button">setVariable</button>
+            <input id="variable_name_input" type="text" placeholder="variable name" />
+            <input id="variable_value_input" type="text" placeholder="variable value" />
+        </div>
+        <div class="row">
+            <button id="get_config_button">getConfig</button>
+            <button id="notify_widget_minimized_button">notifyWidgetMinimized</button>
+            <button id="notify_widget_maximized_button">notifyWidgetMaximized</button>
+        </div>
+        <div class="row">
+            <div>
+                <button id="add_interaction_associated_object_button">addInteractionAssociatedObject</button>
+            </div>
+            <textarea id="associated_object_textarea" rows="9">
+{
+    "id": "some-random-id",
+    "type": "contact",
+    "displayName": "Peter Morrison",
+    "displayType": "Contact",
+    "customFields": {},
+    "source": "test-adapter"
+}
+            </textarea>
+        </div>
+        <div class="row">
+            <div>
+                <button id="set_interaction_active_screen_button">setInteractionActiveScreen</button>
+            </div>
+            <textarea id="active_screen_textarea" rows="4" placeholder="Arbitrary data structure">
+{
+    "url": "https://brightpattern.com/?data=none"
+}
+            </textarea>
+        </div>
+        <div class="row">
+            <label for="transfer_data_textarea">Custom data for transfer:</label>
+            <textarea id="transfer_data_textarea" rows="5" placeholder="Arbitrary data structure">
+{
+    "urlHistory": [],
+    "associatedMetadata": "some-data"
+}
+            </textarea>
+        </div>
+        <div class="row">
+            <label for="search_kb_result_textarea">Search KB result:</label>
+            <textarea id="search_kb_result_textarea" rows="10" placeholder="Array of KB items">
+[
+    {
+        "id": "random-id-1",
+        "title": "Demo article",
+        "text": "This is KB Article content",
+        "source": "test-adapter"
+    },
+    {
+        "id": "random-id-2",
+        "title": "How to use KB articles",
+        "text": "You can use KB articles when a client asks you a common question",
+        "source": "test-adapter"
+    }
+]
+                </textarea>
+        </div>
+        <div class="row">
+            <label for="kb_article_full_data_textarea">KB Article full data:</label>
+            <textarea id="kb_article_full_data_textarea" rows="10" placeholder="KB Article data">
+{
+    "id": "random-id-2",
+    "title": "How to use KB articles",
+    "answer": "You can use KB articles when a client asks you a common question",
+    "keywords": "agent,kb,article",
+    "notes": "use it only to teach agents-newcomers",
+    "language": "ru",
+    "createdByUser": "System admin",
+    "lastEditedByUser": "Paul Andersen",
+    "customFields": {},
+    "source": "test-adapter"
+}
+            </textarea>
+        </div>
+    </div>
+    <div id="log"></div>
+</main>
+<aside id="adc_mount_node"></aside>
+</body>
+</html>
