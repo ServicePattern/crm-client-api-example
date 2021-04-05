@@ -24,8 +24,8 @@
         </header>
 
         <div class="controls">
-            <section data-name="session" class="section opened">
-                <form onsubmit="return false">
+            <section data-name="session" class="section opened border border-r p-8 pb-4 rounded border-gray-300">
+                <form onsubmit="return false" class="max-w-lg">
                     <div class="mb-4">
                         <label class="input-label" for="username_input">
                             Username
@@ -52,10 +52,12 @@
                                name="name"
                         >
                     </div>
-                    <button id="login_button">login</button>
-                    <button id="get_login_state_button">getLoginState</button>
-                    <button id="logout_button">logout</button>
-                    <input type='reset' class="button_helper mb-4 self-end inline-block w-auto" value="Reset form"/>
+                    <div class="flex justify-between flex-wrap">
+                        <button class="button mr-1 mb-4" id="login_button">login</button>
+                        <button class="button mx-1 mb-4" id="get_login_state_button">getLoginState</button>
+                        <button class="button mx-1 mb-4" id="logout_button">logout</button>
+                        <input type='reset' class="button_helper self-end inline-block w-auto ml-1 mb-4" value="Reset form"/>
+                    </div>
                 </form>
             </section>
             <!--            <form onsubmit="return false" class="row">-->
@@ -237,11 +239,11 @@
         </div>
         <div class="log-container">
             <div class="log-controls">
-                <button id="clear_log">clear</button>
+                <button id="clear_log" class="button_helper m-3">clear</button>
             </div>
             <div id="log"></div>
         </div>
-    </section>
+    </section >
 </main>
 <aside id="adc_mount_node"></aside>
 </body>

@@ -13,41 +13,43 @@ body > main {
     flex-grow: 1;
 }
 body > aside {
-    border-left: 1px solid #3d3e3f;
+    border-left: 1px solid;
+    @apply border-gray-300;
 }
 
 .controls {
     height: 60%;
-    padding: 1rem;
+    @apply pl-4;
     overflow: auto;
 }
 .log-container {
     height: 40%;
     box-sizing: border-box;
-    border-top: 1px solid #3d3e3f;
     display: flex;
     flex-flow: column nowrap;
+    border: 1px solid;
+    border-left: none;
+    @apply border-gray-300 rounded-tr;
 }
 .log-controls {
     display: flex;
     justify-content: flex-end;
-    border-bottom: 1px solid #5d5e5f;
 }
-.log-controls > button {
-    margin-right: 8px;
-}
+
 #log {
-    padding: 1rem;
+    @apply p-4;
     overflow: auto;
     font-family: monospace;
 }
 .log-msg {
     display: flex;
-    border-top: 1px solid #ebeef0;
+    border-top: 1px solid;
+    @apply border-gray-300 py-2;
     padding: 4px 0;
 }
 .log-msg:last-child {
-    border-bottom: 1px solid #ebeef0;
+    border-bottom: 1px solid;
+    @apply border-gray-300;
 }
 .log-msg > div:nth-child(1) {
     width: 340px;
@@ -61,7 +63,6 @@ body > aside {
 .log-msg > div:nth-child(1) > div {
     border-radius: 8px;
     padding: 2px 8px;
-    border: 1px solid black;
     color: #fff;
     display: inline-block;
 }
@@ -86,38 +87,18 @@ body > aside {
     overflow: hidden;
     line-break: anywhere;
 }
-.row {
-    display: flex;
-    margin: 4px;
-}
-span {
-    width: 20px;
-}
-.row > button,
-.row > input,
-.row > label,
-.row > div,
-.row > textarea {
-    margin-right: 8px;
-}
-.row > div {
-    display: flex;
-    align-items: center;
-}
-textarea {
-    width: 500px;
-}
+
 .highlighted {
     @apply ring-2 ring-yellow-300;
 }
 
-button {
+.button {
     cursor: pointer;
     @apply font-bold py-2 px-4 rounded;
     @apply bg-blue-500 text-white;
 }
 
-button:hover, button:focus {
+.button:hover, .button:focus {
     @apply bg-yellow-500;
 }
 
@@ -125,7 +106,7 @@ button:hover, button:focus {
     @apply bg-transparent outline-none focus:bg-transparent hover:text-yellow-500 text-blue-700 font-semibold hover:text-white  focus:text-yellow-500  py-2 px-4 border border-blue-500 hover:border-yellow-500 focus:border-yellow-500 rounded cursor-pointer;
 }
 
-input {
+input:not([type='reset']) {
     @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-500;
 }
 
