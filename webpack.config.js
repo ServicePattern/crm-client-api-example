@@ -3,7 +3,7 @@ const path = require('path')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const brightpatternOrigin = process.env.BRIGHTPATTERN_ORIGIN || 'https://ocean08.brightpattern.com';
+const brightpatternOrigin = process.env.BRIGHTPATTERN_ORIGIN || 'https://localhost:3000';
 
 module.exports = {
     entry: path.resolve(__dirname, 'src', 'example.ts'),
@@ -21,6 +21,9 @@ module.exports = {
             },
         ],
     },
+    devServer: {
+      contentBase: './public',
+    },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
@@ -31,6 +34,6 @@ module.exports = {
         }),
     ],
     resolve: {
-        extensions: ['.ts'],
+        extensions: ['.ts', '.js'],
     },
 }
