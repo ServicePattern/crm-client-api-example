@@ -1,6 +1,6 @@
 // need to use `import type` when using local copy of .d.ts for brightpattern API types
 import type {InteractionAssociatedObject} from './brightpattern-client-api-types'
-
+import './app.css'
 const integrationKey = 'test-adapter'
 
 const messageClass = {
