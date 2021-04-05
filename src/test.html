@@ -11,9 +11,8 @@
 <body>
 <main class="flex">
     <aside class="menu border-r-2 border-solid h-full bg-white shadow-sm">
-        <label class="inline-flex items-center mt-3">
-            <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" checked><span class="ml-2 text-gray-700">label</span>
-        </label>
+        <p class="menu-item opened" data-name="session">Session</p>
+        <p class="menu-item" data-name="agent-state">Agent state</p>
     </aside>
     <section>
         <header class="flex">
@@ -25,190 +24,216 @@
         </header>
 
         <div class="controls">
-            <form onsubmit="return false" class="row">
-                <button id="get_login_state_button" class="bg-red-500 ">getLoginState</button>
-                <button id="login_button">login</button>
-                <input id="username_input" type="text" placeholder="username" autocomplete="on"/>
-                <input id="password_input" type="text" placeholder="password" autocomplete="off"/>
-                <input id="tenant_input" type="text" placeholder="tenant" autocomplete="on"/>
-                <button id="logout_button">logout</button>
-            </form>
-            <form onsubmit="return false" class="row">
-                <button id="get_phone_devices_list_button">getPhoneDevicesList</button>
-                <button id="get_phone_device_button">getPhoneDevice</button>
-                <input id="phone_device_type_input" type="text" placeholder="phone device type" autocomplete="on"/>
-                <input id="phone_device_number_input" type="text" placeholder="phone device number" autocomplete="on"/>
-                <button id="set_phone_device_button">setPhoneDevice</button>
-            </form>
-            <form onsubmit="return false" class="row">
-                <button id="get_agent_state_button">getAgentState</button>
-                <button id="set_agent_state_button">setAgentState</button>
-                <input id="agent_state_input" type="text" placeholder="agent state" autocomplete="on"/>
-                <input id="not_ready_reason_input" type="text" placeholder="not ready reason" autocomplete="on"/>
-            </form>
-            <form onsubmit="return false" class="row">
-                <button id="start_call_button">startCall</button>
-                <input id="phone_number_input" type="text" placeholder="phone number" autocomplete="on"/>
-                <span></span>
-                <button id="start_chat_button">startChat</button>
-                <input id="chat_channel_input" type="text" placeholder="chat channel" autocomplete="on"/>
-                <input id="chat_address_input" type="text" placeholder="phone or user id" autocomplete="on"/>
-                <span></span>
-                <button id="start_email_button">startEmail</button>
-                <input id="email_address_input" type="text" placeholder="email address" autocomplete="on"/>
-            </form>
-            <form onsubmit="return false" class="row">
-                <button id="consult_call_button">consultCall</button>
-                <button id="blind_transfer_button">blindTransfer</button>
-                <span></span>
-                <button id="transfer_button">transfer</button>
-                <input id="main_item_id_input" type="text" placeholder="transferring item id" autocomplete="off"/>
-                <input id="consult_call_id_input" type="text" placeholder="consult call id" autocomplete="off"/>
-            </form>
-            <form onsubmit="return false" class="row">
-                <label for="interaction_id_input">Interaction ID</label>
-                <input id="interaction_id_input" type="text" placeholder="interaction id" autocomplete="off"/>
-                <span></span>
-                <button id="leave_interaction_button">leaveInteraction</button>
-                <button id="complete_interaction_button">completeInteraction</button>
-                <button id="leave_and_complete_interaction_button">leaveAndCompleteInteraction</button>
-                <button id="switch_active_interaction_button">switchActiveInteraction</button>
-            </form>
-            <form onsubmit="return false" class="row">
-                <button id="accept_interaction_button">acceptInteraction</button>
-                <button id="reject_interaction_button">rejectInteraction</button>
-                <button id="send_dtmf_button">sendDtmf</button>
-                <input id="dtmf_input" type="text" placeholder="DTMF" autocomplete="on"/>
-            </form>
-            <form onsubmit="return false" class="row">
-                <button id="add_to_call_conference_button">addToCallConference</button>
-                <button id="remove_from_call_conference_button">removeFromCallConference</button>
-                <input id="party_id_input" type="text" placeholder="party id" autocomplete="off"/>
-                <button id="destroy_call_conference_button">destroyCallConference</button>
-            </form>
-            <form onsubmit="return false" class="row">
-                <button id="get_teams_button">getTeams</button>
-                <button id="get_team_members_button">getTeamMembers</button>
-                <input id="team_id_input" type="text" placeholder="team id" autocomplete="on"/>
-                <span></span>
-                <button id="get_services_list_button">getServicesList</button>
-                <button id="set_service_button">setService</button>
-                <input id="service_id_input" type="text" placeholder="service id/name" autocomplete="on"/>
-            </form>
-            <form onsubmit="return false" class="row">
-                <button id="set_reschedule_window_button">setRescheduleWindow</button>
-                <input id="from_time_input" type="text" placeholder="YYYY-MM-DD HH24:MM:SS" autocomplete="off"/>
-                <input id="until_time_input" type="text" placeholder="YYYY-MM-DD HH24:MM:SS" autocomplete="off"/>
-                <input id="timezone_code_input" type="text" placeholder="en_US" autocomplete="on"/>
-            </form>
-            <form onsubmit="return false" class="row">
-                <button id="get_dispositions_list_button">getDispositionsList</button>
-                <button id="set_disposition_button">setDisposition</button>
-                <input id="disposition_id_input" type="text" placeholder="disposition id/code/name" autocomplete="on"/>
-                <span></span>
-                <button id="add_note_button">addNote</button>
-                <button id="update_note_button">updateNote</button>
-                <button id="replace_note_button">replaceNote</button>
-                <input id="note_input" type="text" placeholder="note" autocomplete="off"/>
-            </form>
-            <form onsubmit="return false" class="row">
-                <button id="set_call_hold_button">setCallHold</button>
-                <input id="call_hold_checkbox" type="checkbox"/>
-                <label for="call_hold_checkbox">Hold call</label>
-                <button id="set_call_recording_button">setCallRecording</button>
-                <input id="call_recording_checkbox" type="checkbox"/>
-                <label for="call_recording_checkbox">Call recording</label>
-                <button id="set_call_mute_button">setCallMute</button>
-                <input id="call_mute_checkbox" type="checkbox"/>
-                <label for="call_mute_checkbox">Mute call</label>
-            </form>
-            <form onsubmit="return false" class="row">
-                <button id="set_screen_recording_mute_button">setScreenRecordingMute</button>
-                <input id="screen_recording_mute_checkbox" type="checkbox"/>
-                <label for="screen_recording_mute_checkbox">Mute screen recording</label>
-                <button id="get_screen_recording_state_button">getScreenRecordingState</button>
-            </form>
-            <form onsubmit="return false" class="row">
-                <button id="set_variable_button">setVariable</button>
-                <input id="variable_name_input" type="text" placeholder="variable name" autocomplete="on"/>
-                <input id="variable_value_input" type="text" placeholder="variable value" autocomplete="off"/>
-                <span></span>
-                <button id="get_config_button">getConfig</button>
-                <button id="set_widget_minimized_button">setWidgetMinimized</button>
-                <input id="widget_minimized_checkbox" type="checkbox"/>
-                <label for="widget_minimized_checkbox">Widget minimized</label>
-            </form>
-            <div class="row">
-                <div>
-                    <button id="add_interaction_associated_object_button">addInteractionAssociatedObject</button>
-                </div>
-                <textarea id="associated_object_textarea" rows="9">
-{
-    "id": "some-random-id",
-    "type": "contact",
-    "displayName": "Peter Morrison",
-    "displayType": "Contact",
-    "customFields": {},
-    "source": "test-adapter"
-}
-                </textarea>
-            </div>
-            <div class="row">
-                <div>
-                    <button id="set_interaction_active_screen_button">setInteractionActiveScreen</button>
-                </div>
-                <textarea id="active_screen_textarea" rows="4" placeholder="Arbitrary data structure">
-{
-    "url": "https://brightpattern.com/?data=none"
-}
-                </textarea>
-            </div>
-            <div class="row">
-                <label for="transfer_data_textarea">Custom data for transfer:</label>
-                <textarea id="transfer_data_textarea" rows="5" placeholder="Arbitrary data structure (1-level depth)">
-{
-    "prevUrl": "http://example.com/?url=right",
-    "reconnectAttempts": 3,
-    "associatedMetadata": "blah-blah-blah"
-}
-                </textarea>
-            </div>
-            <div class="row">
-                <label for="search_kb_result_textarea">Search KB result:</label>
-                <textarea id="search_kb_result_textarea" rows="10" placeholder="Array of KB items">
-[
-    {
-        "id": "random-id-1",
-        "title": "Demo article",
-        "text": "This is KB Article content",
-        "source": "test-adapter"
-    },
-    {
-        "id": "random-id-2",
-        "title": "How to use KB articles",
-        "text": "You can use KB articles when a client asks you a common question",
-        "source": "test-adapter"
-    }
-]
-                </textarea>
-            </div>
-            <div class="row">
-                <label for="kb_article_full_data_textarea">KB Article full data:</label>
-                <textarea id="kb_article_full_data_textarea" rows="10" placeholder="KB Article data">
-{
-    "id": "random-id-2",
-    "title": "How to use KB articles",
-    "answer": "You can use KB articles when a client asks you a common question",
-    "keywords": "agent,kb,article",
-    "notes": "use it only to teach agents-newcomers",
-    "language": "ru",
-    "createdByUser": "System admin",
-    "lastEditedByUser": "Pol Andersen",
-    "customFields": {},
-    "source": "test-adapter"
-}
-                </textarea>
-            </div>
+            <section data-name="session" class="section opened">
+                <form onsubmit="return false">
+                    <div class="mb-4">
+                        <label class="input-label" for="username_input">
+                            Username
+                        </label>
+                        <input id="username_input" type="text" placeholder="Username" autocomplete="on"
+                               name="name"
+                        >
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="input-label" for="password_input">
+                            Password
+                        </label>
+                        <input id="password_input" type="text" placeholder="Password" autocomplete="off"
+                               name="name"
+                        >
+                    </div>
+
+                    <div class="mb-8">
+                        <label class="input-label" for="tenant_input">
+                            Tenant
+                        </label>
+                        <input id="tenant_input" type="text" placeholder="Tenant" autocomplete="on"
+                               name="name"
+                        >
+                    </div>
+                    <button id="login_button">login</button>
+                    <button id="get_login_state_button">getLoginState</button>
+                    <button id="logout_button">logout</button>
+                    <input type='reset' class="button_helper mb-4 self-end inline-block w-auto" value="Reset form"/>
+                </form>
+            </section>
+            <!--            <form onsubmit="return false" class="row">-->
+            <!--                <button id="get_phone_devices_list_button">getPhoneDevicesList</button>-->
+            <!--                <button id="get_phone_device_button">getPhoneDevice</button>-->
+            <!--                <input id="phone_device_type_input" type="text" placeholder="phone device type" autocomplete="on"/>-->
+            <!--                <input id="phone_device_number_input" type="text" placeholder="phone device number" autocomplete="on"/>-->
+            <!--                <button id="set_phone_device_button">setPhoneDevice</button>-->
+            <!--            </form>-->
+            <!--            <form onsubmit="return false" class="row">-->
+            <!--                <button id="get_agent_state_button">getAgentState</button>-->
+            <!--                <button id="set_agent_state_button">setAgentState</button>-->
+            <!--                <input id="agent_state_input" type="text" placeholder="agent state" autocomplete="on"/>-->
+            <!--                <input id="not_ready_reason_input" type="text" placeholder="not ready reason" autocomplete="on"/>-->
+            <!--            </form>-->
+            <!--            <form onsubmit="return false" class="row">-->
+            <!--                <button id="start_call_button">startCall</button>-->
+            <!--                <input id="phone_number_input" type="text" placeholder="phone number" autocomplete="on"/>-->
+            <!--                <span></span>-->
+            <!--                <button id="start_chat_button">startChat</button>-->
+            <!--                <input id="chat_channel_input" type="text" placeholder="chat channel" autocomplete="on"/>-->
+            <!--                <input id="chat_address_input" type="text" placeholder="phone or user id" autocomplete="on"/>-->
+            <!--                <span></span>-->
+            <!--                <button id="start_email_button">startEmail</button>-->
+            <!--                <input id="email_address_input" type="text" placeholder="email address" autocomplete="on"/>-->
+            <!--            </form>-->
+            <!--            <form onsubmit="return false" class="row">-->
+            <!--                <button id="consult_call_button">consultCall</button>-->
+            <!--                <button id="blind_transfer_button">blindTransfer</button>-->
+            <!--                <span></span>-->
+            <!--                <button id="transfer_button">transfer</button>-->
+            <!--                <input id="main_item_id_input" type="text" placeholder="transferring item id" autocomplete="off"/>-->
+            <!--                <input id="consult_call_id_input" type="text" placeholder="consult call id" autocomplete="off"/>-->
+            <!--            </form>-->
+            <!--            <form onsubmit="return false" class="row">-->
+            <!--                <label for="interaction_id_input">Interaction ID</label>-->
+            <!--                <input id="interaction_id_input" type="text" placeholder="interaction id" autocomplete="off"/>-->
+            <!--                <span></span>-->
+            <!--                <button id="leave_interaction_button">leaveInteraction</button>-->
+            <!--                <button id="complete_interaction_button">completeInteraction</button>-->
+            <!--                <button id="leave_and_complete_interaction_button">leaveAndCompleteInteraction</button>-->
+            <!--                <button id="switch_active_interaction_button">switchActiveInteraction</button>-->
+            <!--            </form>-->
+            <!--            <form onsubmit="return false" class="row">-->
+            <!--                <button id="accept_interaction_button">acceptInteraction</button>-->
+            <!--                <button id="reject_interaction_button">rejectInteraction</button>-->
+            <!--                <button id="send_dtmf_button">sendDtmf</button>-->
+            <!--                <input id="dtmf_input" type="text" placeholder="DTMF" autocomplete="on"/>-->
+            <!--            </form>-->
+            <!--            <form onsubmit="return false" class="row">-->
+            <!--                <button id="add_to_call_conference_button">addToCallConference</button>-->
+            <!--                <button id="remove_from_call_conference_button">removeFromCallConference</button>-->
+            <!--                <input id="party_id_input" type="text" placeholder="party id" autocomplete="off"/>-->
+            <!--                <button id="destroy_call_conference_button">destroyCallConference</button>-->
+            <!--            </form>-->
+            <!--            <form onsubmit="return false" class="row">-->
+            <!--                <button id="get_teams_button">getTeams</button>-->
+            <!--                <button id="get_team_members_button">getTeamMembers</button>-->
+            <!--                <input id="team_id_input" type="text" placeholder="team id" autocomplete="on"/>-->
+            <!--                <span></span>-->
+            <!--                <button id="get_services_list_button">getServicesList</button>-->
+            <!--                <button id="set_service_button">setService</button>-->
+            <!--                <input id="service_id_input" type="text" placeholder="service id/name" autocomplete="on"/>-->
+            <!--            </form>-->
+            <!--            <form onsubmit="return false" class="row">-->
+            <!--                <button id="set_reschedule_window_button">setRescheduleWindow</button>-->
+            <!--                <input id="from_time_input" type="text" placeholder="YYYY-MM-DD HH24:MM:SS" autocomplete="off"/>-->
+            <!--                <input id="until_time_input" type="text" placeholder="YYYY-MM-DD HH24:MM:SS" autocomplete="off"/>-->
+            <!--                <input id="timezone_code_input" type="text" placeholder="en_US" autocomplete="on"/>-->
+            <!--            </form>-->
+            <!--            <form onsubmit="return false" class="row">-->
+            <!--                <button id="get_dispositions_list_button">getDispositionsList</button>-->
+            <!--                <button id="set_disposition_button">setDisposition</button>-->
+            <!--                <input id="disposition_id_input" type="text" placeholder="disposition id/code/name" autocomplete="on"/>-->
+            <!--                <span></span>-->
+            <!--                <button id="add_note_button">addNote</button>-->
+            <!--                <button id="update_note_button">updateNote</button>-->
+            <!--                <button id="replace_note_button">replaceNote</button>-->
+            <!--                <input id="note_input" type="text" placeholder="note" autocomplete="off"/>-->
+            <!--            </form>-->
+            <!--            <form onsubmit="return false" class="row">-->
+            <!--                <button id="set_call_hold_button">setCallHold</button>-->
+            <!--                <input id="call_hold_checkbox" type="checkbox"/>-->
+            <!--                <label for="call_hold_checkbox">Hold call</label>-->
+            <!--                <button id="set_call_recording_button">setCallRecording</button>-->
+            <!--                <input id="call_recording_checkbox" type="checkbox"/>-->
+            <!--                <label for="call_recording_checkbox">Call recording</label>-->
+            <!--                <button id="set_call_mute_button">setCallMute</button>-->
+            <!--                <input id="call_mute_checkbox" type="checkbox"/>-->
+            <!--                <label for="call_mute_checkbox">Mute call</label>-->
+            <!--            </form>-->
+            <!--            <form onsubmit="return false" class="row">-->
+            <!--                <button id="set_screen_recording_mute_button">setScreenRecordingMute</button>-->
+            <!--                <input id="screen_recording_mute_checkbox" type="checkbox"/>-->
+            <!--                <label for="screen_recording_mute_checkbox">Mute screen recording</label>-->
+            <!--                <button id="get_screen_recording_state_button">getScreenRecordingState</button>-->
+            <!--            </form>-->
+            <!--            <form onsubmit="return false" class="row">-->
+            <!--                <button id="set_variable_button">setVariable</button>-->
+            <!--                <input id="variable_name_input" type="text" placeholder="variable name" autocomplete="on"/>-->
+            <!--                <input id="variable_value_input" type="text" placeholder="variable value" autocomplete="off"/>-->
+            <!--                <span></span>-->
+            <!--                <button id="get_config_button">getConfig</button>-->
+            <!--                <button id="set_widget_minimized_button">setWidgetMinimized</button>-->
+            <!--                <input id="widget_minimized_checkbox" type="checkbox"/>-->
+            <!--                <label for="widget_minimized_checkbox">Widget minimized</label>-->
+            <!--            </form>-->
+            <!--            <div class="row">-->
+            <!--                <div>-->
+            <!--                    <button id="add_interaction_associated_object_button">addInteractionAssociatedObject</button>-->
+            <!--                </div>-->
+            <!--                <textarea id="associated_object_textarea" rows="9">-->
+            <!--{-->
+            <!--    "id": "some-random-id",-->
+            <!--    "type": "contact",-->
+            <!--    "displayName": "Peter Morrison",-->
+            <!--    "displayType": "Contact",-->
+            <!--    "customFields": {},-->
+            <!--    "source": "test-adapter"-->
+            <!--}-->
+            <!--                </textarea>-->
+            <!--            </div>-->
+            <!--            <div class="row">-->
+            <!--                <div>-->
+            <!--                    <button id="set_interaction_active_screen_button">setInteractionActiveScreen</button>-->
+            <!--                </div>-->
+            <!--                <textarea id="active_screen_textarea" rows="4" placeholder="Arbitrary data structure">-->
+            <!--{-->
+            <!--    "url": "https://brightpattern.com/?data=none"-->
+            <!--}-->
+            <!--                </textarea>-->
+            <!--            </div>-->
+            <!--            <div class="row">-->
+            <!--                <label for="transfer_data_textarea">Custom data for transfer:</label>-->
+            <!--                <textarea id="transfer_data_textarea" rows="5" placeholder="Arbitrary data structure (1-level depth)">-->
+            <!--{-->
+            <!--    "prevUrl": "http://example.com/?url=right",-->
+            <!--    "reconnectAttempts": 3,-->
+            <!--    "associatedMetadata": "blah-blah-blah"-->
+            <!--}-->
+            <!--                </textarea>-->
+            <!--            </div>-->
+            <!--            <div class="row">-->
+            <!--                <label for="search_kb_result_textarea">Search KB result:</label>-->
+            <!--                <textarea id="search_kb_result_textarea" rows="10" placeholder="Array of KB items">-->
+            <!--[-->
+            <!--    {-->
+            <!--        "id": "random-id-1",-->
+            <!--        "title": "Demo article",-->
+            <!--        "text": "This is KB Article content",-->
+            <!--        "source": "test-adapter"-->
+            <!--    },-->
+            <!--    {-->
+            <!--        "id": "random-id-2",-->
+            <!--        "title": "How to use KB articles",-->
+            <!--        "text": "You can use KB articles when a client asks you a common question",-->
+            <!--        "source": "test-adapter"-->
+            <!--    }-->
+            <!--]-->
+            <!--                </textarea>-->
+            <!--            </div>-->
+            <!--            <div class="row">-->
+            <!--                <label for="kb_article_full_data_textarea">KB Article full data:</label>-->
+            <!--                <textarea id="kb_article_full_data_textarea" rows="10" placeholder="KB Article data">-->
+            <!--{-->
+            <!--    "id": "random-id-2",-->
+            <!--    "title": "How to use KB articles",-->
+            <!--    "answer": "You can use KB articles when a client asks you a common question",-->
+            <!--    "keywords": "agent,kb,article",-->
+            <!--    "notes": "use it only to teach agents-newcomers",-->
+            <!--    "language": "ru",-->
+            <!--    "createdByUser": "System admin",-->
+            <!--    "lastEditedByUser": "Pol Andersen",-->
+            <!--    "customFields": {},-->
+            <!--    "source": "test-adapter"-->
+            <!--}-->
+            <!--                </textarea>-->
+            <!--            </div>-->
         </div>
         <div class="log-container">
             <div class="log-controls">

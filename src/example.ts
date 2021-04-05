@@ -3,11 +3,14 @@ import type {InteractionAssociatedObject} from './brightpattern-client-api-types
 import {Hamburger} from './components/hamburger'
 
 import './app.css'
+import { Menu } from './components/menu'
 const integrationKey = 'test-adapter'
 
 const hamburger = new Hamburger('.hamburger', '.menu')
 hamburger.initializeEventListener()
 
+const menu = new Menu(hamburger,'.menu', '.menu-item', '.section')
+menu.initializeEventListeners()
 
 const messageClass = {
     'o': 'outgoing',
