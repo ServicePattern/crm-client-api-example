@@ -15,7 +15,7 @@
             margin: 0;
         }
         body > main {
-            width: calc(100% - 501px);
+            flex-grow: 1;
         }
         body > aside {
             border-left: 1px solid #3d3e3f;
@@ -26,12 +26,24 @@
             padding: 1rem;
             overflow: auto;
         }
-        #log {
+        .log-container {
             height: 40%;
             box-sizing: border-box;
+            border-top: 1px solid #3d3e3f;
+            display: flex;
+            flex-flow: column nowrap;
+        }
+        .log-controls {
+            display: flex;
+            justify-content: flex-end;
+            border-bottom: 1px solid #5d5e5f;
+        }
+        .log-controls > button {
+            margin-right: 8px;
+        }
+        #log {
             padding: 1rem;
             overflow: auto;
-            border-top: 1px solid #3d3e3f;
             font-family: monospace;
         }
         .log-msg {
@@ -83,6 +95,9 @@
             display: flex;
             margin: 4px;
         }
+        #controls > span {
+            width: 20px;
+        }
         #controls > .row > button,
         #controls > .row > input,
         #controls > .row > label,
@@ -111,70 +126,119 @@
 <body>
 <main>
     <div id="controls">
-        <div class="row">
+        <form onsubmit="return false" class="row">
+            <button id="get_login_state_button">getLoginState</button>
+            <button id="login_button">login</button>
+            <input id="username_input" type="text" placeholder="username" autocomplete="on" />
+            <input id="password_input" type="text" placeholder="password" autocomplete="off" />
+            <input id="tenant_input" type="text" placeholder="tenant" autocomplete="on" />
+            <button id="logout_button">logout</button>
+        </form>
+        <form onsubmit="return false" class="row">
+            <button id="get_phone_devices_list_button">getPhoneDevicesList</button>
+            <button id="get_phone_device_button">getPhoneDevice</button>
+            <input id="phone_device_type_input" type="text" placeholder="phone device type" autocomplete="on" />
+            <input id="phone_device_number_input" type="text" placeholder="phone device number" autocomplete="on" />
+            <button id="set_phone_device_button">setPhoneDevice</button>
+        </form>
+        <form onsubmit="return false" class="row">
             <button id="get_agent_state_button">getAgentState</button>
             <button id="set_agent_state_button">setAgentState</button>
-            <input id="agent_state_input" type="text" placeholder="agent state" />
-            <input id="not_ready_reason_input" type="text" placeholder="not ready reason" />
-        </div>
-        <div class="row">
+            <input id="agent_state_input" type="text" placeholder="agent state" autocomplete="on" />
+            <input id="not_ready_reason_input" type="text" placeholder="not ready reason" autocomplete="on" />
+        </form>
+        <form onsubmit="return false" class="row">
             <button id="start_call_button">startCall</button>
-            <button id="start_sms_chat_button">startSMSChat</button>
-            <input id="phone_number_input" type="text" placeholder="phone number" />
-        </div>
-        <div class="row">
+            <input id="phone_number_input" type="text" placeholder="phone number" autocomplete="on" />
+            <span></span>
+            <button id="start_chat_button">startChat</button>
+            <input id="chat_channel_input" type="text" placeholder="chat channel" autocomplete="on" />
+            <input id="chat_address_input" type="text" placeholder="phone or user id" autocomplete="on" />
+            <span></span>
             <button id="start_email_button">startEmail</button>
-            <input id="email_address_input" type="text" placeholder="email address" />
-        </div>
-        <div class="row">
+            <input id="email_address_input" type="text" placeholder="email address" autocomplete="on" />
+        </form>
+        <form onsubmit="return false" class="row">
+            <button id="consult_call_button">consultCall</button>
+            <button id="blind_transfer_button">blindTransfer</button>
+            <span></span>
+            <button id="transfer_button">transfer</button>
+            <input id="main_item_id_input" type="text" placeholder="transferring item id" autocomplete="off" />
+            <input id="consult_call_id_input" type="text" placeholder="consult call id" autocomplete="off" />
+        </form>
+        <form onsubmit="return false" class="row">
             <label for="interaction_id_input">Interaction ID</label>
-            <input id="interaction_id_input" type="text" placeholder="interaction id" />
-        </div>
-        <div class="row">
-            <button id="terminate_call_button">terminateCall</button>
+            <input id="interaction_id_input" type="text" placeholder="interaction id" autocomplete="off" />
+            <span></span>
+            <button id="leave_interaction_button">leaveInteraction</button>
             <button id="complete_interaction_button">completeInteraction</button>
+            <button id="leave_and_complete_interaction_button">leaveAndCompleteInteraction</button>
             <button id="switch_active_interaction_button">switchActiveInteraction</button>
-        </div>
-        <div class="row">
-            <button id="change_service">changeService</button>
-            <input id="service_name_input" type="text" placeholder="service name" />
-        </div>
-        <div class="row">
-            <button id="set_disposition">setDisposition</button>
-            <input id="disposition_name_input" type="text" placeholder="disposition name" />
-            <label>or</label>
-            <input id="disposition_code_input" type="text" placeholder="disposition code" />
-        </div>
-        <div class="row">
-            <button id="get_call_recording_status_button">getCallRecordingStatus</button>
-            <button id="set_call_recording_status_button">setCallRecordingStatus</button>
-            <label for="call_recording_checkbox">Call recording</label>
+        </form>
+        <form onsubmit="return false" class="row">
+            <button id="accept_interaction_button">acceptInteraction</button>
+            <button id="reject_interaction_button">rejectInteraction</button>
+            <button id="send_dtmf_button">sendDtmf</button>
+            <input id="dtmf_input" type="text" placeholder="DTMF" autocomplete="on" />
+        </form>
+        <form onsubmit="return false" class="row">
+            <button id="add_to_call_conference_button">addToCallConference</button>
+            <button id="remove_from_call_conference_button">removeFromCallConference</button>
+            <input id="party_id_input" type="text" placeholder="party id" autocomplete="off" />
+            <button id="destroy_call_conference_button">destroyCallConference</button>
+        </form>
+        <form onsubmit="return false" class="row">
+            <button id="get_teams_button">getTeams</button>
+            <button id="get_team_members_button">getTeamMembers</button>
+            <input id="team_id_input" type="text" placeholder="team id" autocomplete="on" />
+            <span></span>
+            <button id="get_services_list_button">getServicesList</button>
+            <button id="set_service_button">setService</button>
+            <input id="service_id_input" type="text" placeholder="service id/name" autocomplete="on" />
+        </form>
+        <form onsubmit="return false" class="row">
+            <button id="set_reschedule_window_button">setRescheduleWindow</button>
+            <input id="from_time_input" type="text" placeholder="YYYY-MM-DD HH24:MM:SS" autocomplete="off" />
+            <input id="until_time_input" type="text" placeholder="YYYY-MM-DD HH24:MM:SS" autocomplete="off" />
+            <input id="timezone_code_input" type="text" placeholder="en_US" autocomplete="on" />
+        </form>
+        <form onsubmit="return false" class="row">
+            <button id="get_dispositions_list_button">getDispositionsList</button>
+            <button id="set_disposition_button">setDisposition</button>
+            <input id="disposition_id_input" type="text" placeholder="disposition id/code/name" autocomplete="on" />
+            <span></span>
+            <button id="add_note_button">addNote</button>
+            <button id="update_note_button">updateNote</button>
+            <button id="replace_note_button">replaceNote</button>
+            <input id="note_input" type="text" placeholder="note" autocomplete="off" />
+        </form>
+        <form onsubmit="return false" class="row">
+            <button id="set_call_hold_button">setCallHold</button>
+            <input id="call_hold_checkbox" type="checkbox" />
+            <label for="call_hold_checkbox">Hold call</label>
+            <button id="set_call_recording_button">setCallRecording</button>
             <input id="call_recording_checkbox" type="checkbox" />
-        </div>
-        <div class="row">
-            <button id="get_screen_recording_status_button">getScreenRecordingStatus</button>
-            <button id="set_screen_recording_status_button">setScreenRecordingStatus</button>
-            <label for="screen_recording_checkbox">Screen recording</label>
-            <input id="screen_recording_checkbox" type="checkbox" />
-        </div>
-        <div class="row">
-            <button id="mute_all_button">muteAll</button>
-            <button id="unmute_all_button">unmuteAll</button>
-            <select id="mute_target_select">
-                <option value="CALLS" selected>CALLS</option>
-                <option value="SCREEN">SCREEN</option>
-            </select>
-        </div>
-        <div class="row">
+            <label for="call_recording_checkbox">Call recording</label>
+            <button id="set_call_mute_button">setCallMute</button>
+            <input id="call_mute_checkbox" type="checkbox" />
+            <label for="call_mute_checkbox">Mute call</label>
+        </form>
+        <form onsubmit="return false" class="row">
+            <button id="set_screen_recording_mute_button">setScreenRecordingMute</button>
+            <input id="screen_recording_mute_checkbox" type="checkbox" />
+            <label for="screen_recording_mute_checkbox">Mute screen recording</label>
+            <button id="get_screen_recording_state_button">getScreenRecordingState</button>
+        </form>
+        <form onsubmit="return false" class="row">
             <button id="set_variable_button">setVariable</button>
-            <input id="variable_name_input" type="text" placeholder="variable name" />
-            <input id="variable_value_input" type="text" placeholder="variable value" />
-        </div>
-        <div class="row">
+            <input id="variable_name_input" type="text" placeholder="variable name" autocomplete="on" />
+            <input id="variable_value_input" type="text" placeholder="variable value" autocomplete="off" />
+            <span></span>
             <button id="get_config_button">getConfig</button>
-            <button id="notify_widget_minimized_button">notifyWidgetMinimized</button>
-            <button id="notify_widget_maximized_button">notifyWidgetMaximized</button>
-        </div>
+            <button id="set_widget_minimized_button">setWidgetMinimized</button>
+            <input id="widget_minimized_checkbox" type="checkbox" />
+            <label for="widget_minimized_checkbox">Widget minimized</label>
+        </form>
         <div class="row">
             <div>
                 <button id="add_interaction_associated_object_button">addInteractionAssociatedObject</button>
@@ -188,7 +252,7 @@
     "customFields": {},
     "source": "test-adapter"
 }
-            </textarea>
+                </textarea>
         </div>
         <div class="row">
             <div>
@@ -198,16 +262,17 @@
 {
     "url": "https://brightpattern.com/?data=none"
 }
-            </textarea>
+                </textarea>
         </div>
         <div class="row">
             <label for="transfer_data_textarea">Custom data for transfer:</label>
-            <textarea id="transfer_data_textarea" rows="5" placeholder="Arbitrary data structure">
+            <textarea id="transfer_data_textarea" rows="5" placeholder="Arbitrary data structure (1-level depth)">
 {
-    "urlHistory": [],
-    "associatedMetadata": "some-data"
+    "prevUrl": "http://example.com/?url=right",
+    "reconnectAttempts": 3,
+    "associatedMetadata": "blah-blah-blah"
 }
-            </textarea>
+                </textarea>
         </div>
         <div class="row">
             <label for="search_kb_result_textarea">Search KB result:</label>
@@ -239,14 +304,19 @@
     "notes": "use it only to teach agents-newcomers",
     "language": "ru",
     "createdByUser": "System admin",
-    "lastEditedByUser": "Paul Andersen",
+    "lastEditedByUser": "Pol Andersen",
     "customFields": {},
     "source": "test-adapter"
 }
-            </textarea>
+                </textarea>
         </div>
     </div>
-    <div id="log"></div>
+    <div class="log-container">
+        <div class="log-controls">
+            <button id="clear_log">clear</button>
+        </div>
+        <div id="log"></div>
+    </div>
 </main>
 <aside id="adc_mount_node"></aside>
 </body>
