@@ -1,4 +1,4 @@
-interface HamburgerI {
+export interface HamburgerI {
     toggle(evtOrForceShow?: boolean | Event): void
 
     initializeEventListener(): void
