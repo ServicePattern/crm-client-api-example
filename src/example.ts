@@ -1,7 +1,13 @@
 // need to use `import type` when using local copy of .d.ts for brightpattern API types
 import type {InteractionAssociatedObject} from './brightpattern-client-api-types'
+import {Hamburger} from './components/hamburger'
+
 import './app.css'
 const integrationKey = 'test-adapter'
+
+const hamburger = new Hamburger('.hamburger', '.menu')
+hamburger.initializeEventListener()
+
 
 const messageClass = {
     'o': 'outgoing',
