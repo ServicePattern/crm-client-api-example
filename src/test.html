@@ -125,10 +125,10 @@
                         <button class="tab-item" data-name="start-interaction">
                             Start interaction
                         </button>
-                        <button class="tab-item active" data-name="transfer-interaction">
+                        <button class="tab-item" data-name="transfer-interaction">
                             Transfer
                         </button>
-                        <button class="tab-item" data-name="conference-interaction">
+                        <button class="tab-item active" data-name="conference-interaction">
                             Conference
                         </button>
                         <button class="tab-item" data-name="active-interaction">
@@ -201,7 +201,7 @@
                             </div>
                         </form>
                     </section>
-                    <section class="tab-content mt-4 active -mb-4" data-name="transfer-interaction">
+                    <section class="tab-content mt-4 -mb-4" data-name="transfer-interaction">
                         <form onsubmit="return false">
                             <div class="grid grid-cols-2 gap-4 mb-4">
                                 <div>
@@ -262,6 +262,59 @@
                             </div>
                         </form>
                     </section>
+                    <section class="tab-content mt-4 active -mb-4" data-name="conference-interaction">
+                        <form onsubmit="return false">
+                            <div class="grid grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <label class="input-label" for="conference_phone_number_input">
+                                        Phone number
+                                    </label>
+                                    <input id="conference_phone_number_input" type="text" placeholder="Phone number"
+                                           autocomplete="on"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="input-label" for="conference_interaction_id_input">
+                                        Interaction ID
+                                    </label>
+                                    <input id="conference_interaction_id_input" type="text" placeholder="Interaction ID"
+                                           autocomplete="off"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="input-label" for="party_id_input">
+                                        Party ID
+                                    </label>
+                                    <input id="party_id_input" type="text" placeholder="Party ID" autocomplete="off"/>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="conference_transfer_data_textarea" class="input-label">Custom data for
+                                    transfer:</label>
+                                <textarea id="conference_transfer_data_textarea" rows="5"
+                                          placeholder="Arbitrary data structure (1-level depth)">
+                                            {
+                                                "prevUrl": "http://example.com/?url=right",
+                                                "reconnectAttempts": 3,
+                                                "associatedMetadata": "blah-blah-blah"
+                                            }
+                                                            </textarea>
+                            </div>
+                            <div class="flex flex-wrap -mx-1 mt-4">
+                                <button class='button mx-1 mb-4' id="add_to_call_conference_button">
+                                    addToCallConference
+                                </button>
+                                <button class='button mx-1 mb-4' id="remove_from_call_conference_button">
+                                    removeFromCallConference
+                                </button>
+                                <button class='button mx-1 mb-4' id="destroy_call_conference_button">
+                                    destroyCallConference
+                                </button>
+                                <input type='reset' class="button_helper self-end inline-block w-auto mx-1 mb-4"
+                                       value="Reset form"/>
+                            </div>
+                        </form>
+                    </section>
                 </section>
 
                 <!--            <form onsubmit="return false" class="row">-->
@@ -278,12 +331,6 @@
                 <!--                <button id="reject_interaction_button">rejectInteraction</button>-->
                 <!--                <button id="send_dtmf_button">sendDtmf</button>-->
                 <!--                <input id="dtmf_input" type="text" placeholder="DTMF" autocomplete="on"/>-->
-                <!--            </form>-->
-                <!--            <form onsubmit="return false" class="row">-->
-                <!--                <button id="add_to_call_conference_button">addToCallConference</button>-->
-                <!--                <button id="remove_from_call_conference_button">removeFromCallConference</button>-->
-                <!--                <input id="party_id_input" type="text" placeholder="party id" autocomplete="off"/>-->
-                <!--                <button id="destroy_call_conference_button">destroyCallConference</button>-->
                 <!--            </form>-->
                 <!--            <form onsubmit="return false" class="row">-->
                 <!--                <button id="get_teams_button">getTeams</button>-->

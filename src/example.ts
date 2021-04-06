@@ -51,8 +51,10 @@ const agentStateInput = document.getElementById('agent_state_input')! as HTMLInp
 const notReadyReasonInput = document.getElementById('not_ready_reason_input')! as HTMLInputElement
 
 const startCallButton = document.getElementById('start_call_button')!
+
 const startCallPhoneNumberInput = document.getElementById('start_call_phone_number_input')! as HTMLInputElement
 const transferPhoneNumberInput = document.getElementById('transfer_phone_number_input')! as HTMLInputElement
+const conferencePhoneNumberInput = document.getElementById('conference_phone_number_input')! as HTMLInputElement
 const startChatButton = document.getElementById('start_chat_button')!
 const chatChannelInput = document.getElementById('chat_channel_input')! as HTMLInputElement
 const chatAddressInput = document.getElementById('chat_address_input')! as HTMLInputElement
@@ -66,6 +68,7 @@ const mainItemIdInput = document.getElementById('main_item_id_input')! as HTMLIn
 const consultCallIdInput = document.getElementById('consult_call_id_input')! as HTMLInputElement
 
 const interactionIdInput = document.getElementById('interaction_id_input')! as HTMLInputElement
+const conferenceInteractionIdInput = document.getElementById('conference_interaction_id_input')! as HTMLInputElement
 const leaveInteractionButton = document.getElementById('leave_interaction_button')!
 const completeInteractionButton = document.getElementById('complete_interaction_button')!
 const leaveAndCompleteInteractionButton = document.getElementById('leave_and_complete_interaction_button')!
@@ -127,6 +130,7 @@ const setInteractionActiveScreenButton = document.getElementById('set_interactio
 const activeScreenTextarea = document.getElementById('active_screen_textarea')! as HTMLTextAreaElement
 
 const transferDataTextarea = document.getElementById('transfer_data_textarea')! as HTMLTextAreaElement
+const conferenceTransferDataTextarea = document.getElementById('conference_transfer_data_textarea')! as HTMLTextAreaElement
 const searchKBResultTextarea = document.getElementById('search_kb_result_textarea')! as HTMLTextAreaElement
 const kbArticleFullDataTextarea = document.getElementById('kb_article_full_data_textarea')! as HTMLTextAreaElement
 
@@ -190,7 +194,6 @@ adApi.injectMessageLogger((message, data) => {
 
 setupHoverEffect(getLoginStateButton, [])
 getLoginStateButton.onclick = () => {
-    console.log('AHHAHAHA')
     adApi.getLoginState()
 }
 
@@ -318,74 +321,76 @@ transferButton.onclick = () => {
     adApi.transfer(transferData, mainItemId, consultCallId)
 }
 
-setupHoverEffect(leaveInteractionButton, [interactionIdInput])
-leaveInteractionButton.onclick = () => {
-    const itemId = interactionIdInput.value
-    adApi.leaveInteraction(itemId)
-}
+// setupHoverEffect(leaveInteractionButton, [interactionIdInput])
+// leaveInteractionButton.onclick = () => {
+//     const itemId = interactionIdInput.value
+//     adApi.leaveInteraction(itemId)
+// }
+//
+// setupHoverEffect(completeInteractionButton, [interactionIdInput])
+// completeInteractionButton.onclick = () => {
+//     const itemId = interactionIdInput.value
+//     adApi.completeInteraction(itemId)
+// }
+//
+// setupHoverEffect(leaveAndCompleteInteractionButton, [dispositionIdInput, noteInput, interactionIdInput])
+// leaveAndCompleteInteractionButton.onclick = () => {
+//     const dispositionId = dispositionIdInput.value
+//     const note = noteInput.value
+//     const itemId = interactionIdInput.value
+//     adApi.leaveAndCompleteInteraction(dispositionId, note, itemId)
+// }
+//
+// setupHoverEffect(switchActiveInteractionButton, [interactionIdInput])
+// switchActiveInteractionButton.onclick = () => {
+//     const itemId = interactionIdInput.value
+//     adApi.switchActiveInteraction(itemId)
+// }
+//
+// setupHoverEffect(acceptInteractionButton, [interactionIdInput])
+// acceptInteractionButton.onclick = () => {
+//     const itemId = interactionIdInput.value
+//     adApi.acceptInteraction(itemId)
+// }
+//
+// setupHoverEffect(rejectInteractionButton, [interactionIdInput])
+// rejectInteractionButton.onclick = () => {
+//     const itemId = interactionIdInput.value
+//     adApi.rejectInteraction(itemId)
+// }
+//
+// setupHoverEffect(sendDtmfButton, [dtmfInput, interactionIdInput])
+// sendDtmfButton.onclick = () => {
+//     const dtmf = dtmfInput.value
+//     const itemId = interactionIdInput.value
+//     adApi.sendDtmf(dtmf, itemId)
+// }
 
-setupHoverEffect(completeInteractionButton, [interactionIdInput])
-completeInteractionButton.onclick = () => {
-    const itemId = interactionIdInput.value
-    adApi.completeInteraction(itemId)
-}
 
-setupHoverEffect(leaveAndCompleteInteractionButton, [dispositionIdInput, noteInput, interactionIdInput])
-leaveAndCompleteInteractionButton.onclick = () => {
-    const dispositionId = dispositionIdInput.value
-    const note = noteInput.value
-    const itemId = interactionIdInput.value
-    adApi.leaveAndCompleteInteraction(dispositionId, note, itemId)
-}
-
-setupHoverEffect(switchActiveInteractionButton, [interactionIdInput])
-switchActiveInteractionButton.onclick = () => {
-    const itemId = interactionIdInput.value
-    adApi.switchActiveInteraction(itemId)
-}
-
-setupHoverEffect(acceptInteractionButton, [interactionIdInput])
-acceptInteractionButton.onclick = () => {
-    const itemId = interactionIdInput.value
-    adApi.acceptInteraction(itemId)
-}
-
-setupHoverEffect(rejectInteractionButton, [interactionIdInput])
-rejectInteractionButton.onclick = () => {
-    const itemId = interactionIdInput.value
-    adApi.rejectInteraction(itemId)
-}
-
-setupHoverEffect(sendDtmfButton, [dtmfInput, interactionIdInput])
-sendDtmfButton.onclick = () => {
-    const dtmf = dtmfInput.value
-    const itemId = interactionIdInput.value
-    adApi.sendDtmf(dtmf, itemId)
-}
-
-setupHoverEffect(inviteToCallConferenceButton, [transferPhoneNumberInput, transferDataTextarea, interactionIdInput])
+setupHoverEffect(inviteToCallConferenceButton, [conferencePhoneNumberInput, conferenceTransferDataTextarea, conferenceInteractionIdInput])
 inviteToCallConferenceButton.onclick = () => {
-    const phoneNumber = transferPhoneNumberInput.value
+    const phoneNumber = conferencePhoneNumberInput.value
     let transferData: any | null = null
     try {
-        transferData = JSON.parse(transferDataTextarea.value)
+        transferData = JSON.parse(conferenceTransferDataTextarea.value)
     } catch (e) {
         alert('You have syntax error in the transfer data structure. Cannot parse JSON.')
     }
-    const itemId = interactionIdInput.value
+    const itemId = conferenceInteractionIdInput.value
     adApi.inviteToCallConference(phoneNumber, transferData, itemId)
 }
 
-setupHoverEffect(removeFromCallConferenceButton, [partyIdInput, interactionIdInput])
+
+setupHoverEffect(removeFromCallConferenceButton, [partyIdInput, conferenceInteractionIdInput])
 removeFromCallConferenceButton.onclick = () => {
     const partyId = partyIdInput.value
-    const itemId = interactionIdInput.value
+    const itemId = conferenceInteractionIdInput.value
     adApi.removeFromCallConference(partyId, itemId)
 }
 
-setupHoverEffect(destroyCallConferenceButton, [interactionIdInput])
+setupHoverEffect(destroyCallConferenceButton, [conferenceInteractionIdInput])
 destroyCallConferenceButton.onclick = () => {
-    const itemId = interactionIdInput.value
+    const itemId = conferenceInteractionIdInput.value
     adApi.destroyCallConference(itemId)
 }
 
