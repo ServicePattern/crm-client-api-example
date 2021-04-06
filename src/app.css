@@ -11,10 +11,10 @@ html, body {
 }
 body > main {
     flex-grow: 1;
+    @apply shadow-inner;
 }
 body > aside {
-    border-left: 1px solid;
-    @apply border-gray-300;
+    @apply shadow-md;
 }
 
 .controls {
@@ -27,9 +27,7 @@ body > aside {
     box-sizing: border-box;
     display: flex;
     flex-flow: column nowrap;
-    border: 1px solid;
-    border-left: none;
-    @apply border-gray-300 rounded-tr;
+    @apply rounded-tr shadow-inner;
 }
 .log-controls {
     display: flex;
@@ -139,11 +137,15 @@ input:not([type='reset']) {
 
 .section {
     display: none;
-    @apply border border-r p-8 pb-4 rounded border-gray-300;
+    @apply p-8 pb-4 shadow-md rounded-lg;
 }
 
 .section.opened {
     display: block;
+}
+
+.title {
+    @apply text-2xl font-semibold mb-4 text-center;
 }
 
 /*HAMBURGER*/

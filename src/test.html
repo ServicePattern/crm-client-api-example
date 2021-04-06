@@ -26,6 +26,7 @@
 
         <div class="controls">
             <section data-name="session" class="section opened max-w-lg">
+                <h2 class="title">Session</h2>
                 <form onsubmit="return false">
                     <div class="mb-4">
                         <label class="input-label" for="username_input">
@@ -53,16 +54,17 @@
                                name="name"
                         >
                     </div>
-                    <div class="flex justify-between flex-wrap">
-                        <button class="button mr-1 mb-4" id="login_button">login</button>
+                    <div class="flex justify-between flex-wrap -mx-1">
+                        <button class="button mx-1 mb-4" id="login_button">login</button>
                         <button class="button mx-1 mb-4" id="get_login_state_button">getLoginState</button>
                         <button class="button mx-1 mb-4" id="logout_button">logout</button>
-                        <input type='reset' class="button_helper self-end inline-block w-auto ml-1 mb-4"
+                        <input type='reset' class="button_helper self-end inline-block w-auto mx-1 mb-4"
                                value="Reset form"/>
                     </div>
                 </form>
             </section>
             <section class="section max-w-lg" data-name="phone-device">
+                <h2 class="title">Phone device</h2>
                 <form onsubmit="return false" >
                     <div class="mb-8">
                         <label class="input-label" for="phone_device_type_input">
@@ -82,21 +84,44 @@
                                name="name"
                         >
                     </div>
-                    <div class="flex flex-wrap">
-                        <button class="button mr-1 mb-4"  id="get_phone_devices_list_button">getPhoneDevicesList</button>
-                        <button class="button mx-1 mb-4"  id="get_phone_device_button">getPhoneDevice</button>
-                        <button class="button mx-1 mb-4"  id="set_phone_device_button">setPhoneDevice</button>
-                        <input type='reset' class="button_helper inline-block w-auto ml-1 mb-4"
+                    <div class="flex flex-wrap -mx-1 ">
+                        <button class="button mx-1 mb-4" id="get_phone_devices_list_button">getPhoneDevicesList</button>
+                        <button class="button mx-1 mb-4" id="get_phone_device_button">getPhoneDevice</button>
+                        <button class="button mx-1 mb-4" id="set_phone_device_button">setPhoneDevice</button>
+                        <input type='reset' class="button_helper inline-block w-auto mx-1 mb-4"
                                value="Reset form"/>
                     </div>
                 </form>
             </section>
-            <!--            <form onsubmit="return false" class="row">-->
-            <!--                <button id="get_agent_state_button">getAgentState</button>-->
-            <!--                <button id="set_agent_state_button">setAgentState</button>-->
-            <!--                <input id="agent_state_input" type="text" placeholder="agent state" autocomplete="on"/>-->
-            <!--                <input id="not_ready_reason_input" type="text" placeholder="not ready reason" autocomplete="on"/>-->
-            <!--            </form>-->
+            <section class="section max-w-lg" data-name="agent-state">
+                <h2 class="title">Agent state</h2>
+                <form onsubmit="return false">
+                    <div class="mb-8">
+                        <label class="input-label" for="agent_state_input">
+                            Agent state
+                        </label>
+                        <input id="agent_state_input" type="text" placeholder="Agent state"
+                               autocomplete="on"
+                               name="name"
+                        >
+                    </div>
+                    <div class="mb-8">
+                        <label class="input-label" for="not_ready_reason_input">
+                            Not ready reason
+                        </label>
+                        <input id="not_ready_reason_input" type="text" placeholder="Not ready reason"
+                               autocomplete="on"
+                               name="name"
+                        >
+                    </div>
+                    <div class="flex flex-wrap -mx-1">
+                        <button class="button mx-1 mb-4" id="get_agent_state_button">getAgentState</button>
+                        <button class="button mx-1 mb-4" id="set_agent_state_button">setAgentState</button>
+                        <input type='reset' class="button_helper inline-block w-auto mx-1 mb-4"
+                               value="Reset form"/>
+                    </div>
+                </form>
+            </section>
             <!--            <form onsubmit="return false" class="row">-->
             <!--                <button id="start_call_button">startCall</button>-->
             <!--                <input id="phone_number_input" type="text" placeholder="phone number" autocomplete="on"/>-->
