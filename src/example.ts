@@ -4,6 +4,7 @@ import {Hamburger} from './components/hamburger'
 
 import './app.css'
 import { Menu } from './components/menu'
+import { Tab } from './components/tab'
 const integrationKey = 'test-adapter'
 
 const hamburger = new Hamburger('.hamburger', '.menu')
@@ -11,6 +12,9 @@ hamburger.initializeEventListener()
 
 const menu = new Menu(hamburger,'.menu', '.menu-item', '.section')
 menu.initializeEventListeners()
+
+const tab = new Tab('.tab', '.tab-item', '.tab-content')
+tab.initializeEventListeners()
 
 const messageClass = {
     'o': 'outgoing',

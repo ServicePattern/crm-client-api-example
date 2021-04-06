@@ -11,43 +11,43 @@
 <body>
 <main class="flex">
     <aside class="menu border-r-2 border-solid h-full bg-white shadow-sm">
-        <p class="menu-item opened" data-name="session">Session</p>
+        <p class="menu-item" data-name="session">Session</p>
         <p class="menu-item" data-name="phone-device">Phone Device</p>
         <p class="menu-item" data-name="agent-state">Agent state</p>
-        <p class="menu-item" data-name="start-interaction">Start interaction</p>
+        <p class="menu-item opened" data-name="interaction">Interactions</p>
     </aside>
-    <section>
-        <header class="flex">
-            <div class="hamburger hamburger--emphatic">
-                <div class="hamburger-box">
-                    <div class="hamburger-inner"></div>
+    <section class="flex flex-col">
+        <section class="main-section">
+            <header class="flex">
+                <div class="hamburger hamburger--emphatic">
+                    <div class="hamburger-box">
+                        <div class="hamburger-inner"></div>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
+            <div class="controls">
+                <section data-name="session" class="section max-w-lg">
+                    <h2 class="title">Session</h2>
+                    <form onsubmit="return false">
+                        <div class="mb-4">
+                            <label class="input-label" for="username_input">
+                                Username
+                            </label>
+                            <input id="username_input" type="text" placeholder="Username" autocomplete="on"
+                                   name="name"
+                            >
+                        </div>
 
-        <div class="controls">
-            <section data-name="session" class="section opened max-w-lg">
-                <h2 class="title">Session</h2>
-                <form onsubmit="return false">
-                    <div class="mb-4">
-                        <label class="input-label" for="username_input">
-                            Username
-                        </label>
-                        <input id="username_input" type="text" placeholder="Username" autocomplete="on"
-                               name="name"
-                        >
-                    </div>
+                        <div class="mb-4">
+                            <label class="input-label" for="password_input">
+                                Password
+                            </label>
+                            <input id="password_input" type="text" placeholder="Password" autocomplete="off"
+                                   name="name"
+                            >
+                        </div>
 
-                    <div class="mb-4">
-                        <label class="input-label" for="password_input">
-                            Password
-                        </label>
-                        <input id="password_input" type="text" placeholder="Password" autocomplete="off"
-                               name="name"
-                        >
-                    </div>
-
-                    <div class="mb-8">
+                        <div class="mb-8">
                         <label class="input-label" for="tenant_input">
                             Tenant
                         </label>
@@ -119,28 +119,47 @@
                     </div>
                 </form>
             </section>
-            <section class="section max-w-3xl" data-name="start-interaction">
-                <h2 class="title">Start interaction</h2>
-                <form onsubmit="return false" class="flex flex-wrap -mx-4">
-                    <div class="mx-4">
-                        <div class="mb-4">
-                            <label class="input-label" for="chat_channel_input">
-                                Chat channel
-                            </label>
-                            <input id="chat_channel_input" type="text" placeholder="Chat channel"
-                                   autocomplete="on"
-                            >
-                        </div>
-                        <div class="mb-4">
-                            <label class="input-label" for="chat_address_input">
-                                Phone or user id
-                            </label>
-                            <input id="chat_address_input" type="text" placeholder="Phone or user id"
-                                   autocomplete="on"
-                            >
-                        </div>
-                        <button class="button" id="start_chat_button">startChat</button>
-                    </div>
+                <section class="section w-full opened" data-name="interaction">
+                    <h2 class="title">Interactions</h2>
+                    <nav class="tab">
+                        <button class="tab-item active" data-name="start-interaction">
+                            Start interaction
+                        </button>
+                        <button class="tab-item" data-name="transfer-interaction">
+                            Transfer/Conference
+                        </button>
+                        <button class="tab-item" data-name="active-interaction">
+                            Active interaction
+                        </button>
+                        <button class="tab-item" data-name="notes-interaction">
+                            Notes and Disposition
+                        </button>
+                        <button class="tab-item" data-name="end-interaction">
+                            End interaction
+                        </button>
+                    </nav>
+                    <section class="tab-content mt-4 active" data-name="start-interaction">
+                        <form onsubmit="return false" class="flex flex-wrap -mx-4">
+
+                            <div class="mx-4">
+                                <div class="mb-4">
+                                    <label class="input-label" for="chat_channel_input">
+                                        Chat channel
+                                    </label>
+                                    <input id="chat_channel_input" type="text" placeholder="Chat channel"
+                                           autocomplete="on"
+                                    >
+                                </div>
+                                <div class="mb-4">
+                                    <label class="input-label" for="chat_address_input">
+                                        Phone or user id
+                                    </label>
+                                    <input id="chat_address_input" type="text" placeholder="Phone or user id"
+                                           autocomplete="on"
+                                    >
+                                </div>
+                                <button class="button" id="start_chat_button">startChat</button>
+                            </div>
                     <div class="mx-4">
                         <div class="mb-4">
                             <label class="input-label" for="phone_number_input">
@@ -163,7 +182,23 @@
                         </div>
                         <button class="button" id="start_email_button">startEmail</button>
                     </div>
-                </form>
+                            <div class="mx-4 mt-8 w-full">
+                                <label class="input-label" for="associated_object_textarea">
+                                    Associated object
+                                </label>
+                                <textarea id="associated_object_textarea" placeholder="Associated object" rows="9">
+                    {
+                        "id": "some-random-id",
+                        "type": "contact",
+                        "displayName": "Peter Morrison",
+                        "displayType": "Contact",
+                        "customFields": {},
+                        "source": "test-adapter"
+                    }
+                                    </textarea>
+                            </div>
+                        </form>
+                    </section>
             </section>
             <!--            <form onsubmit="return false" class="row">-->
             <!--                <button id="consult_call_button">consultCall</button>-->
@@ -250,16 +285,6 @@
             <!--                <div>-->
             <!--                    <button id="add_interaction_associated_object_button">addInteractionAssociatedObject</button>-->
             <!--                </div>-->
-            <!--                <textarea id="associated_object_textarea" rows="9">-->
-            <!--{-->
-            <!--    "id": "some-random-id",-->
-            <!--    "type": "contact",-->
-            <!--    "displayName": "Peter Morrison",-->
-            <!--    "displayType": "Contact",-->
-            <!--    "customFields": {},-->
-            <!--    "source": "test-adapter"-->
-            <!--}-->
-            <!--                </textarea>-->
             <!--            </div>-->
             <!--            <div class="row">-->
             <!--                <div>-->
@@ -288,43 +313,44 @@
             <!--    {-->
             <!--        "id": "random-id-1",-->
             <!--        "title": "Demo article",-->
-            <!--        "text": "This is KB Article content",-->
-            <!--        "source": "test-adapter"-->
-            <!--    },-->
-            <!--    {-->
-            <!--        "id": "random-id-2",-->
-            <!--        "title": "How to use KB articles",-->
-            <!--        "text": "You can use KB articles when a client asks you a common question",-->
-            <!--        "source": "test-adapter"-->
-            <!--    }-->
-            <!--]-->
-            <!--                </textarea>-->
-            <!--            </div>-->
-            <!--            <div class="row">-->
-            <!--                <label for="kb_article_full_data_textarea">KB Article full data:</label>-->
-            <!--                <textarea id="kb_article_full_data_textarea" rows="10" placeholder="KB Article data">-->
-            <!--{-->
-            <!--    "id": "random-id-2",-->
-            <!--    "title": "How to use KB articles",-->
-            <!--    "answer": "You can use KB articles when a client asks you a common question",-->
-            <!--    "keywords": "agent,kb,article",-->
-            <!--    "notes": "use it only to teach agents-newcomers",-->
-            <!--    "language": "ru",-->
-            <!--    "createdByUser": "System admin",-->
-            <!--    "lastEditedByUser": "Pol Andersen",-->
-            <!--    "customFields": {},-->
-            <!--    "source": "test-adapter"-->
-            <!--}-->
-            <!--                </textarea>-->
-            <!--            </div>-->
-        </div>
-        <div class="log-container">
+                <!--        "text": "This is KB Article content",-->
+                <!--        "source": "test-adapter"-->
+                <!--    },-->
+                <!--    {-->
+                <!--        "id": "random-id-2",-->
+                <!--        "title": "How to use KB articles",-->
+                <!--        "text": "You can use KB articles when a client asks you a common question",-->
+                <!--        "source": "test-adapter"-->
+                <!--    }-->
+                <!--]-->
+                <!--                </textarea>-->
+                <!--            </div>-->
+                <!--            <div class="row">-->
+                <!--                <label for="kb_article_full_data_textarea">KB Article full data:</label>-->
+                <!--                <textarea id="kb_article_full_data_textarea" rows="10" placeholder="KB Article data">-->
+                <!--{-->
+                <!--    "id": "random-id-2",-->
+                <!--    "title": "How to use KB articles",-->
+                <!--    "answer": "You can use KB articles when a client asks you a common question",-->
+                <!--    "keywords": "agent,kb,article",-->
+                <!--    "notes": "use it only to teach agents-newcomers",-->
+                <!--    "language": "ru",-->
+                <!--    "createdByUser": "System admin",-->
+                <!--    "lastEditedByUser": "Pol Andersen",-->
+                <!--    "customFields": {},-->
+                <!--    "source": "test-adapter"-->
+                <!--}-->
+                <!--                </textarea>-->
+                <!--            </div>-->
+            </div>
+        </section>
+        <footer class="log-container">
             <div class="log-controls">
                 <button id="clear_log" class="button_helper m-3">clear</button>
             </div>
             <div id="log"></div>
-        </div>
-    </section >
+        </footer>
+    </section>
 </main>
 <aside id="adc_mount_node"></aside>
 </body>

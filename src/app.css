@@ -17,15 +17,18 @@ body > aside {
     @apply shadow-md;
 }
 
+.main-section {
+    flex-basis: 60%;
+}
+
 .controls {
-    height: 60%;
-    @apply pl-4;
+    @apply pl-4 pb-2;
     overflow: auto;
 }
 .log-container {
-    height: 40%;
     box-sizing: border-box;
     display: flex;
+    flex: 1 1 40%;
     flex-flow: column nowrap;
     @apply rounded-tr shadow-inner bg-white;
 }
@@ -104,7 +107,7 @@ body > aside {
     @apply bg-transparent outline-none focus:bg-transparent hover:text-yellow-500 text-blue-700 font-semibold hover:text-white  focus:text-yellow-500  py-2 px-4 border border-blue-500 hover:border-yellow-500 focus:border-yellow-500 rounded cursor-pointer;
 }
 
-input:not([type='reset']) {
+input:not([type='reset']), textarea {
     @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-500;
 }
 
@@ -137,7 +140,7 @@ input:not([type='reset']) {
 
 .section {
     display: none;
-    @apply p-8 pb-4 shadow-md rounded-lg bg-white;
+    @apply px-8 py-4 shadow-md rounded-lg bg-white;
 }
 
 .section.opened {
@@ -146,6 +149,27 @@ input:not([type='reset']) {
 
 .title {
     @apply text-2xl font-semibold mb-4 text-center;
+}
+
+.tab {
+    @apply flex flex-col sm:flex-row bg-blue-50;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-item {
+    @apply text-gray-600 py-4 px-6 block  border-b-2 font-medium border-blue-500;
+    transition: all .3s ease;
+}
+
+.tab-item:hover,.tab-item:focus,.tab-item.active {
+    @apply text-blue-500  focus:outline-none bg-blue-100 border-yellow-500;
 }
 
 /*HAMBURGER*/
