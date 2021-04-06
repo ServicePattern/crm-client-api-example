@@ -24,8 +24,8 @@ module.exports = {
                 test: /\.css$/i,
                 include: path.resolve(__dirname, 'src'),
                 use: [
-                  MiniCssExtractPlugin.loader,
-                    'css-loader', 'postcss-loader'
+                  // MiniCssExtractPlugin.loader,
+                    'style-loader', 'css-loader', 'postcss-loader'
                 ],
             }
 
@@ -35,10 +35,10 @@ module.exports = {
       contentBase: './public',
     },
     plugins: [
-        new MiniCssExtractPlugin({
-            filename: '[name].[contenthash].css',
-              chunkFilename: '[id].[contenthash].css',
-        }),
+        // new MiniCssExtractPlugin({
+        //     filename: '[name].[contenthash].css',
+        //       chunkFilename: '[id].[contenthash].css',
+        // }),
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve('./src/test.html'),

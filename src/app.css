@@ -22,7 +22,7 @@ body > aside {
 }
 
 .controls {
-    @apply pl-4 pb-2;
+    @apply p-4 pt-0;
     overflow: auto;
 }
 .log-container {

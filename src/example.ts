@@ -51,7 +51,8 @@ const agentStateInput = document.getElementById('agent_state_input')! as HTMLInp
 const notReadyReasonInput = document.getElementById('not_ready_reason_input')! as HTMLInputElement
 
 const startCallButton = document.getElementById('start_call_button')!
-const phoneNumberInput = document.getElementById('phone_number_input')! as HTMLInputElement
+const startCallPhoneNumberInput = document.getElementById('start_call_phone_number_input')! as HTMLInputElement
+const transferPhoneNumberInput = document.getElementById('transfer_phone_number_input')! as HTMLInputElement
 const startChatButton = document.getElementById('start_chat_button')!
 const chatChannelInput = document.getElementById('chat_channel_input')! as HTMLInputElement
 const chatAddressInput = document.getElementById('chat_address_input')! as HTMLInputElement
@@ -236,9 +237,9 @@ setAgentStateButton.onclick = () => {
     adApi.setAgentState(state as any, notReadyReason)
 }
 
-setupHoverEffect(startCallButton, [phoneNumberInput, associatedObjectTextarea])
+setupHoverEffect(startCallButton, [startCallPhoneNumberInput, associatedObjectTextarea])
 startCallButton.onclick = () => {
-    const phone = phoneNumberInput.value
+    const phone = startCallPhoneNumberInput.value
     let associatedObject: InteractionAssociatedObject | undefined = undefined
     const associatedObjectStr = associatedObjectTextarea.value
     if (associatedObjectStr) {
@@ -285,15 +286,15 @@ startEmailButton.onclick = () => {
     adApi.startEmail(emailAddress, associatedObject)
 }
 
-setupHoverEffect(consultCallButton, [phoneNumberInput])
+setupHoverEffect(consultCallButton, [transferPhoneNumberInput])
 consultCallButton.onclick = () => {
-    const phoneNumber = phoneNumberInput.value
+    const phoneNumber = transferPhoneNumberInput.value
     adApi.consultCall(phoneNumber)
 }
 
-setupHoverEffect(blindTransferButton, [phoneNumberInput, interactionIdInput, transferDataTextarea])
+setupHoverEffect(blindTransferButton, [transferPhoneNumberInput, interactionIdInput, transferDataTextarea])
 blindTransferButton.onclick = () => {
-    const phoneNumber = phoneNumberInput.value
+    const phoneNumber = transferPhoneNumberInput.value
     const itemId = interactionIdInput.value
     let transferData: any | null = null
     try {
@@ -362,9 +363,9 @@ sendDtmfButton.onclick = () => {
     adApi.sendDtmf(dtmf, itemId)
 }
 
-setupHoverEffect(inviteToCallConferenceButton, [phoneNumberInput, transferDataTextarea, interactionIdInput])
+setupHoverEffect(inviteToCallConferenceButton, [transferPhoneNumberInput, transferDataTextarea, interactionIdInput])
 inviteToCallConferenceButton.onclick = () => {
-    const phoneNumber = phoneNumberInput.value
+    const phoneNumber = transferPhoneNumberInput.value
     let transferData: any | null = null
     try {
         transferData = JSON.parse(transferDataTextarea.value)
@@ -427,15 +428,16 @@ setDispositionButton.onclick = () => {
     adApi.setDisposition(dispositionId, itemId)
 }
 
-setupHoverEffect(setRescheduleWindowButton, [phoneNumberInput, interactionIdInput, fromTimeInput, untilTimeInput, timezoneCodeInput])
-setRescheduleWindowButton.onclick = () => {
-    const phoneNumber = phoneNumberInput.value
-    const itemId = interactionIdInput.value
-    const fromTime = fromTimeInput.value
-    const untilTime = untilTimeInput.value
-    const timezoneCode = timezoneCodeInput.value
-    adApi.setRescheduleWindow({numberToDial: phoneNumber, fromTime, untilTime, timezoneCode}, itemId)
-}
+// TODO: Change phoneInput
+// setupHoverEffect(setRescheduleWindowButton, [phoneNumberInput, interactionIdInput, fromTimeInput, untilTimeInput, timezoneCodeInput])
+// setRescheduleWindowButton.onclick = () => {
+//     const phoneNumber = phoneNumberInput.value
+//     const itemId = interactionIdInput.value
+//     const fromTime = fromTimeInput.value
+//     const untilTime = untilTimeInput.value
+//     const timezoneCode = timezoneCodeInput.value
+//     adApi.setRescheduleWindow({numberToDial: phoneNumber, fromTime, untilTime, timezoneCode}, itemId)
+// }
 
 setupHoverEffect(addNoteButton, [noteInput, interactionIdInput])
 addNoteButton.onclick = () => {
