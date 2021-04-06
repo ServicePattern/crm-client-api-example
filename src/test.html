@@ -14,6 +14,7 @@
         <p class="menu-item opened" data-name="session">Session</p>
         <p class="menu-item" data-name="phone-device">Phone Device</p>
         <p class="menu-item" data-name="agent-state">Agent state</p>
+        <p class="menu-item" data-name="start-interaction">Start interaction</p>
     </aside>
     <section>
         <header class="flex">
@@ -72,7 +73,6 @@
                         </label>
                         <input id="phone_device_type_input" type="text" placeholder="Phone device type"
                                autocomplete="on"
-                               name="name"
                         >
                     </div>
                     <div class="mb-8">
@@ -81,7 +81,6 @@
                         </label>
                         <input id="phone_device_number_input" type="text" placeholder="Phone device number"
                                autocomplete="on"
-                               name="name"
                         >
                     </div>
                     <div class="flex flex-wrap -mx-1 ">
@@ -102,7 +101,6 @@
                         </label>
                         <input id="agent_state_input" type="text" placeholder="Agent state"
                                autocomplete="on"
-                               name="name"
                         >
                     </div>
                     <div class="mb-8">
@@ -111,7 +109,6 @@
                         </label>
                         <input id="not_ready_reason_input" type="text" placeholder="Not ready reason"
                                autocomplete="on"
-                               name="name"
                         >
                     </div>
                     <div class="flex flex-wrap -mx-1">
@@ -122,17 +119,52 @@
                     </div>
                 </form>
             </section>
-            <!--            <form onsubmit="return false" class="row">-->
-            <!--                <button id="start_call_button">startCall</button>-->
-            <!--                <input id="phone_number_input" type="text" placeholder="phone number" autocomplete="on"/>-->
-            <!--                <span></span>-->
-            <!--                <button id="start_chat_button">startChat</button>-->
-            <!--                <input id="chat_channel_input" type="text" placeholder="chat channel" autocomplete="on"/>-->
-            <!--                <input id="chat_address_input" type="text" placeholder="phone or user id" autocomplete="on"/>-->
-            <!--                <span></span>-->
-            <!--                <button id="start_email_button">startEmail</button>-->
-            <!--                <input id="email_address_input" type="text" placeholder="email address" autocomplete="on"/>-->
-            <!--            </form>-->
+            <section class="section max-w-3xl" data-name="start-interaction">
+                <h2 class="title">Start interaction</h2>
+                <form onsubmit="return false" class="flex flex-wrap -mx-4">
+                    <div class="mx-4">
+                        <div class="mb-4">
+                            <label class="input-label" for="chat_channel_input">
+                                Chat channel
+                            </label>
+                            <input id="chat_channel_input" type="text" placeholder="Chat channel"
+                                   autocomplete="on"
+                            >
+                        </div>
+                        <div class="mb-4">
+                            <label class="input-label" for="chat_address_input">
+                                Phone or user id
+                            </label>
+                            <input id="chat_address_input" type="text" placeholder="Phone or user id"
+                                   autocomplete="on"
+                            >
+                        </div>
+                        <button class="button" id="start_chat_button">startChat</button>
+                    </div>
+                    <div class="mx-4">
+                        <div class="mb-4">
+                            <label class="input-label" for="phone_number_input">
+                                Phone number
+                            </label>
+                            <input id="phone_number_input" type="text" placeholder="Phone number"
+                                   autocomplete="on"
+                            >
+                        </div>
+                        <button class="button" id="start_call_button">startCall</button>
+                    </div>
+                    <div class="mx-4">
+                        <div class="mb-4">
+                            <label class="input-label" for="email_address_input">
+                                Email address
+                            </label>
+                            <input id="email_address_input" type="text" placeholder="Email address"
+                                   autocomplete="on"
+                            >
+                        </div>
+                        <button class="button" id="start_email_button">startEmail</button>
+                    </div>
+                </form>
+            </section>
             <!--            <form onsubmit="return false" class="row">-->
             <!--                <button id="consult_call_button">consultCall</button>-->
             <!--                <button id="blind_transfer_button">blindTransfer</button>-->

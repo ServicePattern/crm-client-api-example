@@ -11,7 +11,7 @@ html, body {
 }
 body > main {
     flex-grow: 1;
-    @apply shadow-inner;
+    @apply shadow-inner bg-gray-50;
 }
 body > aside {
     @apply shadow-md;
@@ -27,7 +27,7 @@ body > aside {
     box-sizing: border-box;
     display: flex;
     flex-flow: column nowrap;
-    @apply rounded-tr shadow-inner;
+    @apply rounded-tr shadow-inner bg-white;
 }
 .log-controls {
     display: flex;
@@ -137,7 +137,7 @@ input:not([type='reset']) {
 
 .section {
     display: none;
-    @apply p-8 pb-4 shadow-md rounded-lg;
+    @apply p-8 pb-4 shadow-md rounded-lg bg-white;
 }
 
 .section.opened {
