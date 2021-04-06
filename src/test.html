@@ -12,6 +12,7 @@
 <main class="flex">
     <aside class="menu border-r-2 border-solid h-full bg-white shadow-sm">
         <p class="menu-item opened" data-name="session">Session</p>
+        <p class="menu-item" data-name="phone-device">Phone Device</p>
         <p class="menu-item" data-name="agent-state">Agent state</p>
     </aside>
     <section>
@@ -24,8 +25,8 @@
         </header>
 
         <div class="controls">
-            <section data-name="session" class="section opened border border-r p-8 pb-4 rounded border-gray-300">
-                <form onsubmit="return false" class="max-w-lg">
+            <section data-name="session" class="section opened max-w-lg">
+                <form onsubmit="return false">
                     <div class="mb-4">
                         <label class="input-label" for="username_input">
                             Username
@@ -56,17 +57,40 @@
                         <button class="button mr-1 mb-4" id="login_button">login</button>
                         <button class="button mx-1 mb-4" id="get_login_state_button">getLoginState</button>
                         <button class="button mx-1 mb-4" id="logout_button">logout</button>
-                        <input type='reset' class="button_helper self-end inline-block w-auto ml-1 mb-4" value="Reset form"/>
+                        <input type='reset' class="button_helper self-end inline-block w-auto ml-1 mb-4"
+                               value="Reset form"/>
                     </div>
                 </form>
             </section>
-            <!--            <form onsubmit="return false" class="row">-->
-            <!--                <button id="get_phone_devices_list_button">getPhoneDevicesList</button>-->
-            <!--                <button id="get_phone_device_button">getPhoneDevice</button>-->
-            <!--                <input id="phone_device_type_input" type="text" placeholder="phone device type" autocomplete="on"/>-->
-            <!--                <input id="phone_device_number_input" type="text" placeholder="phone device number" autocomplete="on"/>-->
-            <!--                <button id="set_phone_device_button">setPhoneDevice</button>-->
-            <!--            </form>-->
+            <section class="section max-w-lg" data-name="phone-device">
+                <form onsubmit="return false" >
+                    <div class="mb-8">
+                        <label class="input-label" for="phone_device_type_input">
+                            Phone device type
+                        </label>
+                        <input id="phone_device_type_input" type="text" placeholder="Phone device type"
+                               autocomplete="on"
+                               name="name"
+                        >
+                    </div>
+                    <div class="mb-8">
+                        <label class="input-label" for="phone_device_number_input">
+                            Phone device number
+                        </label>
+                        <input id="phone_device_number_input" type="text" placeholder="Phone device number"
+                               autocomplete="on"
+                               name="name"
+                        >
+                    </div>
+                    <div class="flex flex-wrap">
+                        <button class="button mr-1 mb-4"  id="get_phone_devices_list_button">getPhoneDevicesList</button>
+                        <button class="button mx-1 mb-4"  id="get_phone_device_button">getPhoneDevice</button>
+                        <button class="button mx-1 mb-4"  id="set_phone_device_button">setPhoneDevice</button>
+                        <input type='reset' class="button_helper inline-block w-auto ml-1 mb-4"
+                               value="Reset form"/>
+                    </div>
+                </form>
+            </section>
             <!--            <form onsubmit="return false" class="row">-->
             <!--                <button id="get_agent_state_button">getAgentState</button>-->
             <!--                <button id="set_agent_state_button">setAgentState</button>-->
