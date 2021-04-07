@@ -38,7 +38,7 @@ body > aside {
 }
 
 #log {
-    @apply p-4;
+    @apply p-4 pt-2;
     overflow: auto;
     font-family: monospace;
 }
