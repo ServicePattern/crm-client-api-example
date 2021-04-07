@@ -496,6 +496,10 @@ setCallHoldButton.onclick = () => {
     const itemId = activeInteractionIdInput.value
     adApi.setCallHold(holdCall, itemId)
 }
+callHoldCheckbox.addEventListener('change', (evt) =>{
+    const holdCall = (evt.target as HTMLInputElement).checked
+    setCallHoldButton.innerHTML = `setCallHold (${holdCall ? 'hold' : 'retrieve'})`
+})
 
 setupHoverEffect(setCallRecordingButton, [callRecordingCheckbox, activeInteractionIdInput])
 setCallRecordingButton.onclick = () => {
@@ -503,6 +507,10 @@ setCallRecordingButton.onclick = () => {
     const itemId = activeInteractionIdInput.value
     adApi.setCallRecording(callRecording, itemId)
 }
+callRecordingCheckbox.addEventListener('change', (evt) =>{
+    const callRecording = (evt.target as HTMLInputElement).checked
+    setCallRecordingButton.innerHTML = `setCallRecording (${callRecording ? 'start' : 'stop'})`
+})
 
 setupHoverEffect(setCallMuteButton, [callMuteCheckbox, activeInteractionIdInput])
 setCallMuteButton.onclick = () => {
@@ -510,6 +518,10 @@ setCallMuteButton.onclick = () => {
     const itemId = activeInteractionIdInput.value
     adApi.setCallMute(muteCall, itemId)
 }
+callMuteCheckbox.addEventListener('change', (evt) =>{
+    const muteCall = (evt.target as HTMLInputElement).checked
+    setCallMuteButton.innerHTML = `setCallMute (${muteCall ? 'mute' : 'unmute'})`
+})
 
 setupHoverEffect(setScreenRecordingMuteButton, [screenRecordingMuteCheckbox])
 setScreenRecordingMuteButton.onclick = () => {
