@@ -141,10 +141,10 @@
                             End interaction
                         </button>
                     </nav>
-                    <section class="tab-content mt-4" data-name="start-interaction">
-                        <form onsubmit="return false" class="flex flex-wrap -mx-4">
-                            <div class="mx-4">
-                                <div class="mb-4">
+                    <section class="tab-content mt-4 -mb-4" data-name="start-interaction">
+                        <form onsubmit="return false">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
                                     <label class="input-label" for="chat_channel_input">
                                         Chat channel
                                     </label>
@@ -152,7 +152,7 @@
                                            autocomplete="on"
                                     >
                                 </div>
-                                <div class="mb-4">
+                                <div>
                                     <label class="input-label" for="chat_address_input">
                                         Phone or user ID
                                     </label>
@@ -160,44 +160,42 @@
                                            autocomplete="on"
                                     >
                                 </div>
-                                <button class="button" id="start_chat_button">startChat</button>
+                                <div>
+                                    <label class="input-label" for="email_address_input">
+                                        Email address
+                                    </label>
+                                    <input id="email_address_input" type="text" placeholder="Email address"
+                                           autocomplete="on"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="input-label" for="start_call_phone_number_input">
+                                        Phone number
+                                    </label>
+                                    <input id="start_call_phone_number_input" type="text" placeholder="Phone number"
+                                           autocomplete="on"
+                                    >
+                                </div>
                             </div>
-                    <div class="mx-4">
-                        <div class="mb-4">
-                            <label class="input-label" for="start_call_phone_number_input">
-                                Phone number
-                            </label>
-                            <input id="start_call_phone_number_input" type="text" placeholder="Phone number"
-                                   autocomplete="on"
-                            >
-                        </div>
-                        <button class="button" id="start_call_button">startCall</button>
-                    </div>
-                    <div class="mx-4">
-                        <div class="mb-4">
-                            <label class="input-label" for="email_address_input">
-                                Email address
-                            </label>
-                            <input id="email_address_input" type="text" placeholder="Email address"
-                                   autocomplete="on"
-                            >
-                        </div>
-                        <button class="button" id="start_email_button">startEmail</button>
-                    </div>
-                            <div class="mx-4 mt-8 w-full">
+                            <div class="mt-4 w-full">
                                 <label class="input-label" for="associated_object_textarea">
                                     Associated object
                                 </label>
-                                <textarea id="associated_object_textarea" placeholder="Associated object" rows="9">
-                    {
-                        "id": "some-random-id",
-                        "type": "contact",
-                        "displayName": "Peter Morrison",
-                        "displayType": "Contact",
-                        "customFields": {},
-                        "source": "test-adapter"
-                    }
+                                <textarea id="associated_object_textarea" placeholder="Associated object" rows="8">
+{
+    "id": "some-random-id",
+    "type": "contact",
+    "displayName": "Peter Morrison",
+    "displayType": "Contact",
+    "customFields": {},
+    "source": "test-adapter"
+}
                                     </textarea>
+                            </div>
+                            <div class="flex flex-wrap -mx-1 mt-4">
+                                <button class="button mx-1 mb-4" id="start_chat_button">startChat</button>
+                                <button class="button mx-1 mb-4" id="start_email_button">startEmail</button>
+                                <button class="button mx-1 mb-4" id="start_call_button">startCall</button>
                             </div>
                         </form>
                     </section>
@@ -246,11 +244,11 @@
                                     transfer:</label>
                                 <textarea id="transfer_data_textarea" rows="5"
                                           placeholder="Arbitrary data structure (1-level depth)">
-                            {
-                                "prevUrl": "http://example.com/?url=right",
-                                "reconnectAttempts": 3,
-                                "associatedMetadata": "blah-blah-blah"
-                            }
+{
+    "prevUrl": "http://example.com/?url=right",
+    "reconnectAttempts": 3,
+    "associatedMetadata": "blah-blah-blah"
+}
                                             </textarea>
                             </div>
                             <div class="flex flex-wrap -mx-1 mt-4">
