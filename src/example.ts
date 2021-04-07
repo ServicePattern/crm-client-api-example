@@ -56,6 +56,7 @@ const startCallButton = document.getElementById('start_call_button')!
 const startCallPhoneNumberInput = document.getElementById('start_call_phone_number_input')! as HTMLInputElement
 const transferPhoneNumberInput = document.getElementById('transfer_phone_number_input')! as HTMLInputElement
 const conferencePhoneNumberInput = document.getElementById('conference_phone_number_input')! as HTMLInputElement
+const reschedulePhoneNumberInput = document.getElementById('reschedule_phone_number_input')! as HTMLInputElement
 const startChatButton = document.getElementById('start_chat_button')!
 const chatChannelInput = document.getElementById('chat_channel_input')! as HTMLInputElement
 const chatAddressInput = document.getElementById('chat_address_input')! as HTMLInputElement
@@ -73,6 +74,7 @@ const activeInteractionIdInput = document.getElementById('active_interaction_id_
 const conferenceInteractionIdInput = document.getElementById('conference_interaction_id_input')! as HTMLInputElement
 const notesInteractionIdInput = document.getElementById('notes_interaction_id_input')! as HTMLInputElement
 const completeInteractionIdInput = document.getElementById('complete_interaction_id_input')! as HTMLInputElement
+const rescheduleInteractionIdInput = document.getElementById('reschedule_interaction_id_input')! as HTMLInputElement
 const leaveInteractionButton = document.getElementById('leave_interaction_button')!
 const completeInteractionButton = document.getElementById('complete_interaction_button')!
 const leaveAndCompleteInteractionButton = document.getElementById('leave_and_complete_interaction_button')!
@@ -456,16 +458,15 @@ setDispositionButton.onclick = () => {
     adApi.setDisposition(dispositionId, itemId)
 }
 
-// TODO: Change phoneInput
-// setupHoverEffect(setRescheduleWindowButton, [phoneNumberInput, interactionIdInput, fromTimeInput, untilTimeInput, timezoneCodeInput])
-// setRescheduleWindowButton.onclick = () => {
-//     const phoneNumber = phoneNumberInput.value
-//     const itemId = interactionIdInput.value
-//     const fromTime = fromTimeInput.value
-//     const untilTime = untilTimeInput.value
-//     const timezoneCode = timezoneCodeInput.value
-//     adApi.setRescheduleWindow({numberToDial: phoneNumber, fromTime, untilTime, timezoneCode}, itemId)
-// }
+setupHoverEffect(setRescheduleWindowButton, [reschedulePhoneNumberInput, rescheduleInteractionIdInput, fromTimeInput, untilTimeInput, timezoneCodeInput])
+setRescheduleWindowButton.onclick = () => {
+    const phoneNumber = reschedulePhoneNumberInput.value
+    const itemId = rescheduleInteractionIdInput.value
+    const fromTime = fromTimeInput.value
+    const untilTime = untilTimeInput.value
+    const timezoneCode = timezoneCodeInput.value
+    adApi.setRescheduleWindow({numberToDial: phoneNumber, fromTime, untilTime, timezoneCode}, itemId)
+}
 
 
 setupHoverEffect(addNoteButton, [noteInput, notesInteractionIdInput])
