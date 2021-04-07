@@ -3,14 +3,15 @@ import type {InteractionAssociatedObject} from './brightpattern-client-api-types
 import {Hamburger} from './components/hamburger'
 
 import './app.css'
-import { Menu } from './components/menu'
-import { Tab } from './components/tab'
+import {Menu} from './components/menu'
+import {Tab} from './components/tab'
+
 const integrationKey = 'test-adapter'
 
 const hamburger = new Hamburger('.hamburger', '.menu')
 hamburger.initializeEventListener()
 
-const menu = new Menu(hamburger,'.menu', '.menu-item', '.section')
+const menu = new Menu(hamburger, '.menu', '.menu-item', '.section')
 menu.initializeEventListeners()
 
 const tab = new Tab('.tab', '.tab-item', '.tab-content')
@@ -55,6 +56,7 @@ const startCallButton = document.getElementById('start_call_button')!
 const startCallPhoneNumberInput = document.getElementById('start_call_phone_number_input')! as HTMLInputElement
 const transferPhoneNumberInput = document.getElementById('transfer_phone_number_input')! as HTMLInputElement
 const conferencePhoneNumberInput = document.getElementById('conference_phone_number_input')! as HTMLInputElement
+const reschedulePhoneNumberInput = document.getElementById('reschedule_phone_number_input')! as HTMLInputElement
 const startChatButton = document.getElementById('start_chat_button')!
 const chatChannelInput = document.getElementById('chat_channel_input')! as HTMLInputElement
 const chatAddressInput = document.getElementById('chat_address_input')! as HTMLInputElement
@@ -68,7 +70,11 @@ const mainItemIdInput = document.getElementById('main_item_id_input')! as HTMLIn
 const consultCallIdInput = document.getElementById('consult_call_id_input')! as HTMLInputElement
 
 const interactionIdInput = document.getElementById('interaction_id_input')! as HTMLInputElement
+const activeInteractionIdInput = document.getElementById('active_interaction_id_input')! as HTMLInputElement
 const conferenceInteractionIdInput = document.getElementById('conference_interaction_id_input')! as HTMLInputElement
+const notesInteractionIdInput = document.getElementById('notes_interaction_id_input')! as HTMLInputElement
+const completeInteractionIdInput = document.getElementById('complete_interaction_id_input')! as HTMLInputElement
+const rescheduleInteractionIdInput = document.getElementById('reschedule_interaction_id_input')! as HTMLInputElement
 const leaveInteractionButton = document.getElementById('leave_interaction_button')!
 const completeInteractionButton = document.getElementById('complete_interaction_button')!
 const leaveAndCompleteInteractionButton = document.getElementById('leave_and_complete_interaction_button')!
@@ -83,6 +89,7 @@ const inviteToCallConferenceButton = document.getElementById('add_to_call_confer
 const removeFromCallConferenceButton = document.getElementById('remove_from_call_conference_button')!
 const partyIdInput = document.getElementById('party_id_input')! as HTMLInputElement
 const destroyCallConferenceButton = document.getElementById('destroy_call_conference_button')!
+const completeDestroyCallConferenceButton = document.getElementById('complete_destroy_call_conference_button')!
 
 const getTeamsButton = document.getElementById('get_teams_button')!
 const getTeamMembersButton = document.getElementById('get_team_members_button')!
@@ -90,6 +97,7 @@ const teamIdInput = document.getElementById('team_id_input')! as HTMLInputElemen
 const getServicesListButton = document.getElementById('get_services_list_button')!
 const setServiceButton = document.getElementById('set_service_button')!
 const serviceIdInput = document.getElementById('service_id_input')! as HTMLInputElement
+const notesServiceIdInput = document.getElementById('notes_service_id_input')! as HTMLInputElement
 
 const setRescheduleWindowButton = document.getElementById('set_reschedule_window_button')!
 const fromTimeInput = document.getElementById('from_time_input')! as HTMLInputElement
@@ -99,11 +107,13 @@ const timezoneCodeInput = document.getElementById('timezone_code_input')! as HTM
 const getDispositionsListButton = document.getElementById('get_dispositions_list_button')!
 const setDispositionButton = document.getElementById('set_disposition_button')!
 const dispositionIdInput = document.getElementById('disposition_id_input')! as HTMLInputElement
+const completeDispositionIdInput = document.getElementById('complete_disposition_id_input')! as HTMLInputElement
 
 const addNoteButton = document.getElementById('add_note_button')!
 const updateNoteButton = document.getElementById('update_note_button')!
 const replaceNoteButton = document.getElementById('replace_note_button')!
 const noteInput = document.getElementById('note_input')! as HTMLInputElement
+const completeNoteInput = document.getElementById('complete_note_input')! as HTMLInputElement
 
 const setCallHoldButton = document.getElementById('set_call_hold_button')!
 const callHoldCheckbox = document.getElementById('call_hold_checkbox')! as HTMLInputElement
@@ -133,6 +143,9 @@ const transferDataTextarea = document.getElementById('transfer_data_textarea')! 
 const conferenceTransferDataTextarea = document.getElementById('conference_transfer_data_textarea')! as HTMLTextAreaElement
 const searchKBResultTextarea = document.getElementById('search_kb_result_textarea')! as HTMLTextAreaElement
 const kbArticleFullDataTextarea = document.getElementById('kb_article_full_data_textarea')! as HTMLTextAreaElement
+
+const resetSizeButton = document.querySelector('.reset_size_button') as HTMLElement
+const mainSection = document.querySelector('.main-section') as HTMLElement
 
 
 const adApi = new window.brightpattern.AdApi({
@@ -191,6 +204,12 @@ adApi.injectMessageLogger((message, data) => {
         }
     }
 })
+
+resetSizeButton.addEventListener('click', resetMainSectionSize)
+
+function resetMainSectionSize() {
+    mainSection.removeAttribute('style')
+}
 
 setupHoverEffect(getLoginStateButton, [])
 getLoginStateButton.onclick = () => {
@@ -321,50 +340,50 @@ transferButton.onclick = () => {
     adApi.transfer(transferData, mainItemId, consultCallId)
 }
 
-// setupHoverEffect(leaveInteractionButton, [interactionIdInput])
-// leaveInteractionButton.onclick = () => {
-//     const itemId = interactionIdInput.value
-//     adApi.leaveInteraction(itemId)
-// }
-//
-// setupHoverEffect(completeInteractionButton, [interactionIdInput])
-// completeInteractionButton.onclick = () => {
-//     const itemId = interactionIdInput.value
-//     adApi.completeInteraction(itemId)
-// }
-//
-// setupHoverEffect(leaveAndCompleteInteractionButton, [dispositionIdInput, noteInput, interactionIdInput])
-// leaveAndCompleteInteractionButton.onclick = () => {
-//     const dispositionId = dispositionIdInput.value
-//     const note = noteInput.value
-//     const itemId = interactionIdInput.value
-//     adApi.leaveAndCompleteInteraction(dispositionId, note, itemId)
-// }
-//
-// setupHoverEffect(switchActiveInteractionButton, [interactionIdInput])
-// switchActiveInteractionButton.onclick = () => {
-//     const itemId = interactionIdInput.value
-//     adApi.switchActiveInteraction(itemId)
-// }
-//
-// setupHoverEffect(acceptInteractionButton, [interactionIdInput])
-// acceptInteractionButton.onclick = () => {
-//     const itemId = interactionIdInput.value
-//     adApi.acceptInteraction(itemId)
-// }
-//
-// setupHoverEffect(rejectInteractionButton, [interactionIdInput])
-// rejectInteractionButton.onclick = () => {
-//     const itemId = interactionIdInput.value
-//     adApi.rejectInteraction(itemId)
-// }
-//
-// setupHoverEffect(sendDtmfButton, [dtmfInput, interactionIdInput])
-// sendDtmfButton.onclick = () => {
-//     const dtmf = dtmfInput.value
-//     const itemId = interactionIdInput.value
-//     adApi.sendDtmf(dtmf, itemId)
-// }
+setupHoverEffect(leaveInteractionButton, [completeInteractionIdInput])
+leaveInteractionButton.onclick = () => {
+    const itemId = completeInteractionIdInput.value
+    adApi.leaveInteraction(itemId)
+}
+
+setupHoverEffect(completeInteractionButton, [completeInteractionIdInput])
+completeInteractionButton.onclick = () => {
+    const itemId = completeInteractionIdInput.value
+    adApi.completeInteraction(itemId)
+}
+
+setupHoverEffect(leaveAndCompleteInteractionButton, [completeDispositionIdInput, completeNoteInput, completeInteractionIdInput])
+leaveAndCompleteInteractionButton.onclick = () => {
+    const dispositionId = completeDispositionIdInput.value
+    const note = completeNoteInput.value
+    const itemId = completeInteractionIdInput.value
+    adApi.leaveAndCompleteInteraction(dispositionId, note, itemId)
+}
+
+setupHoverEffect(switchActiveInteractionButton, [activeInteractionIdInput])
+switchActiveInteractionButton.onclick = () => {
+    const itemId = activeInteractionIdInput.value
+    adApi.switchActiveInteraction(itemId)
+}
+
+setupHoverEffect(acceptInteractionButton, [activeInteractionIdInput])
+acceptInteractionButton.onclick = () => {
+    const itemId = activeInteractionIdInput.value
+    adApi.acceptInteraction(itemId)
+}
+
+setupHoverEffect(rejectInteractionButton, [activeInteractionIdInput])
+rejectInteractionButton.onclick = () => {
+    const itemId = activeInteractionIdInput.value
+    adApi.rejectInteraction(itemId)
+}
+
+setupHoverEffect(sendDtmfButton, [dtmfInput, activeInteractionIdInput])
+sendDtmfButton.onclick = () => {
+    const dtmf = dtmfInput.value
+    const itemId = activeInteractionIdInput.value
+    adApi.sendDtmf(dtmf, itemId)
+}
 
 
 setupHoverEffect(inviteToCallConferenceButton, [conferencePhoneNumberInput, conferenceTransferDataTextarea, conferenceInteractionIdInput])
@@ -394,6 +413,12 @@ destroyCallConferenceButton.onclick = () => {
     adApi.destroyCallConference(itemId)
 }
 
+setupHoverEffect(completeDestroyCallConferenceButton, [completeInteractionIdInput])
+completeDestroyCallConferenceButton.onclick = () => {
+    const itemId = completeInteractionIdInput.value
+    adApi.destroyCallConference(itemId)
+}
+
 setupHoverEffect(getTeamsButton, [])
 getTeamsButton.onclick = () => {
     adApi.getTeams()
@@ -416,81 +441,97 @@ setServiceButton.onclick = () => {
     adApi.setService(serviceId)
 }
 
-setupHoverEffect(getDispositionsListButton, [serviceIdInput, interactionIdInput])
+setupHoverEffect(getDispositionsListButton, [notesServiceIdInput, notesInteractionIdInput])
 getDispositionsListButton.onclick = () => {
-    const serviceId = serviceIdInput.value
-    const itemId = interactionIdInput.value
+    const serviceId = notesServiceIdInput.value
+    const itemId = notesInteractionIdInput.value
     adApi.getDispositionsList({
         service: serviceId,
         interactionId: itemId,
     })
 }
 
-setupHoverEffect(setDispositionButton, [dispositionIdInput, interactionIdInput])
+setupHoverEffect(setDispositionButton, [dispositionIdInput, notesInteractionIdInput])
 setDispositionButton.onclick = () => {
     const dispositionId = dispositionIdInput.value
-    const itemId = interactionIdInput.value
+    const itemId = notesInteractionIdInput.value
     adApi.setDisposition(dispositionId, itemId)
 }
 
-// TODO: Change phoneInput
-// setupHoverEffect(setRescheduleWindowButton, [phoneNumberInput, interactionIdInput, fromTimeInput, untilTimeInput, timezoneCodeInput])
-// setRescheduleWindowButton.onclick = () => {
-//     const phoneNumber = phoneNumberInput.value
-//     const itemId = interactionIdInput.value
-//     const fromTime = fromTimeInput.value
-//     const untilTime = untilTimeInput.value
-//     const timezoneCode = timezoneCodeInput.value
-//     adApi.setRescheduleWindow({numberToDial: phoneNumber, fromTime, untilTime, timezoneCode}, itemId)
-// }
+setupHoverEffect(setRescheduleWindowButton, [reschedulePhoneNumberInput, rescheduleInteractionIdInput, fromTimeInput, untilTimeInput, timezoneCodeInput])
+setRescheduleWindowButton.onclick = () => {
+    const phoneNumber = reschedulePhoneNumberInput.value
+    const itemId = rescheduleInteractionIdInput.value
+    const fromTime = fromTimeInput.value
+    const untilTime = untilTimeInput.value
+    const timezoneCode = timezoneCodeInput.value
+    adApi.setRescheduleWindow({numberToDial: phoneNumber, fromTime, untilTime, timezoneCode}, itemId)
+}
 
-setupHoverEffect(addNoteButton, [noteInput, interactionIdInput])
+
+setupHoverEffect(addNoteButton, [noteInput, notesInteractionIdInput])
 addNoteButton.onclick = () => {
     const note = noteInput.value
-    const itemId = interactionIdInput.value
+    const itemId = notesInteractionIdInput.value
     adApi.addNote(note, itemId)
 }
 
-setupHoverEffect(updateNoteButton, [noteInput, interactionIdInput])
+setupHoverEffect(updateNoteButton, [noteInput, notesInteractionIdInput])
 updateNoteButton.onclick = () => {
     const note = noteInput.value
-    const itemId = interactionIdInput.value
+    const itemId = notesInteractionIdInput.value
     adApi.updateNote(note, itemId)
 }
 
-setupHoverEffect(replaceNoteButton, [noteInput, interactionIdInput])
+setupHoverEffect(replaceNoteButton, [noteInput, notesInteractionIdInput])
 replaceNoteButton.onclick = () => {
     const note = noteInput.value
-    const itemId = interactionIdInput.value
+    const itemId = notesInteractionIdInput.value
     adApi.replaceNote(note, itemId)
 }
 
-setupHoverEffect(setCallHoldButton, [callHoldCheckbox, interactionIdInput])
+setupHoverEffect(setCallHoldButton, [callHoldCheckbox, activeInteractionIdInput])
 setCallHoldButton.onclick = () => {
     const holdCall = callHoldCheckbox.checked
-    const itemId = interactionIdInput.value
+    const itemId = activeInteractionIdInput.value
     adApi.setCallHold(holdCall, itemId)
 }
+callHoldCheckbox.addEventListener('change', (evt) =>{
+    const holdCall = (evt.target as HTMLInputElement).checked
+    setCallHoldButton.innerHTML = `setCallHold (${holdCall ? 'hold' : 'retrieve'})`
+})
 
-setupHoverEffect(setCallRecordingButton, [callRecordingCheckbox, interactionIdInput])
+setupHoverEffect(setCallRecordingButton, [callRecordingCheckbox, activeInteractionIdInput])
 setCallRecordingButton.onclick = () => {
     const callRecording = callRecordingCheckbox.checked
-    const itemId = interactionIdInput.value
+    const itemId = activeInteractionIdInput.value
     adApi.setCallRecording(callRecording, itemId)
 }
+callRecordingCheckbox.addEventListener('change', (evt) =>{
+    const callRecording = (evt.target as HTMLInputElement).checked
+    setCallRecordingButton.innerHTML = `setCallRecording (${callRecording ? 'start' : 'stop'})`
+})
 
-setupHoverEffect(setCallMuteButton, [callMuteCheckbox, interactionIdInput])
+setupHoverEffect(setCallMuteButton, [callMuteCheckbox, activeInteractionIdInput])
 setCallMuteButton.onclick = () => {
     const muteCall = callMuteCheckbox.checked
-    const itemId = interactionIdInput.value
+    const itemId = activeInteractionIdInput.value
     adApi.setCallMute(muteCall, itemId)
 }
+callMuteCheckbox.addEventListener('change', (evt) =>{
+    const muteCall = (evt.target as HTMLInputElement).checked
+    setCallMuteButton.innerHTML = `setCallMute (${muteCall ? 'mute' : 'unmute'})`
+})
 
 setupHoverEffect(setScreenRecordingMuteButton, [screenRecordingMuteCheckbox])
 setScreenRecordingMuteButton.onclick = () => {
     const muteScreenRecording = screenRecordingMuteCheckbox.checked
     adApi.setScreenRecordingMute(muteScreenRecording)
 }
+screenRecordingMuteCheckbox.addEventListener('change', (evt) =>{
+    const screenRecordingMute = (evt.target as HTMLInputElement).checked
+    setScreenRecordingMuteButton.innerHTML = `setScreenRecordingMute (${screenRecordingMute ? 'mute' : 'unmute'})`
+})
 
 setupHoverEffect(getScreenRecordingStateButton, [])
 getScreenRecordingStateButton.onclick = () => {
