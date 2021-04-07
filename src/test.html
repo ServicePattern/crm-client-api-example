@@ -128,10 +128,10 @@
                         <button class="tab-item" data-name="transfer-interaction">
                             Transfer
                         </button>
-                        <button class="tab-item active" data-name="conference-interaction">
+                        <button class="tab-item" data-name="conference-interaction">
                             Conference
                         </button>
-                        <button class="tab-item" data-name="active-interaction">
+                        <button class="tab-item active" data-name="active-interaction">
                             Active interaction
                         </button>
                         <button class="tab-item" data-name="notes-interaction">
@@ -260,7 +260,7 @@
                             </div>
                         </form>
                     </section>
-                    <section class="tab-content mt-4 active -mb-4" data-name="conference-interaction">
+                    <section class="tab-content mt-4 -mb-4" data-name="conference-interaction">
                         <form onsubmit="return false">
                             <div class="grid grid-cols-3 gap-4 mb-4">
                                 <div>
@@ -313,22 +313,70 @@
                             </div>
                         </form>
                     </section>
-                </section>
+                    <section class='tab-content  mt-4 -mb-4 active' data-name="active-interaction">
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div >
+                                <label class="input-label" for="active_interaction_id_input">
+                                    Interaction ID
+                                </label>
+                                <input id="active_interaction_id_input" type="text" placeholder="Interaction ID"
+                                       autocomplete="off"
+                                >
+                            </div>
+                            <div >
+                                <label class="input-label" for="dtmf_input">
+                                    DTMF
+                                </label>
+                                <input id="dtmf_input" type="text" placeholder="DTMF"
+                                       autocomplete="on"
+                                >
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-1">
+                            <button class='mx-1 mb-4 button' id="accept_interaction_button">acceptInteraction</button>
+                            <button class='mx-1 mb-4 button' id="reject_interaction_button">rejectInteraction</button>
+                            <button class='mx-1 mb-4 button' id="switch_active_interaction_button">
+                                switchActiveInteraction
+                            </button>
+                            <button class='mx-1 mb-4 button' id="send_dtmf_button">sendDtmf</button>
 
+                            <div class="flex flex-wrap -mx-1 bg-gray-50 pt-4 mb-4 px-2 w-full rounded">
+                                <div class="mx-1 mb-4 shadow-md w-auto p-2 inline-block rounded bg-white">
+                                    <div class="toggle-checkbox-wrapper">
+                                        <input type="checkbox" name="toggle" id="call_hold_checkbox"
+                                               class="toggle-checkbox "/>
+                                        <label for="call_hold_checkbox"
+                                               class="toggle-label"></label>
+                                    </div>
+                                    <button class='button' id="set_call_hold_button">setCallHold</button>
+                                </div>
+
+                                <div class="mx-1 mb-4 shadow-md w-auto p-2 inline-block rounded bg-white">
+                                    <div class="toggle-checkbox-wrapper">
+                                        <input type="checkbox" name="toggle" id="call_recording_checkbox"
+                                               class="toggle-checkbox "/>
+                                        <label for="call_recording_checkbox"
+                                               class="toggle-label"></label>
+                                    </div>
+                                    <button class='button' id="set_call_recording_button">setCallRecording</button>
+                                </div>
+
+                                <div class="mx-1 mb-4 shadow-md w-auto p-2 inline-block rounded bg-white">
+                                    <div class="toggle-checkbox-wrapper">
+                                        <input type="checkbox" name="toggle" id="call_mute_checkbox"
+                                               class="toggle-checkbox "/>
+                                        <label for="call_mute_checkbox"
+                                               class="toggle-label"></label>
+                                    </div>
+                                    <button class='button' id="set_call_mute_button">setCallMute</button>
+                                </div>
+                            </div>
+                    </section>
+                </section>
                 <!--            <form onsubmit="return false" class="row">-->
-                <!--                <label for="interaction_id_input">Interaction ID</label>-->
-                <!--                <input id="interaction_id_input" type="text" placeholder="interaction id" autocomplete="off"/>-->
-                <!--                <span></span>-->
                 <!--                <button id="leave_interaction_button">leaveInteraction</button>-->
                 <!--                <button id="complete_interaction_button">completeInteraction</button>-->
                 <!--                <button id="leave_and_complete_interaction_button">leaveAndCompleteInteraction</button>-->
-                <!--                <button id="switch_active_interaction_button">switchActiveInteraction</button>-->
-                <!--            </form>-->
-                <!--            <form onsubmit="return false" class="row">-->
-                <!--                <button id="accept_interaction_button">acceptInteraction</button>-->
-                <!--                <button id="reject_interaction_button">rejectInteraction</button>-->
-                <!--                <button id="send_dtmf_button">sendDtmf</button>-->
-                <!--                <input id="dtmf_input" type="text" placeholder="DTMF" autocomplete="on"/>-->
                 <!--            </form>-->
                 <!--            <form onsubmit="return false" class="row">-->
                 <!--                <button id="get_teams_button">getTeams</button>-->
@@ -356,15 +404,7 @@
                 <!--                <input id="note_input" type="text" placeholder="note" autocomplete="off"/>-->
                 <!--            </form>-->
                 <!--            <form onsubmit="return false" class="row">-->
-                <!--                <button id="set_call_hold_button">setCallHold</button>-->
-                <!--                <input id="call_hold_checkbox" type="checkbox"/>-->
-                <!--                <label for="call_hold_checkbox">Hold call</label>-->
-                <!--                <button id="set_call_recording_button">setCallRecording</button>-->
-                <!--                <input id="call_recording_checkbox" type="checkbox"/>-->
-                <!--                <label for="call_recording_checkbox">Call recording</label>-->
-                <!--                <button id="set_call_mute_button">setCallMute</button>-->
-                <!--                <input id="call_mute_checkbox" type="checkbox"/>-->
-                <!--                <label for="call_mute_checkbox">Mute call</label>-->
+
                 <!--            </form>-->
                 <!--            <form onsubmit="return false" class="row">-->
                 <!--                <button id="set_screen_recording_mute_button">setScreenRecordingMute</button>-->

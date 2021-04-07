@@ -68,6 +68,7 @@ const mainItemIdInput = document.getElementById('main_item_id_input')! as HTMLIn
 const consultCallIdInput = document.getElementById('consult_call_id_input')! as HTMLInputElement
 
 const interactionIdInput = document.getElementById('interaction_id_input')! as HTMLInputElement
+const activeInteractionIdInput = document.getElementById('active_interaction_id_input')! as HTMLInputElement
 const conferenceInteractionIdInput = document.getElementById('conference_interaction_id_input')! as HTMLInputElement
 const leaveInteractionButton = document.getElementById('leave_interaction_button')!
 const completeInteractionButton = document.getElementById('complete_interaction_button')!
@@ -340,31 +341,31 @@ transferButton.onclick = () => {
 //     const itemId = interactionIdInput.value
 //     adApi.leaveAndCompleteInteraction(dispositionId, note, itemId)
 // }
-//
-// setupHoverEffect(switchActiveInteractionButton, [interactionIdInput])
-// switchActiveInteractionButton.onclick = () => {
-//     const itemId = interactionIdInput.value
-//     adApi.switchActiveInteraction(itemId)
-// }
-//
-// setupHoverEffect(acceptInteractionButton, [interactionIdInput])
-// acceptInteractionButton.onclick = () => {
-//     const itemId = interactionIdInput.value
-//     adApi.acceptInteraction(itemId)
-// }
-//
-// setupHoverEffect(rejectInteractionButton, [interactionIdInput])
-// rejectInteractionButton.onclick = () => {
-//     const itemId = interactionIdInput.value
-//     adApi.rejectInteraction(itemId)
-// }
-//
-// setupHoverEffect(sendDtmfButton, [dtmfInput, interactionIdInput])
-// sendDtmfButton.onclick = () => {
-//     const dtmf = dtmfInput.value
-//     const itemId = interactionIdInput.value
-//     adApi.sendDtmf(dtmf, itemId)
-// }
+
+setupHoverEffect(switchActiveInteractionButton, [activeInteractionIdInput])
+switchActiveInteractionButton.onclick = () => {
+    const itemId = activeInteractionIdInput.value
+    adApi.switchActiveInteraction(itemId)
+}
+
+setupHoverEffect(acceptInteractionButton, [activeInteractionIdInput])
+acceptInteractionButton.onclick = () => {
+    const itemId = activeInteractionIdInput.value
+    adApi.acceptInteraction(itemId)
+}
+
+setupHoverEffect(rejectInteractionButton, [activeInteractionIdInput])
+rejectInteractionButton.onclick = () => {
+    const itemId = activeInteractionIdInput.value
+    adApi.rejectInteraction(itemId)
+}
+
+setupHoverEffect(sendDtmfButton, [dtmfInput, activeInteractionIdInput])
+sendDtmfButton.onclick = () => {
+    const dtmf = dtmfInput.value
+    const itemId = activeInteractionIdInput.value
+    adApi.sendDtmf(dtmf, itemId)
+}
 
 
 setupHoverEffect(inviteToCallConferenceButton, [conferencePhoneNumberInput, conferenceTransferDataTextarea, conferenceInteractionIdInput])
@@ -394,44 +395,44 @@ destroyCallConferenceButton.onclick = () => {
     adApi.destroyCallConference(itemId)
 }
 
-setupHoverEffect(getTeamsButton, [])
-getTeamsButton.onclick = () => {
-    adApi.getTeams()
-}
-
-setupHoverEffect(getTeamMembersButton, [teamIdInput])
-getTeamMembersButton.onclick = () => {
-    const teamId = teamIdInput.value
-    adApi.getTeamMembers(teamId)
-}
-
-setupHoverEffect(getServicesListButton, [])
-getServicesListButton.onclick = () => {
-    adApi.getServicesList()
-}
-
-setupHoverEffect(setServiceButton, [serviceIdInput])
-setServiceButton.onclick = () => {
-    const serviceId = serviceIdInput.value
-    adApi.setService(serviceId)
-}
-
-setupHoverEffect(getDispositionsListButton, [serviceIdInput, interactionIdInput])
-getDispositionsListButton.onclick = () => {
-    const serviceId = serviceIdInput.value
-    const itemId = interactionIdInput.value
-    adApi.getDispositionsList({
-        service: serviceId,
-        interactionId: itemId,
-    })
-}
-
-setupHoverEffect(setDispositionButton, [dispositionIdInput, interactionIdInput])
-setDispositionButton.onclick = () => {
-    const dispositionId = dispositionIdInput.value
-    const itemId = interactionIdInput.value
-    adApi.setDisposition(dispositionId, itemId)
-}
+// setupHoverEffect(getTeamsButton, [])
+// getTeamsButton.onclick = () => {
+//     adApi.getTeams()
+// }
+//
+// setupHoverEffect(getTeamMembersButton, [teamIdInput])
+// getTeamMembersButton.onclick = () => {
+//     const teamId = teamIdInput.value
+//     adApi.getTeamMembers(teamId)
+// }
+//
+// setupHoverEffect(getServicesListButton, [])
+// getServicesListButton.onclick = () => {
+//     adApi.getServicesList()
+// }
+//
+// setupHoverEffect(setServiceButton, [serviceIdInput])
+// setServiceButton.onclick = () => {
+//     const serviceId = serviceIdInput.value
+//     adApi.setService(serviceId)
+// }
+//
+// setupHoverEffect(getDispositionsListButton, [serviceIdInput, interactionIdInput])
+// getDispositionsListButton.onclick = () => {
+//     const serviceId = serviceIdInput.value
+//     const itemId = interactionIdInput.value
+//     adApi.getDispositionsList({
+//         service: serviceId,
+//         interactionId: itemId,
+//     })
+// }
+//
+// setupHoverEffect(setDispositionButton, [dispositionIdInput, interactionIdInput])
+// setDispositionButton.onclick = () => {
+//     const dispositionId = dispositionIdInput.value
+//     const itemId = interactionIdInput.value
+//     adApi.setDisposition(dispositionId, itemId)
+// }
 
 // TODO: Change phoneInput
 // setupHoverEffect(setRescheduleWindowButton, [phoneNumberInput, interactionIdInput, fromTimeInput, untilTimeInput, timezoneCodeInput])
@@ -444,45 +445,46 @@ setDispositionButton.onclick = () => {
 //     adApi.setRescheduleWindow({numberToDial: phoneNumber, fromTime, untilTime, timezoneCode}, itemId)
 // }
 
-setupHoverEffect(addNoteButton, [noteInput, interactionIdInput])
-addNoteButton.onclick = () => {
-    const note = noteInput.value
-    const itemId = interactionIdInput.value
-    adApi.addNote(note, itemId)
-}
 
-setupHoverEffect(updateNoteButton, [noteInput, interactionIdInput])
-updateNoteButton.onclick = () => {
-    const note = noteInput.value
-    const itemId = interactionIdInput.value
-    adApi.updateNote(note, itemId)
-}
+// setupHoverEffect(addNoteButton, [noteInput, interactionIdInput])
+// addNoteButton.onclick = () => {
+//     const note = noteInput.value
+//     const itemId = interactionIdInput.value
+//     adApi.addNote(note, itemId)
+// }
+//
+// setupHoverEffect(updateNoteButton, [noteInput, interactionIdInput])
+// updateNoteButton.onclick = () => {
+//     const note = noteInput.value
+//     const itemId = interactionIdInput.value
+//     adApi.updateNote(note, itemId)
+// }
+//
+// setupHoverEffect(replaceNoteButton, [noteInput, interactionIdInput])
+// replaceNoteButton.onclick = () => {
+//     const note = noteInput.value
+//     const itemId = interactionIdInput.value
+//     adApi.replaceNote(note, itemId)
+// }
 
-setupHoverEffect(replaceNoteButton, [noteInput, interactionIdInput])
-replaceNoteButton.onclick = () => {
-    const note = noteInput.value
-    const itemId = interactionIdInput.value
-    adApi.replaceNote(note, itemId)
-}
-
-setupHoverEffect(setCallHoldButton, [callHoldCheckbox, interactionIdInput])
+setupHoverEffect(setCallHoldButton, [callHoldCheckbox, activeInteractionIdInput])
 setCallHoldButton.onclick = () => {
     const holdCall = callHoldCheckbox.checked
-    const itemId = interactionIdInput.value
+    const itemId = activeInteractionIdInput.value
     adApi.setCallHold(holdCall, itemId)
 }
 
-setupHoverEffect(setCallRecordingButton, [callRecordingCheckbox, interactionIdInput])
+setupHoverEffect(setCallRecordingButton, [callRecordingCheckbox, activeInteractionIdInput])
 setCallRecordingButton.onclick = () => {
     const callRecording = callRecordingCheckbox.checked
-    const itemId = interactionIdInput.value
+    const itemId = activeInteractionIdInput.value
     adApi.setCallRecording(callRecording, itemId)
 }
 
-setupHoverEffect(setCallMuteButton, [callMuteCheckbox, interactionIdInput])
+setupHoverEffect(setCallMuteButton, [callMuteCheckbox, activeInteractionIdInput])
 setCallMuteButton.onclick = () => {
     const muteCall = callMuteCheckbox.checked
-    const itemId = interactionIdInput.value
+    const itemId = activeInteractionIdInput.value
     adApi.setCallMute(muteCall, itemId)
 }
 

@@ -107,12 +107,39 @@ body > aside {
     @apply bg-transparent outline-none focus:bg-transparent hover:text-yellow-500 text-blue-700 font-semibold hover:text-white  focus:text-yellow-500  py-2 px-4 border border-blue-500 hover:border-yellow-500 focus:border-yellow-500 rounded cursor-pointer;
 }
 
-input:not([type='reset']), textarea {
+input:not([type='reset']):not([type='checkbox']), textarea {
     @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-500;
 }
 
 .input-label {
     @apply block text-gray-500 text-sm font-bold mb-2;
+}
+
+.toggle-checkbox-wrapper {
+    @apply relative inline-block w-10 mr-2 align-middle select-none;
+}
+
+.toggle-checkbox {
+    transition: all .2s ease-in-out;
+    right: 0;
+    transform: translateX(-60%);
+    @apply absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-300;
+}
+
+.toggle-label {
+    transition: all .2s ease-in-out;
+    @apply block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer;
+}
+
+.toggle-checkbox:checked {
+    @apply right-0 border-blue-500;
+    transform: translateX(-10%);
+    @apply border-blue-500;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+    @apply bg-blue-500;
+    @apply bg-blue-500;
 }
 
 .menu {
