@@ -131,10 +131,10 @@
                         <button class="tab-item" data-name="conference-interaction">
                             Conference
                         </button>
-                        <button class="tab-item active" data-name="active-interaction">
+                        <button class="tab-item" data-name="active-interaction">
                             Active interaction
                         </button>
-                        <button class="tab-item" data-name="notes-interaction">
+                        <button class="tab-item active" data-name="notes-interaction">
                             Notes and Disposition
                         </button>
                         <button class="tab-item" data-name="end-interaction">
@@ -313,9 +313,9 @@
                             </div>
                         </form>
                     </section>
-                    <section class='tab-content  mt-4 -mb-4 active' data-name="active-interaction">
+                    <section class='tab-content mt-4 -mb-4' data-name="active-interaction">
                         <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div >
+                            <div>
                                 <label class="input-label" for="active_interaction_id_input">
                                     Interaction ID
                                 </label>
@@ -323,7 +323,7 @@
                                        autocomplete="off"
                                 >
                             </div>
-                            <div >
+                            <div>
                                 <label class="input-label" for="dtmf_input">
                                     DTMF
                                 </label>
@@ -371,6 +371,53 @@
                                     <button class='button' id="set_call_mute_button">setCallMute</button>
                                 </div>
                             </div>
+                        </div>
+                    </section>
+                    <section class='tab-content mt-4 -mb-4 active' data-name="notes-interaction">
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="input-label" for="notes_interaction_id_input">
+                                    Interaction ID
+                                </label>
+                                <input id="notes_interaction_id_input" type="text" placeholder="Interaction ID"
+                                       autocomplete="off"
+                                >
+                            </div>
+                            <div>
+                                <label class="input-label" for="notes_service_id_input">
+                                    Service id/name
+                                </label>
+                                <input id="notes_service_id_input" type="text" placeholder="Service id/name"
+                                       autocomplete="on"
+                                >
+                            </div>
+                            <div>
+                                <label class="input-label" for="disposition_id_input">
+                                    Disposition id/code/name
+                                </label>
+                                <input id="disposition_id_input" type="text" placeholder="Disposition id/code/name"
+                                       autocomplete="on"
+                                >
+                            </div>
+                            <div>
+                                <label class="input-label" for="note_input">
+                                    Note
+                                </label>
+                                <input id="note_input" type="text" placeholder="Note"
+                                       autocomplete="on"
+                                >
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-1">
+                            <button class='mx-1 mb-4 button' id="get_dispositions_list_button">getDispositionsList
+                            </button>
+                            <button class='mx-1 mb-4 button' id="set_disposition_button">setDisposition</button>
+                            <button class='mx-1 mb-4 button' id="add_note_button">
+                                addNote
+                            </button>
+                            <button class='mx-1 mb-4 button' id="update_note_button">updateNote</button>
+                            <button class='mx-1 mb-4 button' id="replace_note_button">replaceNote</button>
+                        </div>
                     </section>
                 </section>
                 <!--            <form onsubmit="return false" class="row">-->

@@ -70,6 +70,7 @@ const consultCallIdInput = document.getElementById('consult_call_id_input')! as 
 const interactionIdInput = document.getElementById('interaction_id_input')! as HTMLInputElement
 const activeInteractionIdInput = document.getElementById('active_interaction_id_input')! as HTMLInputElement
 const conferenceInteractionIdInput = document.getElementById('conference_interaction_id_input')! as HTMLInputElement
+const notesInteractionIdInput = document.getElementById('notes_interaction_id_input')! as HTMLInputElement
 const leaveInteractionButton = document.getElementById('leave_interaction_button')!
 const completeInteractionButton = document.getElementById('complete_interaction_button')!
 const leaveAndCompleteInteractionButton = document.getElementById('leave_and_complete_interaction_button')!
@@ -91,6 +92,7 @@ const teamIdInput = document.getElementById('team_id_input')! as HTMLInputElemen
 const getServicesListButton = document.getElementById('get_services_list_button')!
 const setServiceButton = document.getElementById('set_service_button')!
 const serviceIdInput = document.getElementById('service_id_input')! as HTMLInputElement
+const notesServiceIdInput = document.getElementById('notes_service_id_input')! as HTMLInputElement
 
 const setRescheduleWindowButton = document.getElementById('set_reschedule_window_button')!
 const fromTimeInput = document.getElementById('from_time_input')! as HTMLInputElement
@@ -417,22 +419,22 @@ destroyCallConferenceButton.onclick = () => {
 //     adApi.setService(serviceId)
 // }
 //
-// setupHoverEffect(getDispositionsListButton, [serviceIdInput, interactionIdInput])
-// getDispositionsListButton.onclick = () => {
-//     const serviceId = serviceIdInput.value
-//     const itemId = interactionIdInput.value
-//     adApi.getDispositionsList({
-//         service: serviceId,
-//         interactionId: itemId,
-//     })
-// }
-//
-// setupHoverEffect(setDispositionButton, [dispositionIdInput, interactionIdInput])
-// setDispositionButton.onclick = () => {
-//     const dispositionId = dispositionIdInput.value
-//     const itemId = interactionIdInput.value
-//     adApi.setDisposition(dispositionId, itemId)
-// }
+setupHoverEffect(getDispositionsListButton, [notesServiceIdInput, notesInteractionIdInput])
+getDispositionsListButton.onclick = () => {
+    const serviceId = notesServiceIdInput.value
+    const itemId = notesInteractionIdInput.value
+    adApi.getDispositionsList({
+        service: serviceId,
+        interactionId: itemId,
+    })
+}
+
+setupHoverEffect(setDispositionButton, [dispositionIdInput, notesInteractionIdInput])
+setDispositionButton.onclick = () => {
+    const dispositionId = dispositionIdInput.value
+    const itemId = notesInteractionIdInput.value
+    adApi.setDisposition(dispositionId, itemId)
+}
 
 // TODO: Change phoneInput
 // setupHoverEffect(setRescheduleWindowButton, [phoneNumberInput, interactionIdInput, fromTimeInput, untilTimeInput, timezoneCodeInput])
@@ -446,26 +448,26 @@ destroyCallConferenceButton.onclick = () => {
 // }
 
 
-// setupHoverEffect(addNoteButton, [noteInput, interactionIdInput])
-// addNoteButton.onclick = () => {
-//     const note = noteInput.value
-//     const itemId = interactionIdInput.value
-//     adApi.addNote(note, itemId)
-// }
-//
-// setupHoverEffect(updateNoteButton, [noteInput, interactionIdInput])
-// updateNoteButton.onclick = () => {
-//     const note = noteInput.value
-//     const itemId = interactionIdInput.value
-//     adApi.updateNote(note, itemId)
-// }
-//
-// setupHoverEffect(replaceNoteButton, [noteInput, interactionIdInput])
-// replaceNoteButton.onclick = () => {
-//     const note = noteInput.value
-//     const itemId = interactionIdInput.value
-//     adApi.replaceNote(note, itemId)
-// }
+setupHoverEffect(addNoteButton, [noteInput, notesInteractionIdInput])
+addNoteButton.onclick = () => {
+    const note = noteInput.value
+    const itemId = notesInteractionIdInput.value
+    adApi.addNote(note, itemId)
+}
+
+setupHoverEffect(updateNoteButton, [noteInput, notesInteractionIdInput])
+updateNoteButton.onclick = () => {
+    const note = noteInput.value
+    const itemId = notesInteractionIdInput.value
+    adApi.updateNote(note, itemId)
+}
+
+setupHoverEffect(replaceNoteButton, [noteInput, notesInteractionIdInput])
+replaceNoteButton.onclick = () => {
+    const note = noteInput.value
+    const itemId = notesInteractionIdInput.value
+    adApi.replaceNote(note, itemId)
+}
 
 setupHoverEffect(setCallHoldButton, [callHoldCheckbox, activeInteractionIdInput])
 setCallHoldButton.onclick = () => {
