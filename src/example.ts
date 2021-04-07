@@ -417,28 +417,28 @@ completeDestroyCallConferenceButton.onclick = () => {
     adApi.destroyCallConference(itemId)
 }
 
-// setupHoverEffect(getTeamsButton, [])
-// getTeamsButton.onclick = () => {
-//     adApi.getTeams()
-// }
-//
-// setupHoverEffect(getTeamMembersButton, [teamIdInput])
-// getTeamMembersButton.onclick = () => {
-//     const teamId = teamIdInput.value
-//     adApi.getTeamMembers(teamId)
-// }
-//
-// setupHoverEffect(getServicesListButton, [])
-// getServicesListButton.onclick = () => {
-//     adApi.getServicesList()
-// }
-//
-// setupHoverEffect(setServiceButton, [serviceIdInput])
-// setServiceButton.onclick = () => {
-//     const serviceId = serviceIdInput.value
-//     adApi.setService(serviceId)
-// }
-//
+setupHoverEffect(getTeamsButton, [])
+getTeamsButton.onclick = () => {
+    adApi.getTeams()
+}
+
+setupHoverEffect(getTeamMembersButton, [teamIdInput])
+getTeamMembersButton.onclick = () => {
+    const teamId = teamIdInput.value
+    adApi.getTeamMembers(teamId)
+}
+
+setupHoverEffect(getServicesListButton, [])
+getServicesListButton.onclick = () => {
+    adApi.getServicesList()
+}
+
+setupHoverEffect(setServiceButton, [serviceIdInput])
+setServiceButton.onclick = () => {
+    const serviceId = serviceIdInput.value
+    adApi.setService(serviceId)
+}
+
 setupHoverEffect(getDispositionsListButton, [notesServiceIdInput, notesInteractionIdInput])
 getDispositionsListButton.onclick = () => {
     const serviceId = notesServiceIdInput.value

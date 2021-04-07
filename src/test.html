@@ -14,7 +14,8 @@
         <p class="menu-item" data-name="session">Session</p>
         <p class="menu-item" data-name="phone-device">Phone Device</p>
         <p class="menu-item" data-name="agent-state">Agent state</p>
-        <p class="menu-item opened" data-name="interaction">Interactions</p>
+        <p class="menu-item" data-name="interaction">Interactions</p>
+        <p class="menu-item opened" data-name="teams">Teams and Service</p>
     </aside>
     <section class="main-section-wrapper">
         <section class="main-section">
@@ -120,7 +121,7 @@
                     </div>
                 </form>
             </section>
-                <section class="section opened" data-name="interaction">
+                <section class="section" data-name="interaction">
                         <h2 class="title justify-self-center">Interactions</h2>
                         <nav class="tab">
                             <button class="tab-item active" data-name="start-interaction">
@@ -366,10 +367,14 @@
                                     </div>
                                 </div>
                                 <div class="flex flex-wrap -mx-1">
-                                    <button class='mx-1 mb-4 button' id="accept_interaction_button">acceptInteraction
+                                    <button class='mx-1 mb-4 button green' id="accept_interaction_button">
+                                        acceptInteraction
                                     </button>
-                                    <button class='mx-1 mb-4 button' id="reject_interaction_button">rejectInteraction
+                                    <button class='mx-1 mb-4 button red' id="reject_interaction_button">
+                                        rejectInteraction
                                     </button>
+                                </div>
+                                <div class="flex flex-wrap -mx-1">
                                     <button class='mx-1 mb-4 button' id="switch_active_interaction_button">
                                         switchActiveInteraction
                                     </button>
@@ -392,7 +397,7 @@
                                     </div>
                                     <div>
                                         <label class="input-label" for="notes_service_id_input">
-                                            Service id/name
+                                            Service ID/name
                                         </label>
                                         <input class='input' id="notes_service_id_input" type="text" placeholder="Service id/name"
                                                autocomplete="on"
@@ -442,10 +447,10 @@
                                     </div>
                                     <div>
                                         <label class="input-label" for="complete_disposition_id_input">
-                                            Disposition id/code/name
+                                            Disposition ID/code/name
                                         </label>
                                         <input class='input' id="complete_disposition_id_input" type="text"
-                                               placeholder="Disposition id/code/name"
+                                               placeholder="Disposition ID/code/name"
                                                autocomplete="on"
                                         >
                                     </div>
@@ -474,6 +479,35 @@
                             </form>
                         </section>
                 </section>
+                <section class="section max-w-lg opened" data-name="teams">
+                                <h2 class="title">Teams and Service</h2>
+                                <form onsubmit="return false">
+                                    <div class="mb-8">
+                                        <label class="input-label" for="team_id_input">
+                                            Team ID
+                                        </label>
+                                        <input class='input' id="team_id_input" type="text" placeholder="Team ID"
+                                               autocomplete="on"
+                                        >
+                                    </div>
+                                    <div class="mb-8">
+                                        <label class="input-label" for="service_id_input">
+                                            Service ID/name
+                                        </label>
+                                        <input class='input' id="service_id_input" type="text" placeholder="Service ID/name"
+                                               autocomplete="on"
+                                        >
+                                    </div>
+                                    <div class="flex flex-wrap -mx-1">
+                                        <button class="button mx-1 mb-4" id="get_teams_button">getTeams</button>
+                                        <button class="button mx-1 mb-4" id="get_team_members_button">getTeamMembers</button>
+                                        <button class="button mx-1 mb-4" id="get_services_list_button">getServicesList</button>
+                                        <button class="button mx-1 mb-4" id="set_service_button">setService</button>
+                                        <input type='reset' class="button_helper inline-block w-auto mx-1 mb-4"
+                                               value="Reset form"/>
+                                    </div>
+                                </form>
+                            </section>
                 <!--            <form onsubmit="return false" class="row">-->
                 <!--                <button id="get_teams_button">getTeams</button>-->
                 <!--                <button id="get_team_members_button">getTeamMembers</button>-->

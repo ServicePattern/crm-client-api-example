@@ -130,6 +130,22 @@ body > aside {
     @apply bg-blue-500 text-white;
 }
 
+.button.green {
+    @apply bg-green-500;
+}
+
+.button.red {
+    @apply bg-red-500;
+}
+
+.button.green:hover {
+    @apply bg-green-600;
+}
+
+.button.red:hover {
+    @apply bg-red-600;
+}
+
 .button:hover, .button:focus {
     @apply bg-yellow-500;
 }
@@ -195,7 +211,6 @@ body > aside {
 .menu.expanded {
     transform: translateX(0);
 }
-
 
 
 .menu.expanded + .main-section-wrapper:after {
