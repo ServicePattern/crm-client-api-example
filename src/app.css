@@ -132,14 +132,14 @@ input:not([type='reset']):not([type='checkbox']), textarea {
 }
 
 .toggle-checkbox:checked {
-    @apply right-0 border-blue-500;
+    @apply right-0 border-yellow-400;
     transform: translateX(-10%);
-    @apply border-blue-500;
+    @apply border-yellow-400;
 }
 
 .toggle-checkbox:checked + .toggle-label {
-    @apply bg-blue-500;
-    @apply bg-blue-500;
+    @apply bg-yellow-400;
+    @apply bg-yellow-400;
 }
 
 .menu {
@@ -193,6 +193,7 @@ input:not([type='reset']):not([type='checkbox']), textarea {
 .tab-item {
     @apply text-gray-600 py-4 px-6 block  border-b-2 font-medium border-blue-500;
     transition: all .3s ease;
+    cursor: pointer;
 }
 
 .tab-item:hover,.tab-item:focus,.tab-item.active {
