@@ -3,14 +3,15 @@ import type {InteractionAssociatedObject} from './brightpattern-client-api-types
 import {Hamburger} from './components/hamburger'
 
 import './app.css'
-import { Menu } from './components/menu'
-import { Tab } from './components/tab'
+import {Menu} from './components/menu'
+import {Tab} from './components/tab'
+
 const integrationKey = 'test-adapter'
 
 const hamburger = new Hamburger('.hamburger', '.menu')
 hamburger.initializeEventListener()
 
-const menu = new Menu(hamburger,'.menu', '.menu-item', '.section')
+const menu = new Menu(hamburger, '.menu', '.menu-item', '.section')
 menu.initializeEventListeners()
 
 const tab = new Tab('.tab', '.tab-item', '.tab-content')
@@ -141,6 +142,9 @@ const conferenceTransferDataTextarea = document.getElementById('conference_trans
 const searchKBResultTextarea = document.getElementById('search_kb_result_textarea')! as HTMLTextAreaElement
 const kbArticleFullDataTextarea = document.getElementById('kb_article_full_data_textarea')! as HTMLTextAreaElement
 
+const resetSizeButton = document.querySelector('.reset_size_button') as HTMLElement
+const mainSection = document.querySelector('.main-section') as HTMLElement
+
 
 const adApi = new window.brightpattern.AdApi({
     integrationKey,
@@ -198,6 +202,12 @@ adApi.injectMessageLogger((message, data) => {
         }
     }
 })
+
+resetSizeButton.addEventListener('click', resetMainSectionSize)
+
+function resetMainSectionSize() {
+    mainSection.removeAttribute('style')
+}
 
 setupHoverEffect(getLoginStateButton, [])
 getLoginStateButton.onclick = () => {

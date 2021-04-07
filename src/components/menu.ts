@@ -1,4 +1,4 @@
-import { HamburgerI } from "./hamburger"
+import {HamburgerI} from "./hamburger"
 
 interface MenuI {
     open(menuItemName: string): void
@@ -12,11 +12,13 @@ interface MenuI {
 export class Menu implements MenuI {
     hamburger: HamburgerI
     menu: HTMLElement | null
+    menuSelector: string
     menuItems: NodeListOf<HTMLElement> | undefined
     sections: NodeListOf<HTMLElement> | undefined
     opened = ''
 
     constructor(hamburger: HamburgerI, menuSelector: string, menuItemsSelector: string, sectionSelector: string) {
+        this.menuSelector = menuSelector
         this.menu = document.querySelector(menuSelector)
         this.sections = document.querySelectorAll(sectionSelector)
         this.menuItems = this.menu?.querySelectorAll(menuItemsSelector)
@@ -58,11 +60,32 @@ export class Menu implements MenuI {
 
             menuItemNode.addEventListener('click', () => {
                 this.open(menuItemName)
-
-                console.log('OPENED', this.getOpened())
             })
+        })
+        this.initializeCloseOnOutsideClick()
+        this.initializeCloseOnEscape()
+    }
+
+    initializeCloseOnOutsideClick() {
+        document.addEventListener('click', (evt) => {
+            if (!(evt.target as HTMLElement).closest(this.menuSelector)) {
+                this.closeMenu()
+            }
+        })
+
+    }
+
+    initializeCloseOnEscape() {
+        document.addEventListener('keydown', (evt) => {
+            if (evt.key === 'Escape') {
+                this.closeMenu()
+            }
         })
     }
 
-
+    closeMenu() {
+        if (this.hamburger.isOpened()) {
+            this.hamburger.toggle(false)
+        }
+    }
 }

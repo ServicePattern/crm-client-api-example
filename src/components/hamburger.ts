@@ -3,6 +3,8 @@ export interface HamburgerI {
 
     initializeEventListener(): void
 
+    isOpened(): boolean
+
 }
 
 export class Hamburger implements HamburgerI {
@@ -14,7 +16,13 @@ export class Hamburger implements HamburgerI {
         this.menu = document.querySelector(menuSelector)
     }
 
-    toggle(evtOrForceShow?: boolean | Event) {
+    isOpened = () => {
+        console.log('this.hamburger.classList-->', this?.hamburger?.classList.contains('expanded'))
+
+        return !!this.hamburger?.classList?.contains('expanded')
+    }
+
+    toggle = (evtOrForceShow?: boolean | Event) => {
         let forceShow: boolean | undefined
         if (typeof evtOrForceShow === 'boolean') {
             forceShow = evtOrForceShow
@@ -36,8 +44,9 @@ export class Hamburger implements HamburgerI {
         this.menu?.classList?.toggle('expanded');
     }
 
-    initializeEventListener() {
-        this.hamburger?.addEventListener('click', () => {
+    initializeEventListener = () => {
+        this.hamburger?.addEventListener('click', (evt) => {
+            evt.stopPropagation()
             this.toggle()
         })
     }

@@ -4,34 +4,64 @@
 
 html, body {
     display: flex;
+    overflow-x: hidden;
     height: 100%;
     width: 100%;
     box-sizing: border-box;
     margin: 0;
 }
 body > main {
+    height: 100%;
     flex-grow: 1;
     @apply shadow-inner bg-gray-50;
 }
 body > aside {
+    height: 100%;
     @apply shadow-md;
 }
 
 .main-section {
-    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    resize: vertical;
+    flex: 1 0 auto;
+}
+
+.main-section-wrapper {
+    position: relative;
+    @apply flex flex-col justify-between mx-4 ;
+}
+
+.main-section-wrapper:after {
+    transition: .3s ease-in-out;
+    position: fixed;
+    content: '';
+    background: #000;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
 }
 
 .controls {
-    @apply p-4 pt-0;
+    @apply pb-4;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
+
 .log-container {
+    height: 40%;
     box-sizing: border-box;
     display: flex;
-    flex: 1 1 40%;
+    flex: 100 1 auto;
+    overflow: auto;
     flex-flow: column nowrap;
-    @apply rounded-t shadow-inner bg-white ml-4;
+    @apply rounded-t shadow-inner bg-white;
 }
+
 .log-controls {
     display: flex;
     justify-content: flex-end;
@@ -149,14 +179,27 @@ body > aside {
 }
 
 .menu {
-    transition: all .3s ease;
+    z-index: 1;
+    position: absolute;
+    transition: transform .3s ease;
     flex-shrink: 0;
     width: 300px;
-    margin-left: -300px;
+    transform: translateX(-300px);
+    left: 0;
+    top: 0;
+    will-change: transform;
+    height: 100%;
+    background: white;
 }
 
 .menu.expanded {
-    margin-left: 0;
+    transform: translateX(0);
+}
+
+
+
+.menu.expanded + .main-section-wrapper:after {
+    opacity: .3;
 }
 
 .menu-item {
@@ -173,6 +216,7 @@ body > aside {
 
 .section {
     display: none;
+    overflow: auto;
     @apply px-8 py-4 shadow-md rounded-lg bg-white;
 }
 
@@ -257,6 +301,7 @@ body > aside {
     position: absolute;
     transition-property: transform;
     transition-duration: 0.15s;
+      transition-delay: 0.3s;
     transition-timing-function: ease; }
   .hamburger-inner::before, .hamburger-inner::after {
     content: "";
