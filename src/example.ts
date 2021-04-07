@@ -71,6 +71,7 @@ const interactionIdInput = document.getElementById('interaction_id_input')! as H
 const activeInteractionIdInput = document.getElementById('active_interaction_id_input')! as HTMLInputElement
 const conferenceInteractionIdInput = document.getElementById('conference_interaction_id_input')! as HTMLInputElement
 const notesInteractionIdInput = document.getElementById('notes_interaction_id_input')! as HTMLInputElement
+const completeInteractionIdInput = document.getElementById('complete_interaction_id_input')! as HTMLInputElement
 const leaveInteractionButton = document.getElementById('leave_interaction_button')!
 const completeInteractionButton = document.getElementById('complete_interaction_button')!
 const leaveAndCompleteInteractionButton = document.getElementById('leave_and_complete_interaction_button')!
@@ -85,6 +86,7 @@ const inviteToCallConferenceButton = document.getElementById('add_to_call_confer
 const removeFromCallConferenceButton = document.getElementById('remove_from_call_conference_button')!
 const partyIdInput = document.getElementById('party_id_input')! as HTMLInputElement
 const destroyCallConferenceButton = document.getElementById('destroy_call_conference_button')!
+const completeDestroyCallConferenceButton = document.getElementById('complete_destroy_call_conference_button')!
 
 const getTeamsButton = document.getElementById('get_teams_button')!
 const getTeamMembersButton = document.getElementById('get_team_members_button')!
@@ -102,11 +104,13 @@ const timezoneCodeInput = document.getElementById('timezone_code_input')! as HTM
 const getDispositionsListButton = document.getElementById('get_dispositions_list_button')!
 const setDispositionButton = document.getElementById('set_disposition_button')!
 const dispositionIdInput = document.getElementById('disposition_id_input')! as HTMLInputElement
+const completeDispositionIdInput = document.getElementById('complete_disposition_id_input')! as HTMLInputElement
 
 const addNoteButton = document.getElementById('add_note_button')!
 const updateNoteButton = document.getElementById('update_note_button')!
 const replaceNoteButton = document.getElementById('replace_note_button')!
 const noteInput = document.getElementById('note_input')! as HTMLInputElement
+const completeNoteInput = document.getElementById('complete_note_input')! as HTMLInputElement
 
 const setCallHoldButton = document.getElementById('set_call_hold_button')!
 const callHoldCheckbox = document.getElementById('call_hold_checkbox')! as HTMLInputElement
@@ -324,25 +328,25 @@ transferButton.onclick = () => {
     adApi.transfer(transferData, mainItemId, consultCallId)
 }
 
-// setupHoverEffect(leaveInteractionButton, [interactionIdInput])
-// leaveInteractionButton.onclick = () => {
-//     const itemId = interactionIdInput.value
-//     adApi.leaveInteraction(itemId)
-// }
-//
-// setupHoverEffect(completeInteractionButton, [interactionIdInput])
-// completeInteractionButton.onclick = () => {
-//     const itemId = interactionIdInput.value
-//     adApi.completeInteraction(itemId)
-// }
-//
-// setupHoverEffect(leaveAndCompleteInteractionButton, [dispositionIdInput, noteInput, interactionIdInput])
-// leaveAndCompleteInteractionButton.onclick = () => {
-//     const dispositionId = dispositionIdInput.value
-//     const note = noteInput.value
-//     const itemId = interactionIdInput.value
-//     adApi.leaveAndCompleteInteraction(dispositionId, note, itemId)
-// }
+setupHoverEffect(leaveInteractionButton, [completeInteractionIdInput])
+leaveInteractionButton.onclick = () => {
+    const itemId = completeInteractionIdInput.value
+    adApi.leaveInteraction(itemId)
+}
+
+setupHoverEffect(completeInteractionButton, [completeInteractionIdInput])
+completeInteractionButton.onclick = () => {
+    const itemId = completeInteractionIdInput.value
+    adApi.completeInteraction(itemId)
+}
+
+setupHoverEffect(leaveAndCompleteInteractionButton, [completeDispositionIdInput, completeNoteInput, completeInteractionIdInput])
+leaveAndCompleteInteractionButton.onclick = () => {
+    const dispositionId = completeDispositionIdInput.value
+    const note = completeNoteInput.value
+    const itemId = completeInteractionIdInput.value
+    adApi.leaveAndCompleteInteraction(dispositionId, note, itemId)
+}
 
 setupHoverEffect(switchActiveInteractionButton, [activeInteractionIdInput])
 switchActiveInteractionButton.onclick = () => {
@@ -394,6 +398,12 @@ removeFromCallConferenceButton.onclick = () => {
 setupHoverEffect(destroyCallConferenceButton, [conferenceInteractionIdInput])
 destroyCallConferenceButton.onclick = () => {
     const itemId = conferenceInteractionIdInput.value
+    adApi.destroyCallConference(itemId)
+}
+
+setupHoverEffect(completeDestroyCallConferenceButton, [completeInteractionIdInput])
+completeDestroyCallConferenceButton.onclick = () => {
+    const itemId = completeInteractionIdInput.value
     adApi.destroyCallConference(itemId)
 }
 

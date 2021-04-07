@@ -33,7 +33,7 @@
                             <label class="input-label" for="username_input">
                                 Username
                             </label>
-                            <input id="username_input" type="text" placeholder="Username" autocomplete="on"
+                            <input class='input' id="username_input" type="text" placeholder="Username" autocomplete="on"
                                    name="name"
                             >
                         </div>
@@ -42,7 +42,7 @@
                             <label class="input-label" for="password_input">
                                 Password
                             </label>
-                            <input id="password_input" type="text" placeholder="Password" autocomplete="off"
+                            <input class='input' id="password_input" type="text" placeholder="Password" autocomplete="off"
                                    name="name"
                             >
                         </div>
@@ -51,7 +51,7 @@
                         <label class="input-label" for="tenant_input">
                             Tenant
                         </label>
-                        <input id="tenant_input" type="text" placeholder="Tenant" autocomplete="on"
+                        <input class='input' id="tenant_input" type="text" placeholder="Tenant" autocomplete="on"
                                name="name"
                         >
                     </div>
@@ -71,7 +71,7 @@
                         <label class="input-label" for="phone_device_type_input">
                             Phone device type
                         </label>
-                        <input id="phone_device_type_input" type="text" placeholder="Phone device type"
+                        <input class='input' id="phone_device_type_input" type="text" placeholder="Phone device type"
                                autocomplete="on"
                         >
                     </div>
@@ -79,7 +79,7 @@
                         <label class="input-label" for="phone_device_number_input">
                             Phone device number
                         </label>
-                        <input id="phone_device_number_input" type="text" placeholder="Phone device number"
+                        <input class='input' id="phone_device_number_input" type="text" placeholder="Phone device number"
                                autocomplete="on"
                         >
                     </div>
@@ -99,7 +99,7 @@
                         <label class="input-label" for="agent_state_input">
                             Agent state
                         </label>
-                        <input id="agent_state_input" type="text" placeholder="Agent state"
+                        <input class='input' id="agent_state_input" type="text" placeholder="Agent state"
                                autocomplete="on"
                         >
                     </div>
@@ -107,7 +107,7 @@
                         <label class="input-label" for="not_ready_reason_input">
                             Not ready reason
                         </label>
-                        <input id="not_ready_reason_input" type="text" placeholder="Not ready reason"
+                        <input class='input' id="not_ready_reason_input" type="text" placeholder="Not ready reason"
                                autocomplete="on"
                         >
                     </div>
@@ -134,10 +134,10 @@
                         <button class="tab-item" data-name="active-interaction">
                             Active interaction
                         </button>
-                        <button class="tab-item active" data-name="notes-interaction">
+                        <button class="tab-item" data-name="notes-interaction">
                             Notes and Disposition
                         </button>
-                        <button class="tab-item" data-name="end-interaction">
+                        <button class="tab-item active" data-name="end-interaction">
                             End interaction
                         </button>
                     </nav>
@@ -148,7 +148,7 @@
                                     <label class="input-label" for="chat_channel_input">
                                         Chat channel
                                     </label>
-                                    <input id="chat_channel_input" type="text" placeholder="Chat channel"
+                                    <input class='input' id="chat_channel_input" type="text" placeholder="Chat channel"
                                            autocomplete="on"
                                     >
                                 </div>
@@ -156,7 +156,7 @@
                                     <label class="input-label" for="chat_address_input">
                                         Phone or user ID
                                     </label>
-                                    <input id="chat_address_input" type="text" placeholder="Phone or user ID"
+                                    <input class='input' id="chat_address_input" type="text" placeholder="Phone or user ID"
                                            autocomplete="on"
                                     >
                                 </div>
@@ -164,7 +164,7 @@
                                     <label class="input-label" for="email_address_input">
                                         Email address
                                     </label>
-                                    <input id="email_address_input" type="text" placeholder="Email address"
+                                    <input class='input' id="email_address_input" type="text" placeholder="Email address"
                                            autocomplete="on"
                                     >
                                 </div>
@@ -172,7 +172,7 @@
                                     <label class="input-label" for="start_call_phone_number_input">
                                         Phone number
                                     </label>
-                                    <input id="start_call_phone_number_input" type="text" placeholder="Phone number"
+                                    <input class='input' id="start_call_phone_number_input" type="text" placeholder="Phone number"
                                            autocomplete="on"
                                     >
                                 </div>
@@ -181,7 +181,7 @@
                                 <label class="input-label" for="associated_object_textarea">
                                     Associated object
                                 </label>
-                                <textarea id="associated_object_textarea" placeholder="Associated object" rows="8">
+                                <textarea class='textarea' id="associated_object_textarea" placeholder="Associated object" rows="8">
 {
     "id": "some-random-id",
     "type": "contact",
@@ -207,7 +207,7 @@
                                         <label class="input-label" for="transfer_phone_number_input">
                                             Phone number
                                         </label>
-                                        <input id="transfer_phone_number_input" type="text" placeholder="Phone number"
+                                        <input class='input' id="transfer_phone_number_input" type="text" placeholder="Phone number"
                                                autocomplete="on"
                                         >
                                     </div>
@@ -215,7 +215,7 @@
                                         <label class="input-label" for="interaction_id_input">
                                             Interaction ID
                                         </label>
-                                        <input id="interaction_id_input" type="text" placeholder="Interaction ID"
+                                        <input class='input' id="interaction_id_input" type="text" placeholder="Interaction ID"
                                                autocomplete="off"
                                         >
                                     </div>
@@ -225,7 +225,7 @@
                                         <label class="input-label" for="main_item_id_input">
                                             Transferring item ID
                                         </label>
-                                        <input id="main_item_id_input" type="text" placeholder="Transferring item ID"
+                                        <input class='input' id="main_item_id_input" type="text" placeholder="Transferring item ID"
                                                autocomplete="off"
                                         >
                                     </div>
@@ -233,7 +233,7 @@
                                         <label class="input-label" for="consult_call_id_input">
                                             Consult call ID
                                         </label>
-                                        <input id="consult_call_id_input" type="text" placeholder="Consult call ID"
+                                        <input class='input' id="consult_call_id_input" type="text" placeholder="Consult call ID"
                                                autocomplete="off"
                                         >
                                     </div>
@@ -242,7 +242,7 @@
                             <div class="row">
                                 <label for="transfer_data_textarea" class="input-label">Custom data for
                                     transfer:</label>
-                                <textarea id="transfer_data_textarea" rows="5"
+                                <textarea class='textarea' id="transfer_data_textarea" rows="5"
                                           placeholder="Arbitrary data structure (1-level depth)">
 {
     "prevUrl": "http://example.com/?url=right",
@@ -267,7 +267,7 @@
                                     <label class="input-label" for="conference_phone_number_input">
                                         Phone number
                                     </label>
-                                    <input id="conference_phone_number_input" type="text" placeholder="Phone number"
+                                    <input class='input' id="conference_phone_number_input" type="text" placeholder="Phone number"
                                            autocomplete="on"
                                     >
                                 </div>
@@ -275,7 +275,7 @@
                                     <label class="input-label" for="conference_interaction_id_input">
                                         Interaction ID
                                     </label>
-                                    <input id="conference_interaction_id_input" type="text" placeholder="Interaction ID"
+                                    <input class='input' id="conference_interaction_id_input" type="text" placeholder="Interaction ID"
                                            autocomplete="off"
                                     >
                                 </div>
@@ -283,19 +283,19 @@
                                     <label class="input-label" for="party_id_input">
                                         Party ID
                                     </label>
-                                    <input id="party_id_input" type="text" placeholder="Party ID" autocomplete="off"/>
+                                    <input class='input' id="party_id_input" type="text" placeholder="Party ID" autocomplete="off"/>
                                 </div>
                             </div>
                             <div>
                                 <label for="conference_transfer_data_textarea" class="input-label">Custom data for
                                     transfer:</label>
-                                <textarea id="conference_transfer_data_textarea" rows="5"
+                                <textarea class='textarea' id="conference_transfer_data_textarea" rows="5"
                                           placeholder="Arbitrary data structure (1-level depth)">
-                                            {
-                                                "prevUrl": "http://example.com/?url=right",
-                                                "reconnectAttempts": 3,
-                                                "associatedMetadata": "blah-blah-blah"
-                                            }
+{
+"prevUrl": "http://example.com/?url=right",
+"reconnectAttempts": 3,
+"associatedMetadata": "blah-blah-blah"
+}
                                                             </textarea>
                             </div>
                             <div class="flex flex-wrap -mx-1 mt-4">
@@ -314,33 +314,26 @@
                         </form>
                     </section>
                     <section class='tab-content mt-4 -mb-4' data-name="active-interaction">
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div>
-                                <label class="input-label" for="active_interaction_id_input">
-                                    Interaction ID
-                                </label>
-                                <input id="active_interaction_id_input" type="text" placeholder="Interaction ID"
-                                       autocomplete="off"
-                                >
+                        <form onsubmit="return false">
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="input-label" for="active_interaction_id_input">
+                                        Interaction ID
+                                    </label>
+                                    <input class='input' id="active_interaction_id_input" type="text" placeholder="Interaction ID"
+                                           autocomplete="off"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="input-label" for="dtmf_input">
+                                        DTMF
+                                    </label>
+                                    <input class='input' id="dtmf_input" type="text" placeholder="DTMF"
+                                           autocomplete="on"
+                                    >
+                                </div>
                             </div>
-                            <div>
-                                <label class="input-label" for="dtmf_input">
-                                    DTMF
-                                </label>
-                                <input id="dtmf_input" type="text" placeholder="DTMF"
-                                       autocomplete="on"
-                                >
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-1">
-                            <button class='mx-1 mb-4 button' id="accept_interaction_button">acceptInteraction</button>
-                            <button class='mx-1 mb-4 button' id="reject_interaction_button">rejectInteraction</button>
-                            <button class='mx-1 mb-4 button' id="switch_active_interaction_button">
-                                switchActiveInteraction
-                            </button>
-                            <button class='mx-1 mb-4 button' id="send_dtmf_button">sendDtmf</button>
-
-                            <div class="flex flex-wrap -mx-1 bg-gray-50 pt-4 mb-4 px-2 w-full rounded">
+                            <div class="flex flex-wrap -mx-1 bg-gray-50 pt-4 mb-4 px-2 rounded">
                                 <div class="mx-1 mb-4 shadow-md w-auto p-2 inline-block rounded bg-white">
                                     <div class="toggle-checkbox-wrapper">
                                         <input type="checkbox" name="toggle" id="call_hold_checkbox"
@@ -348,7 +341,7 @@
                                         <label for="call_hold_checkbox"
                                                class="toggle-label"></label>
                                     </div>
-                                    <button class='button' id="set_call_hold_button">setCallHold</button>
+                                    <button class='button bg-green-500' id="set_call_hold_button">setCallHold</button>
                                 </div>
 
                                 <div class="mx-1 mb-4 shadow-md w-auto p-2 inline-block rounded bg-white">
@@ -371,102 +364,146 @@
                                     <button class='button' id="set_call_mute_button">setCallMute</button>
                                 </div>
                             </div>
-                        </div>
+                            <div class="flex flex-wrap -mx-1">
+                                <button class='mx-1 mb-4 button' id="accept_interaction_button">acceptInteraction
+                                </button>
+                                <button class='mx-1 mb-4 button' id="reject_interaction_button">rejectInteraction
+                                </button>
+                                <button class='mx-1 mb-4 button' id="switch_active_interaction_button">
+                                    switchActiveInteraction
+                                </button>
+                                <button class='mx-1 mb-4 button' id="send_dtmf_button">sendDtmf</button>
+                                <input  type='reset' class="button_helper self-end inline-block w-auto mx-1 mb-4"
+                                       value="Reset form"/>
+                            </div>
+                        </form>
                     </section>
-                    <section class='tab-content mt-4 -mb-4 active' data-name="notes-interaction">
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div>
-                                <label class="input-label" for="notes_interaction_id_input">
-                                    Interaction ID
-                                </label>
-                                <input id="notes_interaction_id_input" type="text" placeholder="Interaction ID"
-                                       autocomplete="off"
-                                >
+                    <section class='tab-content mt-4 -mb-4' data-name="notes-interaction">
+                        <form onsubmit="return false">
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="input-label" for="notes_interaction_id_input">
+                                        Interaction ID
+                                    </label>
+                                    <input class='input' id="notes_interaction_id_input" type="text" placeholder="Interaction ID"
+                                           autocomplete="off"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="input-label" for="notes_service_id_input">
+                                        Service id/name
+                                    </label>
+                                    <input class='input' id="notes_service_id_input" type="text" placeholder="Service id/name"
+                                           autocomplete="on"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="input-label" for="disposition_id_input">
+                                        Disposition id/code/name
+                                    </label>
+                                    <input class='input' id="disposition_id_input" type="text" placeholder="Disposition id/code/name"
+                                           autocomplete="on"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="input-label" for="note_input">
+                                        Note
+                                    </label>
+                                    <input class='input' id="note_input" type="text" placeholder="Note"
+                                           autocomplete="on"
+                                    >
+                                </div>
                             </div>
-                            <div>
-                                <label class="input-label" for="notes_service_id_input">
-                                    Service id/name
-                                </label>
-                                <input id="notes_service_id_input" type="text" placeholder="Service id/name"
-                                       autocomplete="on"
-                                >
+                            <div class="flex flex-wrap -mx-1">
+                                <button class='mx-1 mb-4 button' id="get_dispositions_list_button">getDispositionsList
+                                </button>
+                                <button class='mx-1 mb-4 button' id="set_disposition_button">setDisposition</button>
+                                <button class='mx-1 mb-4 button' id="add_note_button">
+                                    addNote
+                                </button>
+                                <button class='mx-1 mb-4 button' id="update_note_button">updateNote</button>
+                                <button class='mx-1 mb-4 button' id="replace_note_button">replaceNote</button>
+                                <input type='reset' class="button_helper self-end inline-block w-auto mx-1 mb-4"
+                                       value="Reset form"/>
                             </div>
-                            <div>
-                                <label class="input-label" for="disposition_id_input">
-                                    Disposition id/code/name
-                                </label>
-                                <input id="disposition_id_input" type="text" placeholder="Disposition id/code/name"
-                                       autocomplete="on"
-                                >
+                        </form>
+                    </section>
+                    <section class='tab-content mt-4 -mb-4 active' data-name="end-interaction">
+                        <form onsubmit="return false">
+                            <div class="grid grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <label class="input-label" for="complete_interaction_id_input">
+                                        Interaction ID
+                                    </label>
+                                    <input class='input' id="complete_interaction_id_input" type="text" placeholder="Interaction ID"
+                                           autocomplete="off"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="input-label" for="complete_disposition_id_input">
+                                        Disposition id/code/name
+                                    </label>
+                                    <input class='input' id="complete_disposition_id_input" type="text"
+                                           placeholder="Disposition id/code/name"
+                                           autocomplete="on"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="input-label" for="complete_note_input">
+                                        Note
+                                    </label>
+                                    <input class='input' id="complete_note_input" type="text" placeholder="Note"
+                                           autocomplete="on"
+                                    >
+                                </div>
                             </div>
-                            <div>
-                                <label class="input-label" for="note_input">
-                                    Note
-                                </label>
-                                <input id="note_input" type="text" placeholder="Note"
-                                       autocomplete="on"
-                                >
+                            <div class="flex flex-wrap -mx-1">
+                                <button class='mx-1 mb-4 button' id="leave_interaction_button">leaveInteraction</button>
+                                <button class='mx-1 mb-4 button' id="complete_interaction_button">completeInteraction
+                                </button>
+                                <button class='mx-1 mb-4 button' id="leave_and_complete_interaction_button">
+                                    leaveAndCompleteInteraction
+                                </button>
+                                <button class='button mx-1 mb-4' id="complete_destroy_call_conference_button">
+                                    destroyCallConference
+                                </button>
+                                <input type='reset' class="button_helper self-end inline-block w-auto mx-1 mb-4"
+                                       value="Reset form"/>
                             </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-1">
-                            <button class='mx-1 mb-4 button' id="get_dispositions_list_button">getDispositionsList
-                            </button>
-                            <button class='mx-1 mb-4 button' id="set_disposition_button">setDisposition</button>
-                            <button class='mx-1 mb-4 button' id="add_note_button">
-                                addNote
-                            </button>
-                            <button class='mx-1 mb-4 button' id="update_note_button">updateNote</button>
-                            <button class='mx-1 mb-4 button' id="replace_note_button">replaceNote</button>
-                        </div>
+                        </form>
                     </section>
                 </section>
                 <!--            <form onsubmit="return false" class="row">-->
-                <!--                <button id="leave_interaction_button">leaveInteraction</button>-->
-                <!--                <button id="complete_interaction_button">completeInteraction</button>-->
-                <!--                <button id="leave_and_complete_interaction_button">leaveAndCompleteInteraction</button>-->
-                <!--            </form>-->
-                <!--            <form onsubmit="return false" class="row">-->
                 <!--                <button id="get_teams_button">getTeams</button>-->
                 <!--                <button id="get_team_members_button">getTeamMembers</button>-->
-                <!--                <input id="team_id_input" type="text" placeholder="team id" autocomplete="on"/>-->
+                <!--                <input class='input' id="team_id_input" type="text" placeholder="team id" autocomplete="on"/>-->
                 <!--                <span></span>-->
                 <!--                <button id="get_services_list_button">getServicesList</button>-->
                 <!--                <button id="set_service_button">setService</button>-->
-                <!--                <input id="service_id_input" type="text" placeholder="service id/name" autocomplete="on"/>-->
+                <!--                <input class='input' id="service_id_input" type="text" placeholder="service id/name" autocomplete="on"/>-->
                 <!--            </form>-->
                 <!--            <form onsubmit="return false" class="row">-->
                 <!--                <button id="set_reschedule_window_button">setRescheduleWindow</button>-->
-                <!--                <input id="from_time_input" type="text" placeholder="YYYY-MM-DD HH24:MM:SS" autocomplete="off"/>-->
-                <!--                <input id="until_time_input" type="text" placeholder="YYYY-MM-DD HH24:MM:SS" autocomplete="off"/>-->
-                <!--                <input id="timezone_code_input" type="text" placeholder="en_US" autocomplete="on"/>-->
+                <!--                <input class='input' id="from_time_input" type="text" placeholder="YYYY-MM-DD HH24:MM:SS" autocomplete="off"/>-->
+                <!--                <input class='input' id="until_time_input" type="text" placeholder="YYYY-MM-DD HH24:MM:SS" autocomplete="off"/>-->
+                <!--                <input class='input' id="timezone_code_input" type="text" placeholder="en_US" autocomplete="on"/>-->
                 <!--            </form>-->
-                <!--            <form onsubmit="return false" class="row">-->
-                <!--                <button id="get_dispositions_list_button">getDispositionsList</button>-->
-                <!--                <button id="set_disposition_button">setDisposition</button>-->
-                <!--                <input id="disposition_id_input" type="text" placeholder="disposition id/code/name" autocomplete="on"/>-->
-                <!--                <span></span>-->
-                <!--                <button id="add_note_button">addNote</button>-->
-                <!--                <button id="update_note_button">updateNote</button>-->
-                <!--                <button id="replace_note_button">replaceNote</button>-->
-                <!--                <input id="note_input" type="text" placeholder="note" autocomplete="off"/>-->
-                <!--            </form>-->
-                <!--            <form onsubmit="return false" class="row">-->
 
                 <!--            </form>-->
                 <!--            <form onsubmit="return false" class="row">-->
                 <!--                <button id="set_screen_recording_mute_button">setScreenRecordingMute</button>-->
-                <!--                <input id="screen_recording_mute_checkbox" type="checkbox"/>-->
+                <!--                <input class='input' id="screen_recording_mute_checkbox" type="checkbox"/>-->
                 <!--                <label for="screen_recording_mute_checkbox">Mute screen recording</label>-->
                 <!--                <button id="get_screen_recording_state_button">getScreenRecordingState</button>-->
                 <!--            </form>-->
                 <!--            <form onsubmit="return false" class="row">-->
                 <!--                <button id="set_variable_button">setVariable</button>-->
-                <!--                <input id="variable_name_input" type="text" placeholder="variable name" autocomplete="on"/>-->
-                <!--                <input id="variable_value_input" type="text" placeholder="variable value" autocomplete="off"/>-->
+                <!--                <input class='input' id="variable_name_input" type="text" placeholder="variable name" autocomplete="on"/>-->
+                <!--                <input class='input' id="variable_value_input" type="text" placeholder="variable value" autocomplete="off"/>-->
                 <!--                <span></span>-->
                 <!--                <button id="get_config_button">getConfig</button>-->
                 <!--                <button id="set_widget_minimized_button">setWidgetMinimized</button>-->
-                <!--                <input id="widget_minimized_checkbox" type="checkbox"/>-->
+                <!--                <input class='input' id="widget_minimized_checkbox" type="checkbox"/>-->
                 <!--                <label for="widget_minimized_checkbox">Widget minimized</label>-->
                 <!--            </form>-->
                 <!--            <div class="row">-->
@@ -478,7 +515,7 @@
                 <!--                <div>-->
                 <!--                    <button id="set_interaction_active_screen_button">setInteractionActiveScreen</button>-->
                 <!--                </div>-->
-                <!--                <textarea id="active_screen_textarea" rows="4" placeholder="Arbitrary data structure">-->
+                <!--                <textarea class='textarea' id="active_screen_textarea" rows="4" placeholder="Arbitrary data structure">-->
                 <!--{-->
                 <!--    "url": "https://brightpattern.com/?data=none"-->
                 <!--}-->
@@ -486,7 +523,7 @@
                 <!--            </div>-->
                 <!--            <div class="row">-->
                 <!--                <label for="search_kb_result_textarea">Search KB result:</label>-->
-                <!--                <textarea id="search_kb_result_textarea" rows="10" placeholder="Array of KB items">-->
+                <!--                <textarea class='textarea' id="search_kb_result_textarea" rows="10" placeholder="Array of KB items">-->
                 <!--[-->
                 <!--    {-->
                 <!--        "id": "random-id-1",-->
@@ -505,7 +542,7 @@
                 <!--            </div>-->
                 <!--            <div class="row">-->
                 <!--                <label for="kb_article_full_data_textarea">KB Article full data:</label>-->
-                <!--                <textarea id="kb_article_full_data_textarea" rows="10" placeholder="KB Article data">-->
+                <!--                <textarea class='textarea' id="kb_article_full_data_textarea" rows="10" placeholder="KB Article data">-->
                 <!--{-->
                 <!--    "id": "random-id-2",-->
                 <!--    "title": "How to use KB articles",-->
