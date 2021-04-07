@@ -16,7 +16,8 @@
         <p class="menu-item" data-name="agent-state">Agent state</p>
         <p class="menu-item" data-name="interaction">Interactions</p>
         <p class="menu-item" data-name="teams">Teams and Service</p>
-        <p class="menu-item opened" data-name="reschedule">Reschedule window</p>
+        <p class="menu-item" data-name="reschedule">Reschedule window</p>
+        <p class="menu-item opened" data-name="screen-recording">Screen recording</p>
     </aside>
     <section class="main-section-wrapper">
         <section class="main-section">
@@ -509,7 +510,7 @@
                         </div>
                     </form>
                 </section>
-                <section class="section opened" data-name="reschedule">
+                <section class="section" data-name="reschedule">
                     <h2 class="title">Reschedule window</h2>
                     <form onsubmit="return false" class="grid grid-cols-2 gap-4">
                         <div>
@@ -556,19 +557,38 @@
                             >
                         </div>
                         <div class="flex flex-wrap -mx-1 -mb-4 items-end">
-                            <button class="button mx-1 mb-4" id="set_reschedule_window_button">setRescheduleWindow</button>
+                            <button class="button mx-1 mb-4" id="set_reschedule_window_button">setRescheduleWindow
+                            </button>
                             <input type='reset' class="button_helper inline-block w-auto mx-1 mb-4"
                                    value="Reset form"/>
                         </div>
                     </form>
                 </section>
-                <!--            </form>-->
-                <!--            <form onsubmit="return false" class="row">-->
-                <!--                <button id="set_screen_recording_mute_button">setScreenRecordingMute</button>-->
-                <!--                <input class='input' id="screen_recording_mute_checkbox" type="checkbox"/>-->
-                <!--                <label for="screen_recording_mute_checkbox">Mute screen recording</label>-->
-                <!--                <button id="get_screen_recording_state_button">getScreenRecordingState</button>-->
-                <!--            </form>-->
+                <section class="section opened max-w-lg inline-block" data-name="screen-recording">
+                    <h2 class="title">Screen recording</h2>
+                    <form onsubmit="return false">
+                        <div class="flex flex-col flex-wrap items-start -mx-1 -mb-4">
+                            <div class="mb-4">
+                                <label class='mr-2 pointer' for="screen_recording_mute_checkbox">Mute screen
+                                    recording</label>
+                                <div class="toggle-checkbox-wrapper">
+                                    <input type="checkbox" name="toggle" id="screen_recording_mute_checkbox"
+                                           class="toggle-checkbox "/>
+                                    <label for="screen_recording_mute_checkbox"
+                                           class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <button class="button mx-1 mb-4" id="set_screen_recording_mute_button">
+                                setScreenRecordingMute (unmute)
+                            </button>
+                            <button class="button mx-1 mb-4" id="get_screen_recording_state_button">
+                                getScreenRecordingState
+                            </button>
+                            <input type='reset' class="button_helper inline-block w-auto mx-1 mb-4"
+                                   value="Reset form"/>
+                        </div>
+                    </form>
+                </section>
                 <!--            <form onsubmit="return false" class="row">-->
                 <!--                <button id="set_variable_button">setVariable</button>-->
                 <!--                <input class='input' id="variable_name_input" type="text" placeholder="variable name" autocomplete="on"/>-->

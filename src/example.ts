@@ -528,6 +528,10 @@ setScreenRecordingMuteButton.onclick = () => {
     const muteScreenRecording = screenRecordingMuteCheckbox.checked
     adApi.setScreenRecordingMute(muteScreenRecording)
 }
+screenRecordingMuteCheckbox.addEventListener('change', (evt) =>{
+    const screenRecordingMute = (evt.target as HTMLInputElement).checked
+    setScreenRecordingMuteButton.innerHTML = `setScreenRecordingMute (${screenRecordingMute ? 'mute' : 'unmute'})`
+})
 
 setupHoverEffect(getScreenRecordingStateButton, [])
 getScreenRecordingStateButton.onclick = () => {
