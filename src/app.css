@@ -30,7 +30,7 @@ body > aside {
     display: flex;
     flex: 1 1 40%;
     flex-flow: column nowrap;
-    @apply rounded-tr shadow-inner bg-white;
+    @apply rounded-t shadow-inner bg-white ml-4;
 }
 .log-controls {
     display: flex;
@@ -185,7 +185,7 @@ body > aside {
 }
 
 .tab {
-    @apply flex flex-col sm:flex-row bg-blue-50;
+    @apply flex flex-col sm:flex-row bg-blue-50 rounded-t;
 }
 
 .tab-content {
@@ -200,6 +200,14 @@ body > aside {
     @apply text-gray-600 py-4 px-6 block  border-b-2 font-medium border-blue-500;
     transition: all .3s ease;
     cursor: pointer;
+}
+
+.tab-item:first-child {
+    @apply rounded-tl
+}
+
+.tab-item:last-child {
+    @apply rounded-tr
 }
 
 .tab-item:hover,.tab-item:focus,.tab-item.active {
