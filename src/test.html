@@ -17,7 +17,8 @@
         <p class="menu-item" data-name="interaction">Interactions</p>
         <p class="menu-item" data-name="teams">Teams and Service</p>
         <p class="menu-item" data-name="reschedule">Reschedule window</p>
-        <p class="menu-item opened" data-name="screen-recording">Screen recording</p>
+        <p class="menu-item" data-name="screen-recording">Screen recording</p>
+        <p class="menu-item opened" data-name="knowledge-base">Knowledge Base</p>
     </aside>
     <section class="main-section-wrapper">
         <section class="main-section">
@@ -200,6 +201,9 @@
                                     <button class="button mx-1 mb-4" id="start_chat_button">startChat</button>
                                     <button class="button mx-1 mb-4" id="start_email_button">startEmail</button>
                                     <button class="button mx-1 mb-4" id="start_call_button">startCall</button>
+                                    <button class="button mx-1 mb-4" id="add_interaction_associated_object_button">
+                                        addInteractionAssociatedObject
+                                    </button>
                                 </div>
                             </form>
                         </section>
@@ -564,12 +568,12 @@
                         </div>
                     </form>
                 </section>
-                <section class="section opened max-w-lg inline-block" data-name="screen-recording">
+                <section class="section max-w-lg inline-block" data-name="screen-recording">
                     <h2 class="title">Screen recording</h2>
                     <form onsubmit="return false">
                         <div class="flex flex-col flex-wrap items-start -mx-1 -mb-4">
                             <div class="mb-4">
-                                <label class='mr-2 pointer' for="screen_recording_mute_checkbox">Mute screen
+                                <label class='mr-2 text-gray-500  cursor-pointer text-sm font-bold inline-block' for="screen_recording_mute_checkbox">Mute screen
                                     recording</label>
                                 <div class="toggle-checkbox-wrapper">
                                     <input type="checkbox" name="toggle" id="screen_recording_mute_checkbox"
@@ -586,6 +590,51 @@
                             </button>
                             <input type='reset' class="button_helper inline-block w-auto mx-1 mb-4"
                                    value="Reset form"/>
+                        </div>
+                    </form>
+                </section>
+                <section class="section opened w-full" data-name="knowledge-base">
+                    <h2 class="title">Knowledge Base</h2>
+                    <form onsubmit="return false">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="row">
+                                <label class="input-label" for="search_kb_result_textarea">Search KB result:</label>
+                                <textarea class='textarea' id="search_kb_result_textarea" rows="15"
+                                          placeholder="Array of KB items">
+[
+    {
+        "id": "random-id-1",
+        "title": "Demo article",
+        "text": "This is KB Article content",
+        "source": "test-adapter"
+    },
+    {
+        "id": "random-id-2",
+        "title": "How to use KB articles",
+        "text": "You can use KB articles when a client asks you a common question",
+        "source": "test-adapter"
+    }
+]
+                                </textarea>
+                            </div>
+                            <div class="row">
+                                <label class="input-label" for="kb_article_full_data_textarea">KB Article full data:</label>
+                                <textarea class='textarea' id="kb_article_full_data_textarea" rows="12"
+                                          placeholder="KB Article data">
+{
+    "id": "random-id-2",
+    "title": "How to use KB articles",
+    "answer": "You can use KB articles when a client asks you a common question",
+    "keywords": "agent,kb,article",
+    "notes": "use it only to teach agents-newcomers",
+    "language": "ru",
+    "createdByUser": "System admin",
+    "lastEditedByUser": "Pol Andersen",
+    "customFields": {},
+    "source": "test-adapter"
+}
+                                </textarea>
+                            </div>
                         </div>
                     </form>
                 </section>

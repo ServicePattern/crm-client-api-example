@@ -30,6 +30,7 @@ body > aside {
 
 .main-section-wrapper {
     position: relative;
+    flex: 1 1 auto;
     @apply flex flex-col justify-between mx-4 ;
 }
 
@@ -164,7 +165,7 @@ body > aside {
 }
 
 .input-label {
-    @apply block text-gray-500 text-sm font-bold mb-2;
+    @apply block text-gray-500 text-sm font-bold mb-2 cursor-pointer;
 }
 
 .toggle-checkbox-wrapper {
