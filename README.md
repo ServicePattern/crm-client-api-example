@@ -2,7 +2,7 @@
 ## Environment variables:
 `BRIGHTPATTERN_ORIGIN`
 - Is used as origin to fetch `communicator/adapters/api.js`
-- Default value for BRIGHTPATTERN_ORIGIN is 'https://ocean08.brightpattern.com'
+- Default value for BRIGHTPATTERN_ORIGIN is 'https://localhost:3000'
 
 ## Setup and run
 ### Setup:
