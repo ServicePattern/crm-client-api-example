@@ -11,7 +11,13 @@ const integrationKey = 'test-adapter'
 const hamburger = new Hamburger('.hamburger', '.menu')
 hamburger.initializeEventListener()
 
-const menu = new Menu(hamburger, '.menu', '.menu-item', '.section')
+const menu = new Menu(hamburger, {
+    menu: '.menu',
+    menuItems: '.menu-item',
+    section: '.section',
+    multipleSelect: '#menu_multiple_select_checkbox'
+})
+
 menu.initializeEventListeners()
 
 const tab = new Tab('.tab', '.tab-item', '.tab-content')
@@ -75,6 +81,7 @@ const conferenceInteractionIdInput = document.getElementById('conference_interac
 const notesInteractionIdInput = document.getElementById('notes_interaction_id_input')! as HTMLInputElement
 const completeInteractionIdInput = document.getElementById('complete_interaction_id_input')! as HTMLInputElement
 const rescheduleInteractionIdInput = document.getElementById('reschedule_interaction_id_input')! as HTMLInputElement
+const activeAssociatedInteractionIdInput = document.getElementById('active-associated_interaction_id_input')! as HTMLInputElement
 const leaveInteractionButton = document.getElementById('leave_interaction_button')!
 const completeInteractionButton = document.getElementById('complete_interaction_button')!
 const leaveAndCompleteInteractionButton = document.getElementById('leave_and_complete_interaction_button')!
@@ -135,6 +142,7 @@ const widgetMinimizedCheckbox = document.getElementById('widget_minimized_checkb
 
 const addInteractionAssociatedObjectButton = document.getElementById('add_interaction_associated_object_button')!
 const associatedObjectTextarea = document.getElementById('associated_object_textarea')! as HTMLTextAreaElement
+const activeAssociatedObjectTextarea = document.getElementById('active-associated_object_textarea')! as HTMLTextAreaElement
 
 const setInteractionActiveScreenButton = document.getElementById('set_interaction_active_screen_button')!
 const activeScreenTextarea = document.getElementById('active_screen_textarea')! as HTMLTextAreaElement
@@ -145,7 +153,7 @@ const searchKBResultTextarea = document.getElementById('search_kb_result_textare
 const kbArticleFullDataTextarea = document.getElementById('kb_article_full_data_textarea')! as HTMLTextAreaElement
 
 const resetSizeButton = document.querySelector('.reset_size_button') as HTMLElement
-const mainSection = document.querySelector('.main-section') as HTMLElement
+const mainSection = document.querySelector('.content') as HTMLElement
 
 
 const adApi = new window.brightpattern.AdApi({
@@ -468,7 +476,7 @@ setRescheduleWindowButton.onclick = () => {
     adApi.setRescheduleWindow({numberToDial: phoneNumber, fromTime, untilTime, timezoneCode}, itemId)
 }
 
-
+//
 setupHoverEffect(addNoteButton, [noteInput, notesInteractionIdInput])
 addNoteButton.onclick = () => {
     const note = noteInput.value
@@ -557,22 +565,22 @@ setWidgetMinimizedButton.onclick = () => {
     adApi.setWidgetMinimized(widgetMinimized)
 }
 
-setupHoverEffect(addInteractionAssociatedObjectButton, [associatedObjectTextarea, interactionIdInput])
+setupHoverEffect(addInteractionAssociatedObjectButton, [activeAssociatedObjectTextarea, activeAssociatedInteractionIdInput])
 addInteractionAssociatedObjectButton.onclick = () => {
     let associatedObject: InteractionAssociatedObject | null = null
     try {
-        associatedObject = JSON.parse(associatedObjectTextarea.value)
+        associatedObject = JSON.parse(activeAssociatedObjectTextarea.value)
     } catch (e) {
         alert('You have syntax error in the associated object structure. Cannot parse JSON.')
     }
     if (!associatedObject) {
         return
     }
-    const itemId = interactionIdInput.value
+    const itemId = activeAssociatedInteractionIdInput.value
     adApi.addInteractionAssociatedObject(associatedObject, itemId)
 }
 
-setupHoverEffect(setInteractionActiveScreenButton, [activeScreenTextarea, interactionIdInput])
+setupHoverEffect(setInteractionActiveScreenButton, [activeScreenTextarea, activeAssociatedInteractionIdInput])
 setInteractionActiveScreenButton.onclick = () => {
     let activeScreenData: any | null = null
     try {
@@ -583,7 +591,7 @@ setInteractionActiveScreenButton.onclick = () => {
     if (!activeScreenData) {
         return
     }
-    const itemId = interactionIdInput.value
+    const itemId = activeAssociatedInteractionIdInput.value
     adApi.setInteractionActiveScreen(activeScreenData, itemId)
 }
 

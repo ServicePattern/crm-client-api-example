@@ -1,28 +1,54 @@
 import {HamburgerI} from "./hamburger"
 
 interface MenuI {
+    multiplySelect: boolean
+
     open(menuItemName: string): void
+
+    toggle(menuItemName: string): void
 
     getOpened(): string
 
     initializeEventListeners(): void
 }
 
+interface Selectors {
+    menu: string,
+    menuItems: string,
+    section: string,
+    multipleSelect: string
+}
+
 
 export class Menu implements MenuI {
+    multiplySelect = false
     hamburger: HamburgerI
     menu: HTMLElement | null
     menuSelector: string
+    multipleSelectCheckbox: HTMLElement | null | undefined
     menuItems: NodeListOf<HTMLElement> | undefined
     sections: NodeListOf<HTMLElement> | undefined
     opened = ''
 
-    constructor(hamburger: HamburgerI, menuSelector: string, menuItemsSelector: string, sectionSelector: string) {
-        this.menuSelector = menuSelector
-        this.menu = document.querySelector(menuSelector)
-        this.sections = document.querySelectorAll(sectionSelector)
-        this.menuItems = this.menu?.querySelectorAll(menuItemsSelector)
+    constructor(hamburger: HamburgerI, selectors: Selectors) {
+        this.menuSelector = selectors.menu
+        this.menu = document.querySelector(selectors.menu)
+        this.sections = document.querySelectorAll(selectors.section)
+        this.menuItems = this.menu?.querySelectorAll(selectors.menuItems)
+        this.multipleSelectCheckbox = this.menu?.querySelector(selectors.multipleSelect)
         this.hamburger = hamburger
+    }
+
+    toggle = (menuItemName: string) => {
+        this.opened = menuItemName
+        const menuItem = Array.from(this.menuItems ?? []).find(menuItemNode => menuItemNode.dataset.name === menuItemName)
+        const section = Array.from(this.sections ?? []).find(section => section.dataset.name === menuItemName)
+        menuItem?.classList.toggle('opened')
+        section?.classList.toggle('opened')
+    }
+
+    toggleSelectMode = () => {
+        this.multiplySelect = !this.multiplySelect
     }
 
     open = (menuItemName: string) => {
@@ -58,12 +84,11 @@ export class Menu implements MenuI {
                 throw Error('Specify data-name attribute for the .menu-item')
             }
 
-            menuItemNode.addEventListener('click', () => {
-                this.open(menuItemName)
-            })
+            menuItemNode.addEventListener('click', () => this.multiplySelect ? this.toggle(menuItemName) : this.open(menuItemName))
         })
         this.initializeCloseOnOutsideClick()
         this.initializeCloseOnEscape()
+        this.initializeMultipleSelector()
     }
 
     initializeCloseOnOutsideClick() {
@@ -81,6 +106,10 @@ export class Menu implements MenuI {
                 this.closeMenu()
             }
         })
+    }
+
+    initializeMultipleSelector() {
+        this.multipleSelectCheckbox?.addEventListener('change', this.toggleSelectMode)
     }
 
     closeMenu() {
