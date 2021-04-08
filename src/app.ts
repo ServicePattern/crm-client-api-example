@@ -229,7 +229,9 @@ loginButton.onclick = () => {
     const username = usernameInput.value
     const password = passwordInput.value
     const tenant = tenantInput.value
-    adApi.login(username, password, tenant)
+    console.table()
+
+    adApi.login({ username: username, password: password, tenant: tenant })
 }
 
 setupHoverEffect(logoutButton, [])
