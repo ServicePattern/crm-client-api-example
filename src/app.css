@@ -2,14 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    box-sizing:border-box;
+}
+
 html, body {
     display: flex;
     overflow-x: hidden;
     height: 100%;
     width: 100%;
-    box-sizing: border-box;
     margin: 0;
 }
+
 body > main {
     height: 100%;
     flex-grow: 1;
@@ -50,13 +54,15 @@ body > aside {
     overflow: auto;
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .log-container {
     height: 40%;
+    min-height: 200px;
     box-sizing: border-box;
     display: flex;
-    flex: 100 1 auto;
+    flex: 100 100 auto;
     overflow: auto;
     flex-flow: column nowrap;
     @apply rounded-t shadow-inner bg-white;
@@ -226,7 +232,7 @@ body > aside {
 }
 
 .menu-item.opened {
-    @apply bg-blue-400 text-white;
+    @apply bg-blue-400 text-white shadow-inner;
 }
 
 .menu-item.opened:hover {
