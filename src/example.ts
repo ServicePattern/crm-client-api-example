@@ -11,7 +11,13 @@ const integrationKey = 'test-adapter'
 const hamburger = new Hamburger('.hamburger', '.menu')
 hamburger.initializeEventListener()
 
-const menu = new Menu(hamburger, '.menu', '.menu-item', '.section')
+const menu = new Menu(hamburger, {
+    menu: '.menu',
+    menuItems: '.menu-item',
+    section: '.section',
+    multipleSelect: '#menu_multiple_select_checkbox'
+})
+
 menu.initializeEventListeners()
 
 const tab = new Tab('.tab', '.tab-item', '.tab-content')

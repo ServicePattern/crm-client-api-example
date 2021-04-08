@@ -25,7 +25,6 @@ body > aside {
     flex-direction: column;
     overflow: auto;
     resize: vertical;
-    flex: 1 0 auto;
 }
 
 .main-section-wrapper {
@@ -47,10 +46,10 @@ body > aside {
 }
 
 .controls {
-    @apply pb-4;
+    @apply -mx-4;
     overflow: auto;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .log-container {
@@ -230,10 +229,14 @@ body > aside {
     @apply bg-blue-400 text-white;
 }
 
+.menu-item.opened:hover {
+    @apply bg-blue-500;
+}
+
 .section {
     display: none;
     overflow: auto;
-    @apply px-8 py-4 shadow-md rounded-lg bg-white;
+    @apply px-8 py-4 shadow-md rounded-lg bg-white m-4;
 }
 
 .section.opened {
