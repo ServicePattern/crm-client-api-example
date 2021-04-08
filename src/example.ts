@@ -75,6 +75,7 @@ const conferenceInteractionIdInput = document.getElementById('conference_interac
 const notesInteractionIdInput = document.getElementById('notes_interaction_id_input')! as HTMLInputElement
 const completeInteractionIdInput = document.getElementById('complete_interaction_id_input')! as HTMLInputElement
 const rescheduleInteractionIdInput = document.getElementById('reschedule_interaction_id_input')! as HTMLInputElement
+const activeAssociatedInteractionIdInput = document.getElementById('active-associated_interaction_id_input')! as HTMLInputElement
 const leaveInteractionButton = document.getElementById('leave_interaction_button')!
 const completeInteractionButton = document.getElementById('complete_interaction_button')!
 const leaveAndCompleteInteractionButton = document.getElementById('leave_and_complete_interaction_button')!
@@ -135,6 +136,7 @@ const widgetMinimizedCheckbox = document.getElementById('widget_minimized_checkb
 
 const addInteractionAssociatedObjectButton = document.getElementById('add_interaction_associated_object_button')!
 const associatedObjectTextarea = document.getElementById('associated_object_textarea')! as HTMLTextAreaElement
+const activeAssociatedObjectTextarea = document.getElementById('active-associated_object_textarea')! as HTMLTextAreaElement
 
 const setInteractionActiveScreenButton = document.getElementById('set_interaction_active_screen_button')!
 const activeScreenTextarea = document.getElementById('active_screen_textarea')! as HTMLTextAreaElement
@@ -468,7 +470,7 @@ setRescheduleWindowButton.onclick = () => {
     adApi.setRescheduleWindow({numberToDial: phoneNumber, fromTime, untilTime, timezoneCode}, itemId)
 }
 
-
+//
 setupHoverEffect(addNoteButton, [noteInput, notesInteractionIdInput])
 addNoteButton.onclick = () => {
     const note = noteInput.value
@@ -546,33 +548,33 @@ setVariableButton.onclick = () => {
     adApi.setVariable(variableName, variableValue, itemId)
 }
 
-setupHoverEffect(getConfigButton, [])
-getConfigButton.onclick = () => {
-    adApi.getConfig()
-}
+// setupHoverEffect(getConfigButton, [])
+// getConfigButton.onclick = () => {
+//     adApi.getConfig()
+// }
+//
+// setupHoverEffect(setWidgetMinimizedButton, [widgetMinimizedCheckbox])
+// setWidgetMinimizedButton.onclick = () => {
+//     const widgetMinimized = widgetMinimizedCheckbox.checked
+//     adApi.setWidgetMinimized(widgetMinimized)
+// }
 
-setupHoverEffect(setWidgetMinimizedButton, [widgetMinimizedCheckbox])
-setWidgetMinimizedButton.onclick = () => {
-    const widgetMinimized = widgetMinimizedCheckbox.checked
-    adApi.setWidgetMinimized(widgetMinimized)
-}
-
-setupHoverEffect(addInteractionAssociatedObjectButton, [associatedObjectTextarea, interactionIdInput])
+setupHoverEffect(addInteractionAssociatedObjectButton, [activeAssociatedObjectTextarea, activeAssociatedInteractionIdInput])
 addInteractionAssociatedObjectButton.onclick = () => {
     let associatedObject: InteractionAssociatedObject | null = null
     try {
-        associatedObject = JSON.parse(associatedObjectTextarea.value)
+        associatedObject = JSON.parse(activeAssociatedObjectTextarea.value)
     } catch (e) {
         alert('You have syntax error in the associated object structure. Cannot parse JSON.')
     }
     if (!associatedObject) {
         return
     }
-    const itemId = interactionIdInput.value
+    const itemId = activeAssociatedInteractionIdInput.value
     adApi.addInteractionAssociatedObject(associatedObject, itemId)
 }
 
-setupHoverEffect(setInteractionActiveScreenButton, [activeScreenTextarea, interactionIdInput])
+setupHoverEffect(setInteractionActiveScreenButton, [activeScreenTextarea, activeAssociatedInteractionIdInput])
 setInteractionActiveScreenButton.onclick = () => {
     let activeScreenData: any | null = null
     try {
@@ -583,7 +585,7 @@ setInteractionActiveScreenButton.onclick = () => {
     if (!activeScreenData) {
         return
     }
-    const itemId = interactionIdInput.value
+    const itemId = activeAssociatedInteractionIdInput.value
     adApi.setInteractionActiveScreen(activeScreenData, itemId)
 }
 

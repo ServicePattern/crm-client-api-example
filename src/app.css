@@ -257,7 +257,7 @@ body > aside {
 }
 
 .tab-item {
-    @apply text-gray-600 py-4 px-6 block  border-b-2 font-medium border-blue-500;
+    @apply text-gray-600 py-4 px-4 block  border-b-2 font-medium border-blue-500;
     transition: all .3s ease;
     cursor: pointer;
 }

@@ -124,69 +124,76 @@
                     </div>
                 </form>
             </section>
-                <section class="section" data-name="interaction">
-                        <h2 class="title justify-self-center">Interactions</h2>
-                        <nav class="tab">
-                            <button class="tab-item active" data-name="start-interaction">
-                                Start interaction
-                            </button>
-                            <button class="tab-item" data-name="transfer-interaction">
-                                Transfer
-                            </button>
-                            <button class="tab-item" data-name="conference-interaction">
-                                Conference
-                            </button>
-                            <button class="tab-item" data-name="active-interaction">
-                                Active interaction
-                            </button>
-                            <button class="tab-item" data-name="notes-interaction">
-                                Notes and Disposition
-                            </button>
-                            <button class="tab-item" data-name="end-interaction">
-                                End interaction
-                            </button>
-                        </nav>
-                        <section class="tab-content mt-4 -mb-4 active" data-name="start-interaction">
-                            <form onsubmit="return false">
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="input-label" for="chat_channel_input">
-                                            Chat channel
-                                        </label>
-                                        <input class='input' id="chat_channel_input" type="text" placeholder="Chat channel"
-                                               autocomplete="on"
-                                        >
-                                    </div>
-                                    <div>
-                                        <label class="input-label" for="chat_address_input">
-                                            Phone or user ID
-                                        </label>
-                                        <input class='input' id="chat_address_input" type="text" placeholder="Phone or user ID"
-                                               autocomplete="on"
-                                        >
-                                    </div>
-                                    <div>
-                                        <label class="input-label" for="email_address_input">
-                                            Email address
-                                        </label>
-                                        <input class='input' id="email_address_input" type="text" placeholder="Email address"
-                                               autocomplete="on"
-                                        >
-                                    </div>
-                                    <div>
-                                        <label class="input-label" for="start_call_phone_number_input">
-                                            Phone number
-                                        </label>
-                                        <input class='input' id="start_call_phone_number_input" type="text" placeholder="Phone number"
-                                               autocomplete="on"
-                                        >
-                                    </div>
-                                </div>
-                                <div class="mt-4 w-full">
-                                    <label class="input-label" for="associated_object_textarea">
-                                        Associated object
+                <section class="section opened" data-name="interaction">
+                    <h2 class="title justify-self-center">Interactions</h2>
+                    <nav class="tab">
+                        <button class="tab-item active" data-name="start-interaction">
+                            Start interaction
+                        </button>
+                        <button class="tab-item" data-name="transfer-interaction">
+                            Transfer
+                        </button>
+                        <button class="tab-item" data-name="conference-interaction">
+                            Conference
+                        </button>
+                        <button class="tab-item" data-name="active-interaction">
+                            Active interaction
+                        </button>
+                        <button class="tab-item" data-name="active-associated">
+                            Active screen & Associated object
+                        </button>
+                        <button class="tab-item" data-name="notes-interaction">
+                            Notes & Disposition
+                        </button>
+                        <button class="tab-item" data-name="end-interaction">
+                            End interaction
+                        </button>
+                    </nav>
+                    <section class="tab-content mt-4 -mb-4" data-name="start-interaction">
+                        <form onsubmit="return false">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="input-label" for="chat_channel_input">
+                                        Chat channel
                                     </label>
-                                    <textarea class='textarea' id="associated_object_textarea" placeholder="Associated object" rows="8">
+                                    <input class='input' id="chat_channel_input" type="text" placeholder="Chat channel"
+                                           autocomplete="on"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="input-label" for="chat_address_input">
+                                        Phone or user ID
+                                    </label>
+                                    <input class='input' id="chat_address_input" type="text"
+                                           placeholder="Phone or user ID"
+                                           autocomplete="on"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="input-label" for="email_address_input">
+                                        Email address
+                                    </label>
+                                    <input class='input' id="email_address_input" type="text"
+                                           placeholder="Email address"
+                                           autocomplete="on"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="input-label" for="start_call_phone_number_input">
+                                        Phone number
+                                    </label>
+                                    <input class='input' id="start_call_phone_number_input" type="text"
+                                           placeholder="Phone number"
+                                           autocomplete="on"
+                                    >
+                                </div>
+                            </div>
+                            <div class="mt-4 w-full">
+                                <label class="input-label" for="associated_object_textarea">
+                                    Associated object
+                                </label>
+                                <textarea class='textarea' id="associated_object_textarea"
+                                          placeholder="Associated object" rows="8">
 {
     "id": "some-random-id",
     "type": "contact",
@@ -196,14 +203,11 @@
     "source": "test-adapter"
 }
                                     </textarea>
-                                </div>
+                            </div>
                                 <div class="flex flex-wrap -mx-1 mt-4">
                                     <button class="button mx-1 mb-4" id="start_chat_button">startChat</button>
                                     <button class="button mx-1 mb-4" id="start_email_button">startEmail</button>
                                     <button class="button mx-1 mb-4" id="start_call_button">startCall</button>
-                                    <button class="button mx-1 mb-4" id="add_interaction_associated_object_button">
-                                        addInteractionAssociatedObject
-                                    </button>
                                 </div>
                             </form>
                         </section>
@@ -340,6 +344,24 @@
                                                autocomplete="on"
                                         >
                                     </div>
+                                    <div>
+                                        <label class="input-label" for="variable_name_input">
+                                            Variable name
+                                        </label>
+                                        <input class='input' id="variable_name_input" type="text"
+                                               placeholder="Variable name"
+                                               autocomplete="on"
+                                        >
+                                    </div>
+                                    <div>
+                                        <label class="input-label" for="variable_value_input">
+                                            Variable value
+                                        </label>
+                                        <input class='input' id="variable_value_input" type="text"
+                                               placeholder="Variable value"
+                                               autocomplete="off"
+                                        >
+                                    </div>
                                 </div>
                                 <div class="flex flex-wrap -mx-1 bg-gray-50 pt-4 mb-4 px-2 rounded">
                                     <div class="mx-1 mb-4 shadow-md w-auto p-2 inline-block rounded bg-white">
@@ -385,71 +407,124 @@
                                         switchActiveInteraction
                                     </button>
                                     <button class='mx-1 mb-4 button' id="send_dtmf_button">sendDtmf</button>
+                                    <button class='mx-1 mb-4 button' id="set_variable_button">setVariable</button>
                                     <input type='reset' class="button_helper self-end inline-block w-auto mx-1 mb-4"
                                            value="Reset form"/>
                                 </div>
                             </form>
                         </section>
-                        <section class='tab-content mt-4 -mb-4' data-name="notes-interaction">
-                            <form onsubmit="return false">
-                                <div class="grid grid-cols-2 gap-4 mb-4">
-                                    <div>
-                                        <label class="input-label" for="notes_interaction_id_input">
-                                            Interaction ID
-                                        </label>
-                                        <input class='input' id="notes_interaction_id_input" type="text" placeholder="Interaction ID"
-                                               autocomplete="off"
-                                        >
-                                    </div>
-                                    <div>
-                                        <label class="input-label" for="notes_service_id_input">
-                                            Service ID/name
-                                        </label>
-                                        <input class='input' id="notes_service_id_input" type="text" placeholder="Service id/name"
-                                               autocomplete="on"
-                                        >
-                                    </div>
-                                    <div>
-                                        <label class="input-label" for="disposition_id_input">
-                                            Disposition id/code/name
-                                        </label>
-                                        <input class='input' id="disposition_id_input" type="text" placeholder="Disposition id/code/name"
-                                               autocomplete="on"
-                                        >
-                                    </div>
-                                    <div>
-                                        <label class="input-label" for="note_input">
-                                            Note
-                                        </label>
-                                        <input class='input' id="note_input" type="text" placeholder="Note"
-                                               autocomplete="on"
-                                        >
-                                    </div>
+                    <section class="tab-content mt-4 -mb-4" data-name="active-associated">
+                        <form onsubmit="return false">
+                            <div class="mb-4">
+                                <label class="input-label" for="active-associated_interaction_id_input">
+                                    Interaction ID
+                                </label>
+                                <input class='input' id="active-associated_interaction_id_input" type="text"
+                                       placeholder="Interaction ID"
+                                       autocomplete="off"
+                                >
+                            </div>
+
+                            <div class="mb-4 w-full">
+                                <label class="input-label" for="active-associated_object_textarea">
+                                    Associated object
+                                </label>
+                                <textarea class='textarea' id="active-associated_object_textarea"
+                                          placeholder="Associated object" rows="8">
+{
+"id": "some-random-id",
+"type": "contact",
+"displayName": "Peter Morrison",
+"displayType": "Contact",
+"customFields": {},
+"source": "test-adapter"
+}
+                                </textarea>
+                            </div>
+                            <div class="mb-4">
+                                <label class="input-label" for="active_screen_textarea">Interaction active
+                                    screen</label>
+                                <textarea class='textarea' id="active_screen_textarea" rows="4"
+                                          placeholder="Arbitrary data structure">
+    {
+        "url": "https://brightpattern.com/?data=none"
+    }
+                                            </textarea>
+                            </div>
+                            <div class="flex flex-wrap -mx-1 mt-4">
+                                <button class='mx-1 mb-4 button' id="add_interaction_associated_object_button">
+                                    addInteractionAssociatedObject
+                                </button>
+                                <button class='mx-1 mb-4 button' id="set_interaction_active_screen_button">
+                                    setInteractionActiveScreen
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+                    <section class='tab-content mt-4 -mb-4' data-name="notes-interaction">
+                        <form onsubmit="return false">
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="input-label" for="notes_interaction_id_input">
+                                        Interaction ID
+                                    </label>
+                                    <input class='input' id="notes_interaction_id_input" type="text"
+                                           placeholder="Interaction ID"
+                                           autocomplete="off"
+                                    >
                                 </div>
-                                <div class="flex flex-wrap -mx-1">
-                                    <button class='mx-1 mb-4 button' id="get_dispositions_list_button">getDispositionsList
-                                    </button>
-                                    <button class='mx-1 mb-4 button' id="set_disposition_button">setDisposition</button>
-                                    <button class='mx-1 mb-4 button' id="add_note_button">
-                                        addNote
-                                    </button>
-                                    <button class='mx-1 mb-4 button' id="update_note_button">updateNote</button>
-                                    <button class='mx-1 mb-4 button' id="replace_note_button">replaceNote</button>
-                                    <input type='reset' class="button_helper self-end inline-block w-auto mx-1 mb-4"
-                                           value="Reset form"/>
+                                <div>
+                                    <label class="input-label" for="notes_service_id_input">
+                                        Service ID/name
+                                    </label>
+                                    <input class='input' id="notes_service_id_input" type="text"
+                                           placeholder="Service id/name"
+                                           autocomplete="on"
+                                    >
                                 </div>
-                            </form>
-                        </section>
-                        <section class='tab-content mt-4 -mb-4' data-name="end-interaction">
-                            <form onsubmit="return false">
-                                <div class="grid grid-cols-3 gap-4 mb-4">
-                                    <div>
-                                        <label class="input-label" for="complete_interaction_id_input">
-                                            Interaction ID
-                                        </label>
-                                        <input class='input' id="complete_interaction_id_input" type="text" placeholder="Interaction ID"
-                                               autocomplete="off"
-                                        >
+                                <div>
+                                    <label class="input-label" for="disposition_id_input">
+                                        Disposition id/code/name
+                                    </label>
+                                    <input class='input' id="disposition_id_input" type="text"
+                                           placeholder="Disposition id/code/name"
+                                           autocomplete="on"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="input-label" for="note_input">
+                                        Note
+                                    </label>
+                                    <input class='input' id="note_input" type="text" placeholder="Note"
+                                           autocomplete="on"
+                                    >
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap -mx-1">
+                                <button class='mx-1 mb-4 button' id="get_dispositions_list_button">getDispositionsList
+                                </button>
+                                <button class='mx-1 mb-4 button' id="set_disposition_button">setDisposition</button>
+                                <button class='mx-1 mb-4 button' id="add_note_button">
+                                    addNote
+                                </button>
+                                <button class='mx-1 mb-4 button' id="update_note_button">updateNote</button>
+                                <button class='mx-1 mb-4 button' id="replace_note_button">replaceNote</button>
+                                <input type='reset' class="button_helper self-end inline-block w-auto mx-1 mb-4"
+                                       value="Reset form"/>
+                            </div>
+                        </form>
+                    </section>
+                    <section class='tab-content mt-4 -mb-4' data-name="end-interaction">
+                        <form onsubmit="return false">
+                            <div class="grid grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <label class="input-label" for="complete_interaction_id_input">
+                                        Interaction ID
+                                    </label>
+                                    <input class='input' id="complete_interaction_id_input" type="text"
+                                           placeholder="Interaction ID"
+                                           autocomplete="off"
+                                    >
                                     </div>
                                     <div>
                                         <label class="input-label" for="complete_disposition_id_input">
@@ -593,7 +668,7 @@
                         </div>
                     </form>
                 </section>
-                <section class="section opened w-full" data-name="knowledge-base">
+                <section class="section w-full" data-name="knowledge-base">
                     <h2 class="title">Knowledge Base</h2>
                     <form onsubmit="return false">
                         <div class="grid grid-cols-2 gap-4">
@@ -618,7 +693,8 @@
                                 </textarea>
                             </div>
                             <div class="row">
-                                <label class="input-label" for="kb_article_full_data_textarea">KB Article full data:</label>
+                                <label class="input-label" for="kb_article_full_data_textarea">KB Article full
+                                    data:</label>
                                 <textarea class='textarea' id="kb_article_full_data_textarea" rows="12"
                                           placeholder="KB Article data">
 {
