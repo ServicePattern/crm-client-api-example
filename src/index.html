@@ -21,7 +21,7 @@
                        class="toggle-label"></label>
             </div>
         </div>
-        <p class="menu-item" data-name="session">Session</p>
+        <p class="menu-item opened" data-name="session">Session</p>
         <p class="menu-item" data-name="phone-device">Phone Device</p>
         <p class="menu-item" data-name="agent-state">Agent state</p>
         <p class="menu-item" data-name="interaction">Interactions</p>
@@ -29,7 +29,7 @@
         <p class="menu-item" data-name="reschedule">Reschedule window</p>
         <p class="menu-item" data-name="screen-recording">Screen recording</p>
         <p class="menu-item" data-name="knowledge-base">Knowledge Base</p>
-        <p class="menu-item opened" data-name="widget-config">Widget & Config</p>
+        <p class="menu-item" data-name="widget-config">Widget & Config</p>
     </aside>
     <div class="content-wrapper">
         <section class="content">
@@ -42,7 +42,7 @@
                 <button class="button_helper reset_size_button py-1 px-2 text-sm font-light">Reset size</button>
             </header>
             <div class="controls">
-                <section data-name="session" class="section max-w-lg">
+                <section data-name="session" class="section max-w-lg opened">
                     <h2 class="title">Session</h2>
                     <form onsubmit="return false">
                         <div class="mb-4">
@@ -679,7 +679,7 @@
                         </div>
                     </form>
                 </section>
-                <section class="section max-w-lg inline-block opened" data-name="widget-config">
+                <section class="section max-w-lg inline-block" data-name="widget-config">
                                                     <h2 class="title">Widget & Config</h2>
                                                     <form onsubmit="return false">
                                                         <div class="flex flex-col flex-wrap items-start -mx-1 -mb-4">
