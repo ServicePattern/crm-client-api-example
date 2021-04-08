@@ -18,7 +18,8 @@
         <p class="menu-item" data-name="teams">Teams and Service</p>
         <p class="menu-item" data-name="reschedule">Reschedule window</p>
         <p class="menu-item" data-name="screen-recording">Screen recording</p>
-        <p class="menu-item opened" data-name="knowledge-base">Knowledge Base</p>
+        <p class="menu-item" data-name="knowledge-base">Knowledge Base</p>
+        <p class="menu-item opened" data-name="widget-config">Widget & Config</p>
     </aside>
     <section class="main-section-wrapper">
         <section class="main-section">
@@ -124,7 +125,7 @@
                     </div>
                 </form>
             </section>
-                <section class="section opened" data-name="interaction">
+                <section class="section" data-name="interaction">
                     <h2 class="title justify-self-center">Interactions</h2>
                     <nav class="tab">
                         <button class="tab-item active" data-name="start-interaction">
@@ -711,6 +712,25 @@
 }
                                 </textarea>
                             </div>
+                        </div>
+                    </form>
+                </section>
+                <section class="section max-w-lg inline-block opened" data-name="widget-config">
+                    <h2 class="title">Widget & Config</h2>
+                    <form onsubmit="return false">
+                        <div class="flex flex-col flex-wrap items-start -mx-1 -mb-4">
+                            <div class="mb-4">
+                                <label class='mr-2 text-gray-500  cursor-pointer text-sm font-bold inline-block'
+                                       for="widget_minimized_checkbox">Widget minimized</label>
+                                <div class="toggle-checkbox-wrapper">
+                                    <input type="checkbox" name="toggle" id="widget_minimized_checkbox"
+                                           class="toggle-checkbox "/>
+                                    <label for="widget_minimized_checkbox"
+                                           class="toggle-label"></label>
+                                </div>
+                            </div>
+                            <button class="button mx-1 mb-4" id="set_widget_minimized_button">setWidgetMinimized</button>
+                            <button class="button mx-1 mb-4" id="get_config_button">getConfig</button>
                         </div>
                     </form>
                 </section>

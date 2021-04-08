@@ -548,16 +548,16 @@ setVariableButton.onclick = () => {
     adApi.setVariable(variableName, variableValue, itemId)
 }
 
-// setupHoverEffect(getConfigButton, [])
-// getConfigButton.onclick = () => {
-//     adApi.getConfig()
-// }
-//
-// setupHoverEffect(setWidgetMinimizedButton, [widgetMinimizedCheckbox])
-// setWidgetMinimizedButton.onclick = () => {
-//     const widgetMinimized = widgetMinimizedCheckbox.checked
-//     adApi.setWidgetMinimized(widgetMinimized)
-// }
+setupHoverEffect(getConfigButton, [])
+getConfigButton.onclick = () => {
+    adApi.getConfig()
+}
+
+setupHoverEffect(setWidgetMinimizedButton, [widgetMinimizedCheckbox])
+setWidgetMinimizedButton.onclick = () => {
+    const widgetMinimized = widgetMinimizedCheckbox.checked
+    adApi.setWidgetMinimized(widgetMinimized)
+}
 
 setupHoverEffect(addInteractionAssociatedObjectButton, [activeAssociatedObjectTextarea, activeAssociatedInteractionIdInput])
 addInteractionAssociatedObjectButton.onclick = () => {
