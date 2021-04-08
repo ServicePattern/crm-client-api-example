@@ -66,6 +66,11 @@ export const callbackMessages = {
     'ON_SHOW_SCREEN': {needResponse: false},
     'ON_SCREEN_RECORDING_STATE_CHANGE': {needResponse: false},
     'ON_WIDGET_MINIMIZED_CHANGE': {needResponse: false},
+    'ON_SERVER_ERROR': {needResponse: false},
+    'ON_SOFTPHONE_STATUS_CHANGE': {needResponse: false},
+    'ON_AUDIO_DEVICE_CHANGE': {needResponse: false},
+    'ON_PHONE_CAPABILITIES_CHANGE': {needResponse: false},
+    'ON_CALL_AUDIO_QUALITY_ALERT': {needResponse: false},
 } as const
 export type CallbackMessage = keyof typeof callbackMessages
 
@@ -98,20 +103,68 @@ export type CallbackMethodsReturnTypeMap = {
     'ON_SHOW_SCREEN': void
     'ON_SCREEN_RECORDING_STATE_CHANGE': void
     'ON_WIDGET_MINIMIZED_CHANGE': void
+    'ON_SERVER_ERROR': void
+    'ON_SOFTPHONE_STATUS_CHANGE': void
+    'ON_AUDIO_DEVICE_CHANGE': void
+    'ON_PHONE_CAPABILITIES_CHANGE': void
+    'ON_CALL_AUDIO_QUALITY_ALERT': void
 }
 
 const resultStatus = ['error', 'success'] as const
 export type ResultStatus = typeof resultStatus[number]
 
-type ResultError = {
-    message: string
+export const resultErrorCodes = {
+    not_enough_privileges: 1,
+    not_logged_in: 2,
+    invalid_args: 3,
+    logged_without_phone: 4,
+    banned: 5,
+    api_not_answer: 6,
+    invalid_request: 7,
+    timeout: 8,
+    no_chat_in_service: 9,
+    empty_number: 10,
+    no_service: 11,
+    self_call: 12,
+    no_interaction: 13,
+    api_method_not_implemented: 14,
+    not_suitable_state: 15,
+    no_disposition: 16,
+    object_not_found: 17,
+    unknown_error: 99,
+} as const
+export type ResultErrorCodes = typeof resultErrorCodes
+
+export const serverErrorCodes = {
+    forced_logout_by_other_client: 100,
+    forced_logout_by_supervisor: 101,
+    invalid_request: 102,
+    phone_not_registered: 103,
+    phone_not_in_dial_plan: 104,
+    tenant_disabled: 105,
+    destination_user_not_logged: 106,
+    user_disabled_or_deleted: 107,
+    user_already_logged_in: 108,
+    invalid_credentials: 109,
+    other_user_logged_with_phone: 110,
+    invalid_token: 111,
+    logged_users_limit_reached: 112,
+    already_logged_in_with_the_same_session: 113,
+    not_enough_privileges: 114,
+    sip_server_error: 200,
+    unknown_error: 300,
+} as const
+export type ServerErrorCodes = typeof serverErrorCodes
+
+export type ResultError = {
+    code: ResultErrorCodes[keyof ResultErrorCodes]
+    name: keyof ResultErrorCodes
+    message?: string
 }
 
-export type OperationResult<ReturnType = null> = {
-    status: ResultStatus
-    data?: ReturnType
-    error?: ResultError
-}
+export type OperationResult<ReturnType = null> =
+    {status: 'success'; data: ReturnType} |
+    {status: 'error'; error: ResultError}
 
 export type SyncAsyncResult<ReturnType = void> = ReturnType | Promise<ReturnType>
 
@@ -316,6 +369,26 @@ export type ScreenRecordingState = {
     muted: boolean
 }
 
+export type ServerErrorData = {
+    code: ServerErrorCodes[keyof ServerErrorCodes]
+    name: keyof ServerErrorCodes
+    timestamp: number // Date.now()
+    message?: string
+}
+
+export type LoginData = {
+    username: string
+    password: string
+    tenant?: string
+}
+
+export type PhoneCapabilities = {
+    canDial: boolean
+    canAnswer: boolean
+    canHold: boolean
+    canRetrieve: boolean
+}
+
 export type OnLoginHandler = (loginState: LoginStateData) => SyncAsyncResult
 export type OnLogoutHandler = () => SyncAsyncResult
 export type OnNewInteractionHandler = (newInteraction: InteractionData) => SyncAsyncResult
@@ -333,6 +406,11 @@ export type OnOpenRecordHandler = (record: InteractionAssociatedObject, interact
 export type OnSearchRecordsHandler = (search: SearchRecordsQuery, interactionId?: string) => SyncAsyncResult
 export type OnShowScreenHandler = (screen: InteractionScreen, interactionId?: string) => SyncAsyncResult
 export type OnScreenRecordingStateChangeHandler = (screenRecordingState: ScreenRecordingState) => SyncAsyncResult
+export type OnServerErrorHandler = (error: ServerErrorData) => SyncAsyncResult
+export type OnSoftphoneStatusChangeHandler = (ready: boolean, error?: string) => SyncAsyncResult
+export type OnAudioDeviceChangeHandler = (inputDevice?: string, outputDevice?: string) => SyncAsyncResult
+export type OnPhoneCapabilitiesChangeHandler = (caps: PhoneCapabilities) => SyncAsyncResult
+export type OnCallAudioQualityAlertHandler = (callId: string, alert: boolean) => SyncAsyncResult
 
 export type MessageLogger = (message: string, data: any) => void
 
@@ -355,7 +433,7 @@ export declare class AgentDesktopClientAPI {
     injectMessageLogger(callback: MessageLogger): void
 
     getLoginState(): Promise<OperationResult<LoginStateData>>
-    login(username: string, password: string, tenant?: string): Promise<OperationResult>
+    login(loginData: LoginData, force?: boolean): Promise<OperationResult>
     logout(): Promise<OperationResult>
     getAgentState(): Promise<OperationResult<AgentStateData>>
     setAgentState(state: AgentState, notReadyReason?: string): Promise<OperationResult>
@@ -416,6 +494,11 @@ export declare class AgentDesktopClientAPI {
     on(message: 'ON_SHOW_SCREEN', handler: OnShowScreenHandler): void
     on(message: 'ON_SCREEN_RECORDING_STATE_CHANGE', handler: OnScreenRecordingStateChangeHandler): void
     on(message: 'ON_WIDGET_MINIMIZED_CHANGE', handler: OnWidgetMinimizedChangeHandler): void
+    on(message: 'ON_SERVER_ERROR', handler: OnServerErrorHandler): void
+    on(message: 'ON_SOFTPHONE_STATUS_CHANGE', handler: OnSoftphoneStatusChangeHandler): void
+    on(message: 'ON_AUDIO_DEVICE_CHANGE', handler: OnAudioDeviceChangeHandler): void
+    on(message: 'ON_PHONE_CAPABILITIES_CHANGE', handler: OnPhoneCapabilitiesChangeHandler): void
+    on(message: 'ON_CALL_AUDIO_QUALITY_ALERT', handler: OnCallAudioQualityAlertHandler): void
 
     remove(message: 'ON_LOGIN', handler: OnLoginHandler): void
     remove(message: 'ON_LOGOUT', handler: OnLogoutHandler): void
@@ -434,6 +517,11 @@ export declare class AgentDesktopClientAPI {
     remove(message: 'ON_SHOW_SCREEN', handler: OnShowScreenHandler): void
     remove(message: 'ON_SCREEN_RECORDING_STATE_CHANGE', handler: OnScreenRecordingStateChangeHandler): void
     remove(message: 'ON_WIDGET_MINIMIZED_CHANGE', handler: OnWidgetMinimizedChangeHandler): void
+    remove(message: 'ON_SERVER_ERROR', handler: OnServerErrorHandler): void
+    remove(message: 'ON_SOFTPHONE_STATUS_CHANGE', handler: OnSoftphoneStatusChangeHandler): void
+    remove(message: 'ON_AUDIO_DEVICE_CHANGE', handler: OnAudioDeviceChangeHandler): void
+    remove(message: 'ON_PHONE_CAPABILITIES_CHANGE', handler: OnPhoneCapabilitiesChangeHandler): void
+    remove(message: 'ON_CALL_AUDIO_QUALITY_ALERT', handler: OnCallAudioQualityAlertHandler): void
 }
 
 interface AgentDesktopClientAPIClassType {
