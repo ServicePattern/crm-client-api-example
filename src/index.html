@@ -135,6 +135,35 @@
                     </div>
                 </form>
             </section>
+                <section class="section max-w-lg" data-name="teams">
+                                    <h2 class="title">Teams and Service</h2>
+                                    <form onsubmit="return false">
+                                        <div class="mb-8">
+                                            <label class="input-label" for="team_id_input">
+                                                Team ID
+                                            </label>
+                                            <input class='input' id="team_id_input" type="text" placeholder="Team ID"
+                                                   autocomplete="on"
+                                            >
+                                        </div>
+                                        <div class="mb-8">
+                                            <label class="input-label" for="service_id_input">
+                                                Service ID/name
+                                            </label>
+                                            <input class='input' id="service_id_input" type="text" placeholder="Service ID/name"
+                                                   autocomplete="on"
+                                            >
+                                        </div>
+                                        <div class="flex flex-wrap -mx-1">
+                                            <button class="button mx-1 mb-4" id="get_teams_button">getTeams</button>
+                                            <button class="button mx-1 mb-4" id="get_team_members_button">getTeamMembers</button>
+                                            <button class="button mx-1 mb-4" id="get_services_list_button">getServicesList</button>
+                                            <button class="button mx-1 mb-4" id="set_service_button">setService</button>
+                                            <input type='reset' class="button_helper inline-block w-auto mx-1 mb-4"
+                                                   value="Reset form"/>
+                                        </div>
+                                    </form>
+                                </section>
                 <section class="section" data-name="interaction">
                     <h2 class="title justify-self-center">Interactions</h2>
                     <nav class="tab">
@@ -571,35 +600,6 @@
                             </form>
                         </section>
                 </section>
-                <section class="section max-w-lg" data-name="teams">
-                    <h2 class="title">Teams and Service</h2>
-                    <form onsubmit="return false">
-                        <div class="mb-8">
-                            <label class="input-label" for="team_id_input">
-                                Team ID
-                            </label>
-                            <input class='input' id="team_id_input" type="text" placeholder="Team ID"
-                                   autocomplete="on"
-                            >
-                        </div>
-                        <div class="mb-8">
-                            <label class="input-label" for="service_id_input">
-                                Service ID/name
-                            </label>
-                            <input class='input' id="service_id_input" type="text" placeholder="Service ID/name"
-                                   autocomplete="on"
-                            >
-                        </div>
-                        <div class="flex flex-wrap -mx-1">
-                            <button class="button mx-1 mb-4" id="get_teams_button">getTeams</button>
-                            <button class="button mx-1 mb-4" id="get_team_members_button">getTeamMembers</button>
-                            <button class="button mx-1 mb-4" id="get_services_list_button">getServicesList</button>
-                            <button class="button mx-1 mb-4" id="set_service_button">setService</button>
-                            <input type='reset' class="button_helper inline-block w-auto mx-1 mb-4"
-                                   value="Reset form"/>
-                        </div>
-                    </form>
-                </section>
                 <section class="section" data-name="reschedule">
                     <h2 class="title">Reschedule window</h2>
                     <form onsubmit="return false" class="grid grid-cols-2 gap-4">
@@ -679,6 +679,26 @@
                         </div>
                     </form>
                 </section>
+                <section class="section max-w-lg inline-block opened" data-name="widget-config">
+                                                    <h2 class="title">Widget & Config</h2>
+                                                    <form onsubmit="return false">
+                                                        <div class="flex flex-col flex-wrap items-start -mx-1 -mb-4">
+                                                            <div class="mb-4">
+                                                                <label class='mr-2 text-gray-500  cursor-pointer text-sm font-bold inline-block'
+                                                                       for="widget_minimized_checkbox">Widget minimized</label>
+                                                                <div class="toggle-checkbox-wrapper">
+                                                                    <input type="checkbox" name="toggle" id="widget_minimized_checkbox"
+                                                                           class="toggle-checkbox "/>
+                                                                    <label for="widget_minimized_checkbox"
+                                                                           class="toggle-label"></label>
+                                                                </div>
+                                                            </div>
+                                                            <button class="button mx-1 mb-4" id="set_widget_minimized_button">setWidgetMinimized
+                                                            </button>
+                                                            <button class="button mx-1 mb-4" id="get_config_button">getConfig</button>
+                                                        </div>
+                                                    </form>
+                                                </section>
                 <section class="section w-full" data-name="knowledge-base">
                     <h2 class="title">Knowledge Base</h2>
                     <form onsubmit="return false">
@@ -722,26 +742,6 @@
 }
                                 </textarea>
                             </div>
-                        </div>
-                    </form>
-                </section>
-                <section class="section max-w-lg inline-block opened" data-name="widget-config">
-                    <h2 class="title">Widget & Config</h2>
-                    <form onsubmit="return false">
-                        <div class="flex flex-col flex-wrap items-start -mx-1 -mb-4">
-                            <div class="mb-4">
-                                <label class='mr-2 text-gray-500  cursor-pointer text-sm font-bold inline-block'
-                                       for="widget_minimized_checkbox">Widget minimized</label>
-                                <div class="toggle-checkbox-wrapper">
-                                    <input type="checkbox" name="toggle" id="widget_minimized_checkbox"
-                                           class="toggle-checkbox "/>
-                                    <label for="widget_minimized_checkbox"
-                                           class="toggle-label"></label>
-                                </div>
-                            </div>
-                            <button class="button mx-1 mb-4" id="set_widget_minimized_button">setWidgetMinimized
-                            </button>
-                            <button class="button mx-1 mb-4" id="get_config_button">getConfig</button>
                         </div>
                     </form>
                 </section>
