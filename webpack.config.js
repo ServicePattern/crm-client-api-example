@@ -7,11 +7,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const brightpatternOrigin = process.env.BRIGHTPATTERN_ORIGIN || 'https://localhost:3000';
 
 module.exports = {
-    entry: path.resolve(__dirname, 'src', 'example.ts'),
+    entry: path.resolve(__dirname, 'src', 'app.ts'),
     mode: 'production',
     output: {
         path: path.resolve(__dirname, 'public'),
-        filename: 'example.js',
+        filename: 'app.js',
     },
     module: {
         rules: [
@@ -24,8 +24,8 @@ module.exports = {
                 test: /\.css$/i,
                 include: path.resolve(__dirname, 'src'),
                 use: [
-                  // MiniCssExtractPlugin.loader,
-                    'style-loader', 'css-loader', 'postcss-loader'
+                    MiniCssExtractPlugin.loader,
+                    'css-loader', 'postcss-loader'
                 ],
             }
 
@@ -35,13 +35,13 @@ module.exports = {
       contentBase: './public',
     },
     plugins: [
-        // new MiniCssExtractPlugin({
-        //     filename: '[name].[contenthash].css',
-        //       chunkFilename: '[id].[contenthash].css',
-        // }),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css',
+            chunkFilename: '[id].[contenthash].css',
+        }),
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: path.resolve('./src/test.html'),
+            template: path.resolve('./src/index.html'),
             templateParameters: {
                 brightpatternOrigin
             }

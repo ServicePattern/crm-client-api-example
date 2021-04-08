@@ -1,5 +1,10 @@
 
-### Setup
+### Environment variables:
+`BRIGHTPATTERN_ORIGIN`
+- Is used as origin to fetch `communicator/adapters/api.js`
+- Default value for BRIGHTPATTERN_ORIGIN is 'https://ocean08.brightpattern.com'
+
+### Setup:
 Compiles app in `/public` folder 
 
 ```bash
@@ -7,12 +12,10 @@ yarn install
 BRIGHTPATTERN_ORIGIN='https://example.brightpattern.com' yarn build 
 ```
 
-the default for BRIGHTPATTERN_ORIGIN is 'https://ocean08.brightpattern.com'
-
 ### Run
 Starts the test page on localhost:8080
 ```bash
-yarn start
+BRIGHTPATTERN_ORIGIN='https://example.brightpattern.com' yarn start
 ```
 
 
@@ -20,7 +23,7 @@ yarn start
 Starts the test page on localhost:8080 and autocompile changed files.
 ```bash
 yarn watch
-yarn start
+BRIGHTPATTERN_ORIGIN='https://example.brightpattern.com' yarn start
 ```
 
 
