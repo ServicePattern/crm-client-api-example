@@ -1,0 +1,38 @@
+.menu {
+    z-index: 1;
+    position: absolute;
+    transition: transform .3s ease;
+    flex-shrink: 0;
+    width: 300px;
+    transform: translateX(-300px);
+    left: 0;
+    top: 0;
+    will-change: transform;
+    height: 100%;
+    background: white;
+}
+
+.menu.expanded {
+    transform: translateX(0);
+}
+
+
+.menu.expanded + .content-wrapper:after {
+    opacity: .3;
+}
+
+.menu-item {
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer;
+}
+
+.menu-item:hover {
+    @apply bg-blue-100;
+}
+
+.menu-item.opened {
+    @apply bg-blue-400 text-white shadow-inner;
+}
+
+.menu-item.opened:hover {
+    @apply bg-blue-500;
+}

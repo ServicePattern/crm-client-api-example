@@ -9,9 +9,9 @@
     <script type="application/javascript" src="<%= brightpatternOrigin %>/agent/communicator/adapters/api.js"></script>
 </head>
 <body>
-<main class="flex">
+<main class="main">
     <aside class="menu">
-        <div class="p-4 flex justify-end items-center border border-b-1 border-gray-200">
+        <div class="p-4 flex justify-end items-center">
             <label class='mr-2 text-gray-500  cursor-pointer text-sm font-bold inline-block'
                    for="menu_multiple_select_checkbox">Multiple select</label>
             <div class="toggle-checkbox-wrapper">
@@ -31,15 +31,15 @@
         <p class="menu-item" data-name="knowledge-base">Knowledge Base</p>
         <p class="menu-item opened" data-name="widget-config">Widget & Config</p>
     </aside>
-    <section class="main-section-wrapper">
-        <section class="main-section">
+    <div class="content-wrapper">
+        <section class="content">
             <header class="flex justify-between items-center">
                 <div class="hamburger hamburger--emphatic">
                     <div class="hamburger-box">
                         <div class="hamburger-inner"></div>
                     </div>
                 </div>
-                <button class="button_helper reset_size_button py-1 px-2 text-xs font-light">Reset size</button>
+                <button class="button_helper reset_size_button py-1 px-2 text-sm font-light">Reset size</button>
             </header>
             <div class="controls">
                 <section data-name="session" class="section max-w-lg">
@@ -749,12 +749,12 @@
         </section>
         <footer class="log-container">
             <div class="log-controls">
-                <button id="clear_log" class="button_helper m-2 mb-0 py-1 px-2 text-xs font-light">clear</button>
+                <button id="clear_log" class="button_helper m-2 mb-0 py-1 px-2 text-sm font-light">clear</button>
             </div>
             <div id="log"></div>
         </footer>
-    </section>
+    </div>
 </main>
-<aside id="adc_mount_node"></aside>
+<aside id="adc_mount_node" class="communicator"></aside>
 </body>
 </html>

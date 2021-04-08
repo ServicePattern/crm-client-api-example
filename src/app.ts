@@ -153,7 +153,7 @@ const searchKBResultTextarea = document.getElementById('search_kb_result_textare
 const kbArticleFullDataTextarea = document.getElementById('kb_article_full_data_textarea')! as HTMLTextAreaElement
 
 const resetSizeButton = document.querySelector('.reset_size_button') as HTMLElement
-const mainSection = document.querySelector('.main-section') as HTMLElement
+const mainSection = document.querySelector('.content') as HTMLElement
 
 
 const adApi = new window.brightpattern.AdApi({

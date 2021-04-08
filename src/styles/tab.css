@@ -1,0 +1,30 @@
+
+.tab {
+    @apply flex flex-col sm:flex-row bg-blue-50 rounded-t;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-item {
+    @apply text-gray-600 py-4 px-4 block  border-b-2 font-medium border-blue-500;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+
+.tab-item:first-child {
+    @apply rounded-tl
+}
+
+.tab-item:last-child {
+    @apply rounded-tr
+}
+
+.tab-item:hover,.tab-item:focus,.tab-item.active {
+    @apply text-blue-500  focus:outline-none bg-blue-100 border-yellow-500;
+}

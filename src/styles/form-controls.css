@@ -1,0 +1,39 @@
+.input, .textarea {
+    transition: all .2s ease-in-out;
+    @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-500;
+}
+
+.textarea {
+    @apply text-sm;
+}
+
+.input-label {
+    @apply block text-gray-500 text-sm font-bold mb-2 cursor-pointer;
+}
+
+.toggle-checkbox-wrapper {
+    @apply relative inline-block w-10 mr-2 align-middle select-none;
+}
+
+.toggle-checkbox {
+    transition: all .2s ease-in-out;
+    right: 0;
+    transform: translateX(-60%);
+    @apply absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-300;
+}
+
+.toggle-label {
+    transition: all .2s ease-in-out;
+    @apply block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer;
+}
+
+.toggle-checkbox:checked {
+    @apply right-0 border-yellow-400;
+    transform: translateX(-10%);
+    @apply border-yellow-400;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+    @apply bg-yellow-400;
+    @apply bg-yellow-400;
+}
