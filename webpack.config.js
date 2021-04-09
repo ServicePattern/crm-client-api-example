@@ -27,8 +27,7 @@ module.exports = {
                     MiniCssExtractPlugin.loader,
                     'css-loader', 'postcss-loader'
                 ],
-            }
-
+            },
         ],
     },
     devServer: {
@@ -41,7 +40,7 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: path.resolve('./src/index.html'),
+            template: path.resolve(__dirname, 'src/index.html'),
             templateParameters: {
                 brightpatternOrigin
             }

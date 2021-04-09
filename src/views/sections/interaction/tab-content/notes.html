@@ -1,0 +1,53 @@
+<section class='tab-content mt-4 -mb-4' data-name="notes-interaction">
+        <form onsubmit="return false">
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="input-label" for="notes_interaction_id_input">
+                        Interaction ID
+                    </label>
+                    <input class='input' id="notes_interaction_id_input" type="text"
+                           placeholder="Interaction ID"
+                           autocomplete="off"
+                    >
+                </div>
+                <div>
+                    <label class="input-label" for="notes_service_id_input">
+                        Service ID/name
+                    </label>
+                    <input class='input' id="notes_service_id_input" type="text"
+                           placeholder="Service id/name"
+                           autocomplete="on"
+                    >
+                </div>
+                <div>
+                    <label class="input-label" for="disposition_id_input">
+                        Disposition id/code/name
+                    </label>
+                    <input class='input' id="disposition_id_input" type="text"
+                           placeholder="Disposition id/code/name"
+                           autocomplete="on"
+                    >
+                </div>
+                <div>
+                    <label class="input-label" for="note_input">
+                        Note
+                    </label>
+                    <input class='input' id="note_input" type="text" placeholder="Note"
+                           autocomplete="on"
+                    >
+                </div>
+            </div>
+            <div class="flex flex-wrap -mx-1">
+                <button class='mx-1 mb-4 button' id="get_dispositions_list_button">getDispositionsList
+                </button>
+                <button class='mx-1 mb-4 button' id="set_disposition_button">setDisposition</button>
+                <button class='mx-1 mb-4 button' id="add_note_button">
+                    addNote
+                </button>
+                <button class='mx-1 mb-4 button' id="update_note_button">updateNote</button>
+                <button class='mx-1 mb-4 button' id="replace_note_button">replaceNote</button>
+                <input type='reset' class="button_helper self-end inline-block w-auto mx-1 mb-4"
+                       value="Reset form"/>
+            </div>
+        </form>
+    </section>

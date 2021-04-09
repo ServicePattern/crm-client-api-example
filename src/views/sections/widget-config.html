@@ -1,0 +1,18 @@
+<h2 class="title">Widget & Config</h2>
+<form onsubmit="return false">
+    <div class="flex flex-col flex-wrap items-start -mx-1 -mb-4">
+        <div class="mb-4">
+            <label class='mr-2 text-gray-500  cursor-pointer text-sm font-bold inline-block'
+                   for="widget_minimized_checkbox">Widget minimized</label>
+            <div class="toggle-checkbox-wrapper">
+                <input type="checkbox" name="toggle" id="widget_minimized_checkbox"
+                       class="toggle-checkbox "/>
+                <label for="widget_minimized_checkbox"
+                       class="toggle-label"></label>
+            </div>
+        </div>
+        <button class="button mx-1 mb-4" id="set_widget_minimized_button">setWidgetMinimized
+        </button>
+        <button class="button mx-1 mb-4" id="get_config_button">getConfig</button>
+    </div>
+</form>

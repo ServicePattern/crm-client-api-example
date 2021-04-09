@@ -1,0 +1,25 @@
+<h2 class="title">Agent state</h2>
+<form onsubmit="return false">
+   <div class="mb-8">
+       <label class="input-label" for="agent_state_input">
+           Agent state
+       </label>
+       <input class='input' id="agent_state_input" type="text" placeholder="Agent state"
+              autocomplete="on"
+       >
+   </div>
+   <div class="mb-8">
+       <label class="input-label" for="not_ready_reason_input">
+           Not ready reason
+       </label>
+       <input class='input' id="not_ready_reason_input" type="text" placeholder="Not ready reason"
+              autocomplete="on"
+       >
+   </div>
+   <div class="flex flex-wrap -mx-1">
+       <button class="button mx-1 mb-4" id="get_agent_state_button">getAgentState</button>
+       <button class="button mx-1 mb-4" id="set_agent_state_button">setAgentState</button>
+       <input type='reset' class="button_helper inline-block w-auto mx-1 mb-4"
+              value="Reset form"/>
+   </div>
+</form>

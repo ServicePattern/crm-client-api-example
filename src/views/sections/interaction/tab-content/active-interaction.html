@@ -1,0 +1,88 @@
+<section class='tab-content mt-4 -mb-4' data-name="active-interaction">
+    <form onsubmit="return false">
+        <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+                <label class="input-label" for="active_interaction_id_input">
+                    Interaction ID
+                </label>
+                <input class='input' id="active_interaction_id_input" type="text" placeholder="Interaction ID"
+                       autocomplete="off"
+                >
+            </div>
+            <div>
+                <label class="input-label" for="dtmf_input">
+                    DTMF
+                </label>
+                <input class='input' id="dtmf_input" type="text" placeholder="DTMF"
+                       autocomplete="on"
+                >
+            </div>
+            <div>
+                <label class="input-label" for="variable_name_input">
+                    Variable name
+                </label>
+                <input class='input' id="variable_name_input" type="text"
+                       placeholder="Variable name"
+                       autocomplete="on"
+                >
+            </div>
+            <div>
+                <label class="input-label" for="variable_value_input">
+                    Variable value
+                </label>
+                <input class='input' id="variable_value_input" type="text"
+                       placeholder="Variable value"
+                       autocomplete="off"
+                >
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-1 bg-gray-50 pt-4 mb-4 px-2 rounded">
+            <div class="mx-1 mb-4 shadow-md w-auto p-2 inline-block rounded bg-white">
+                <div class="toggle-checkbox-wrapper">
+                    <input type="checkbox" name="toggle" id="call_hold_checkbox"
+                           class="toggle-checkbox "/>
+                    <label for="call_hold_checkbox"
+                           class="toggle-label"></label>
+                </div>
+                <button class='button' id="set_call_hold_button">setCallHold (retrieve)</button>
+            </div>
+
+            <div class="mx-1 mb-4 shadow-md w-auto p-2 inline-block rounded bg-white">
+                <div class="toggle-checkbox-wrapper">
+                    <input type="checkbox" name="toggle" id="call_recording_checkbox"
+                           class="toggle-checkbox "/>
+                    <label for="call_recording_checkbox"
+                           class="toggle-label"></label>
+                </div>
+                <button class='button' id="set_call_recording_button">setCallRecording (stop)</button>
+            </div>
+
+            <div class="mx-1 mb-4 shadow-md w-auto p-2 inline-block rounded bg-white">
+                <div class="toggle-checkbox-wrapper">
+                    <input type="checkbox" name="toggle" id="call_mute_checkbox"
+                           class="toggle-checkbox "/>
+                    <label for="call_mute_checkbox"
+                           class="toggle-label"></label>
+                </div>
+                <button class='button' id="set_call_mute_button">setCallMute (unmute)</button>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-1">
+            <button class='mx-1 mb-4 button green' id="accept_interaction_button">
+                acceptInteraction
+            </button>
+            <button class='mx-1 mb-4 button red' id="reject_interaction_button">
+                rejectInteraction
+            </button>
+        </div>
+        <div class="flex flex-wrap -mx-1">
+            <button class='mx-1 mb-4 button' id="switch_active_interaction_button">
+                switchActiveInteraction
+            </button>
+            <button class='mx-1 mb-4 button' id="send_dtmf_button">sendDtmf</button>
+            <button class='mx-1 mb-4 button' id="set_variable_button">setVariable</button>
+            <input type='reset' class="button_helper self-end inline-block w-auto mx-1 mb-4"
+                   value="Reset form"/>
+        </div>
+    </form>
+</section>
