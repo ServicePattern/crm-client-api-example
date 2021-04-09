@@ -1,0 +1,48 @@
+<section class="tab-content mt-4 -mb-4" data-name="active-associated">
+        <form onsubmit="return false">
+            <div class="mb-4">
+                <label class="input-label" for="active-associated_interaction_id_input">
+                    Interaction ID
+                </label>
+                <input class='input' id="active-associated_interaction_id_input" type="text"
+                       placeholder="Interaction ID"
+                       autocomplete="off"
+                >
+            </div>
+
+            <div class="mb-4 w-full">
+                <label class="input-label" for="active-associated_object_textarea">
+                    Associated object
+                </label>
+                <textarea class='textarea' id="active-associated_object_textarea"
+                          placeholder="Associated object" rows="8">
+{
+"id": "some-random-id",
+"type": "contact",
+"displayName": "Peter Morrison",
+"displayType": "Contact",
+"customFields": {},
+"source": "test-adapter"
+}
+                         </textarea>
+            </div>
+            <div class="mb-4">
+                <label class="input-label" for="active_screen_textarea">Interaction active
+                    screen</label>
+                <textarea class='textarea' id="active_screen_textarea" rows="4"
+                          placeholder="Arbitrary data structure">
+{
+ "url": "https://brightpattern.com/?data=none"
+}
+                                     </textarea>
+            </div>
+            <div class="flex flex-wrap -mx-1 mt-4">
+                <button class='mx-1 mb-4 button' id="add_interaction_associated_object_button">
+                    addInteractionAssociatedObject
+                </button>
+                <button class='mx-1 mb-4 button' id="set_interaction_active_screen_button">
+                    setInteractionActiveScreen
+                </button>
+            </div>
+        </form>
+    </section>

@@ -1,0 +1,61 @@
+<section class="tab-content mt-4 -mb-4" data-name="transfer-interaction">
+              <form onsubmit="return false">
+                  <div class="grid grid-cols-2 gap-4 mb-4">
+                      <div>
+                          <div class="mb-4">
+                              <label class="input-label" for="transfer_phone_number_input">
+                                  Phone number
+                              </label>
+                              <input class='input' id="transfer_phone_number_input" type="text" placeholder="Phone number"
+                                     autocomplete="on"
+                              >
+                          </div>
+                          <div>
+                              <label class="input-label" for="interaction_id_input">
+                                  Interaction ID
+                              </label>
+                              <input class='input' id="interaction_id_input" type="text" placeholder="Interaction ID"
+                                     autocomplete="off"
+                              >
+                          </div>
+                      </div>
+                      <div>
+                          <div class="mb-4">
+                              <label class="input-label" for="main_item_id_input">
+                                  Transferring item ID
+                              </label>
+                              <input class='input' id="main_item_id_input" type="text" placeholder="Transferring item ID"
+                                     autocomplete="off"
+                              >
+                          </div>
+                          <div>
+                              <label class="input-label" for="consult_call_id_input">
+                                  Consult call ID
+                              </label>
+                              <input class='input' id="consult_call_id_input" type="text" placeholder="Consult call ID"
+                                     autocomplete="off"
+                              >
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <label for="transfer_data_textarea" class="input-label">Custom data for
+                          transfer:</label>
+                      <textarea class='textarea' id="transfer_data_textarea" rows="5"
+                                placeholder="Arbitrary data structure (1-level depth)">
+{
+"prevUrl": "http://example.com/?url=right",
+"reconnectAttempts": 3,
+"associatedMetadata": "blah-blah-blah"
+}
+                                  </textarea>
+                  </div>
+                  <div class="flex flex-wrap -mx-1 mt-4">
+                      <button class='button mx-1 mb-4' id="consult_call_button">consultCall</button>
+                      <button class='button mx-1 mb-4' id="blind_transfer_button">blindTransfer</button>
+                      <button class='button mx-1 mb-4' id="transfer_button">transfer</button>
+                      <input type='reset' class="button_helper self-end inline-block w-auto mx-1 mb-4"
+                             value="Reset form"/>
+                  </div>
+              </form>
+          </section>

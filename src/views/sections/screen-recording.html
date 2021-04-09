@@ -1,0 +1,23 @@
+<h2 class="title">Screen recording</h2>
+<form onsubmit="return false">
+    <div class="flex flex-col flex-wrap items-start -mx-1 -mb-4">
+        <div class="mb-4">
+            <label class='mr-2 text-gray-500  cursor-pointer text-sm font-bold inline-block' for="screen_recording_mute_checkbox">Mute screen
+                recording</label>
+            <div class="toggle-checkbox-wrapper">
+                <input type="checkbox" name="toggle" id="screen_recording_mute_checkbox"
+                       class="toggle-checkbox "/>
+                <label for="screen_recording_mute_checkbox"
+                       class="toggle-label"></label>
+            </div>
+        </div>
+        <button class="button mx-1 mb-4" id="set_screen_recording_mute_button">
+            setScreenRecordingMute (unmute)
+        </button>
+        <button class="button mx-1 mb-4" id="get_screen_recording_state_button">
+            getScreenRecordingState
+        </button>
+        <input type='reset' class="button_helper inline-block w-auto mx-1 mb-4"
+               value="Reset form"/>
+    </div>
+</form>

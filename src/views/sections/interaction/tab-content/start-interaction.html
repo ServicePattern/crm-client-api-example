@@ -1,0 +1,62 @@
+<section class="tab-content mt-4 -mb-4 active" data-name="start-interaction">
+            <form onsubmit="return false">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="input-label" for="chat_channel_input">
+                            Chat channel
+                        </label>
+                        <input class='input' id="chat_channel_input" type="text" placeholder="Chat channel"
+                               autocomplete="on"
+                        >
+                    </div>
+                    <div>
+                        <label class="input-label" for="chat_address_input">
+                            Phone or user ID
+                        </label>
+                        <input class='input' id="chat_address_input" type="text"
+                               placeholder="Phone or user ID"
+                               autocomplete="on"
+                        >
+                    </div>
+                    <div>
+                        <label class="input-label" for="email_address_input">
+                            Email address
+                        </label>
+                        <input class='input' id="email_address_input" type="text"
+                               placeholder="Email address"
+                               autocomplete="on"
+                        >
+                    </div>
+                    <div>
+                        <label class="input-label" for="start_call_phone_number_input">
+                            Phone number
+                        </label>
+                        <input class='input' id="start_call_phone_number_input" type="text"
+                               placeholder="Phone number"
+                               autocomplete="on"
+                        >
+                    </div>
+                </div>
+                <div class="mt-4 w-full">
+                    <label class="input-label" for="associated_object_textarea">
+                        Associated object
+                    </label>
+                    <textarea class='textarea' id="associated_object_textarea"
+                              placeholder="Associated object" rows="8">
+{
+"id": "some-random-id",
+"type": "contact",
+"displayName": "Peter Morrison",
+"displayType": "Contact",
+"customFields": {},
+"source": "test-adapter"
+}
+                        </textarea>
+                </div>
+                <div class="flex flex-wrap -mx-1 mt-4">
+                    <button class="button mx-1 mb-4" id="start_chat_button">startChat</button>
+                    <button class="button mx-1 mb-4" id="start_email_button">startEmail</button>
+                    <button class="button mx-1 mb-4" id="start_call_button">startCall</button>
+                </div>
+            </form>
+        </section>
