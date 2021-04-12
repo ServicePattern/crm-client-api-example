@@ -22,6 +22,8 @@
 }
 
 .menu-item {
+    display: block;
+    width: 100% ;
     @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer;
 }
 

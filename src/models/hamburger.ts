@@ -1,3 +1,6 @@
+import * as focusTrap from "focus-trap";
+import {FocusTrap} from "focus-trap";
+
 export interface HamburgerI {
     toggle(evtOrForceShow?: boolean | Event): void
 
@@ -7,13 +10,32 @@ export interface HamburgerI {
 
 }
 
+export interface Selectors {
+    hamburger: string,
+    menu: string,
+    menuItem: string
+}
+
 export class Hamburger implements HamburgerI {
+    menuItemSelector: string
     hamburger: HTMLElement | null
     menu: HTMLElement | null
+    menuFocusTrap: FocusTrap
 
-    constructor(hamburgerSelector: string, menuSelector: string) {
-        this.hamburger = document.querySelector(hamburgerSelector)
-        this.menu = document.querySelector(menuSelector)
+    constructor(selectors: Selectors) {
+        this.hamburger = document.querySelector(selectors.hamburger)
+        this.menu = document.querySelector(selectors.menu)
+        this.menuItemSelector = selectors.menuItem
+
+        if (!this.menu) {
+            throw Error('Invalid selector for menu')
+        }
+
+        if (!this.hamburger) {
+            throw Error('Invalid selector for hamburger')
+        }
+
+        this.menuFocusTrap = focusTrap.createFocusTrap(this.menu)
     }
 
     isOpened = () => {
@@ -31,13 +53,22 @@ export class Hamburger implements HamburgerI {
         if (forceShow === true) {
             this.hamburger?.classList?.add('expanded');
             this.menu?.classList?.add('expanded');
+            this.menuFocusTrap.activate()
             return
         }
 
         if (forceShow === false) {
             this.hamburger?.classList?.remove('expanded');
             this.menu?.classList?.remove('expanded');
+            this.menuFocusTrap.deactivate()
             return
+        }
+
+
+        if (this.hamburger?.classList?.contains('expanded')) {
+            this.menuFocusTrap.deactivate()
+        } else {
+            this.menuFocusTrap.activate()
         }
 
         this.hamburger?.classList?.toggle('expanded');
@@ -48,6 +79,8 @@ export class Hamburger implements HamburgerI {
         this.hamburger?.addEventListener('click', (evt) => {
             evt.stopPropagation()
             this.toggle()
+            const menuItem = this.menu?.querySelector(this.menuItemSelector + '.opened');
+            (menuItem as HTMLElement)?.focus()
         })
     }
 
