@@ -75,7 +75,7 @@ export class Menu implements MenuI {
     getOpened = () => {
         return this.opened
     }
-
+    
     initializeEventListeners = () => {
         this?.menuItems?.forEach(menuItemNode => {
             const menuItemName = menuItemNode?.dataset?.name

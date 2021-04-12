@@ -35,7 +35,11 @@ export class Hamburger implements HamburgerI {
             throw Error('Invalid selector for hamburger')
         }
 
-        this.menuFocusTrap = focusTrap.createFocusTrap(this.menu)
+        this.menuFocusTrap = focusTrap.createFocusTrap(this.menu, {
+            clickOutsideDeactivates: true,
+            initialFocus: this.menuItemSelector + '.opened',
+            fallbackFocus: this.menuItemSelector,
+        })
     }
 
     isOpened = () => {
@@ -79,8 +83,6 @@ export class Hamburger implements HamburgerI {
         this.hamburger?.addEventListener('click', (evt) => {
             evt.stopPropagation()
             this.toggle()
-            const menuItem = this.menu?.querySelector(this.menuItemSelector + '.opened');
-            (menuItem as HTMLElement)?.focus()
         })
     }
 
