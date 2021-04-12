@@ -19,6 +19,7 @@
 
 .menu.expanded + .content-wrapper:after {
     opacity: .3;
+    pointer-events: auto;
 }
 
 .menu-item {
