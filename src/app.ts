@@ -31,7 +31,7 @@ const adApi = new window.brightpattern.AdApi({
     standalone: !!(new URLSearchParams(location.search)).get('standalone'),
 })
 
-const hamburger = new Hamburger('.hamburger', '.menu')
+const hamburger = new Hamburger({hamburger: '.hamburger', menu: '.menu', menuItem: '.menu-item'})
 hamburger.initializeEventListener()
 
 const menu = new Menu(hamburger, {
