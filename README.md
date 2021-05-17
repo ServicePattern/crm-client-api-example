@@ -33,7 +33,7 @@ You can switch between view with `Communicator app` and without by adding the `s
 ### Example:
 
 #### API with Communicator app:
-- `http://localhost:8000`
+- `http://localhost:8080`
 
 #### Standalone API (without Communicator app)
-- `http//localhost:8000?standalone=true`
+- `http://localhost:8080?standalone=true`
