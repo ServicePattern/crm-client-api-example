@@ -59,8 +59,9 @@ html, body {
 }
 
 .controls {
-    @apply -m-4 pb-4;
+    @apply -m-4 pb-4 mt-0;
     overflow: auto;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
 }
