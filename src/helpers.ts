@@ -1,3 +1,4 @@
+
 export function setupHoverEffect(hoverElement: Element, highlightElements: Element[]){
     hoverElement.addEventListener('mouseenter', () => {
         highlightElements.forEach(element => {

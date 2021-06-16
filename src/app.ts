@@ -13,7 +13,8 @@ import {initializeActiveInteractionHandlers} from './controllers/interactions/ac
 import {initializeAssociatedObjectInteractionHandlers} from './controllers/interactions/associatedObject'
 import {initializeNotesAndDispositionsHandlers} from './controllers/interactions/notes-dispositions'
 import {initializeEndInteractionHandlers} from './controllers/interactions/end-interaction'
-import {initializeTeamsAndServiceHandlers} from './controllers/teams-service'
+import {initializeTeamsHandlers} from './controllers/teams'
+import {initializeServicesAndDIDHandlers} from './controllers/services-did'
 import {initializeScreenRecordingHandlers} from './controllers/screen-recording'
 import {initializeKnowledgeBaseHandlers} from './controllers/knowledge-base'
 import {initializeRescheduleHandlers} from './controllers/reschedule'
@@ -57,7 +58,8 @@ initializeResizeButtonHandler()
 initializeSessionHandlers(adApi)
 initializePhoneDeviceHandlers(adApi)
 initializeAgentStateHandlers(adApi)
-initializeTeamsAndServiceHandlers(adApi)
+initializeTeamsHandlers(adApi)
+initializeServicesAndDIDHandlers(adApi)
 initializeScreenRecordingHandlers(adApi)
 initializeKnowledgeBaseHandlers(adApi)
 initializeRescheduleHandlers(adApi)

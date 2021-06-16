@@ -25,7 +25,11 @@ export const requestMessages = [
     'GET_TEAMS',
     'GET_TEAM_MEMBERS',
     'GET_SERVICES_LIST',
+    'GET_SERVICE',
     'SET_SERVICE',
+    'GET_DID_LIST',
+    'GET_DID',
+    'SET_DID',
     'GET_DISPOSITIONS_LIST',
     'SET_DISPOSITION',
     'SET_RESCHEDULE',
@@ -71,8 +75,16 @@ export const callbackMessages = {
     'ON_AUDIO_DEVICE_CHANGE': {needResponse: false},
     'ON_PHONE_CAPABILITIES_CHANGE': {needResponse: false},
     'ON_CALL_AUDIO_QUALITY_ALERT': {needResponse: false},
+    'ON_WEB_SCREEN_POP_CUSTOM': {needResponse: true},
 } as const
 export type CallbackMessage = keyof typeof callbackMessages
+
+
+type FilterByHavingResponse<T> = {
+    [Key in keyof T]: T[Key] extends {needResponse: true} ? Key : never
+}
+
+export type CallbackMessageWithResponse = FilterByHavingResponse<typeof callbackMessages>[keyof typeof callbackMessages]
 
 export const responseSuffix = '_RESPONSE' as const
 
@@ -108,6 +120,7 @@ export type CallbackMethodsReturnTypeMap = {
     'ON_AUDIO_DEVICE_CHANGE': void
     'ON_PHONE_CAPABILITIES_CHANGE': void
     'ON_CALL_AUDIO_QUALITY_ALERT': void
+    'ON_WEB_SCREEN_POP_CUSTOM': boolean
 }
 
 const resultStatus = ['error', 'success'] as const
@@ -131,6 +144,8 @@ export const resultErrorCodes = {
     not_suitable_state: 15,
     no_disposition: 16,
     object_not_found: 17,
+    no_permissions_did_sms: 18,
+    no_permissions_did_call: 19,
     unknown_error: 99,
 } as const
 export type ResultErrorCodes = typeof resultErrorCodes
@@ -236,6 +251,7 @@ export type LoginStateData = {
 
 export type AgentStateData = {
     state: AgentState
+    reservedForIncomingInteraction: boolean
     notReadyReason?: string
 }
 
@@ -389,6 +405,31 @@ export type PhoneCapabilities = {
     canRetrieve: boolean
 }
 
+export type DIDNumber = {
+    id: string
+    number: string
+    isSMS: boolean
+    isVoice: boolean
+}
+
+export type WebScreenPopSecondaryUrl = {
+    label?: string
+    url?: string
+}
+
+export type WebScreenPop = {
+    action: 'OPEN_WEB_PAGE' | 'DISPLAY_TEXT'
+    url: string
+    content: string
+    label: string
+    popUponAnswer: boolean
+    keepPopupOpenAfterFinish: boolean
+    popup: boolean
+    secondaryUrls?: {
+        [key: number]: WebScreenPopSecondaryUrl
+    }
+}
+
 export type OnLoginHandler = (loginState: LoginStateData) => SyncAsyncResult
 export type OnLogoutHandler = () => SyncAsyncResult
 export type OnNewInteractionHandler = (newInteraction: InteractionData) => SyncAsyncResult
@@ -411,6 +452,7 @@ export type OnSoftphoneStatusChangeHandler = (ready: boolean, error?: string) =>
 export type OnAudioDeviceChangeHandler = (inputDevice?: string, outputDevice?: string) => SyncAsyncResult
 export type OnPhoneCapabilitiesChangeHandler = (caps: PhoneCapabilities) => SyncAsyncResult
 export type OnCallAudioQualityAlertHandler = (callId: string, alert: boolean) => SyncAsyncResult
+export type OnWebScreenPopCustomHandler = (itemId: string, webScreenPop: WebScreenPop) => SyncAsyncResult<boolean>
 
 export type MessageLogger = (message: string, data: any) => void
 
@@ -456,7 +498,11 @@ export declare class AgentDesktopClientAPI {
     getTeams(): Promise<OperationResult<Team[]>>
     getTeamMembers(teamId: string): Promise<OperationResult<User[]>>
     getServicesList(): Promise<OperationResult<ServiceData[]>>
-    setService(service: string): Promise<OperationResult>
+    getService(): Promise<OperationResult<ServiceData | null>>
+    setService(service: string | null): Promise<OperationResult>
+    getDIDNumbersList(): Promise<OperationResult<DIDNumber[]>>
+    getDIDNumber(): Promise<OperationResult<DIDNumber | null>>
+    setDIDNumber(did: string | null): Promise<OperationResult>
     getDispositionsList(target: DispositionTarget): Promise<OperationResult<DispositionData[]>>
     setDisposition(disposition: string, interactionId?: string): Promise<OperationResult>
     setRescheduleWindow(rescheduleData: RescheduleData, interactionId?: string): Promise<OperationResult>
@@ -499,6 +545,7 @@ export declare class AgentDesktopClientAPI {
     on(message: 'ON_AUDIO_DEVICE_CHANGE', handler: OnAudioDeviceChangeHandler): void
     on(message: 'ON_PHONE_CAPABILITIES_CHANGE', handler: OnPhoneCapabilitiesChangeHandler): void
     on(message: 'ON_CALL_AUDIO_QUALITY_ALERT', handler: OnCallAudioQualityAlertHandler): void
+    on(message: 'ON_WEB_SCREEN_POP_CUSTOM', handler: OnWebScreenPopCustomHandler): void
 
     remove(message: 'ON_LOGIN', handler: OnLoginHandler): void
     remove(message: 'ON_LOGOUT', handler: OnLogoutHandler): void
@@ -522,6 +569,7 @@ export declare class AgentDesktopClientAPI {
     remove(message: 'ON_AUDIO_DEVICE_CHANGE', handler: OnAudioDeviceChangeHandler): void
     remove(message: 'ON_PHONE_CAPABILITIES_CHANGE', handler: OnPhoneCapabilitiesChangeHandler): void
     remove(message: 'ON_CALL_AUDIO_QUALITY_ALERT', handler: OnCallAudioQualityAlertHandler): void
+    remove(message: 'ON_WEB_SCREEN_POP_CUSTOM', handler: OnWebScreenPopCustomHandler): void
 }
 
 interface AgentDesktopClientAPIClassType {
