@@ -290,6 +290,8 @@ export type InteractionAssociatedObjectsData = {
     selected: string | null
 }
 
+export type AttachedData = Record<string, string>
+
 export type InteractionData = {
     interactionId: string
     state: InteractionState
@@ -299,6 +301,7 @@ export type InteractionData = {
     callParties: CallParty[]
     callMuted: boolean
     callRecording: boolean
+    attachedData: AttachedData
     phoneNumber?: string
     email?: string
     callDirection?: CallDirection
