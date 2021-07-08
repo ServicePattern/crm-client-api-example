@@ -31,6 +31,8 @@ const adApi = new window.brightpattern.AdApi({
     mountRoot: adcMountNode,
     standalone: !!(new URLSearchParams(location.search)).get('standalone'),
 })
+// @ts-ignore
+window.adApi = adApi
 
 const hamburger = new Hamburger({hamburger: '.hamburger', menu: '.menu', menuItem: '.menu-item'})
 hamburger.initializeEventListener()
