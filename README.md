@@ -12,6 +12,7 @@ Compiles app in `/public` folder
 yarn install
 BRIGHTPATTERN_ORIGIN='https://example.brightpattern.com' yarn build 
 ```
+where https://example.brightpattern.com is the domain of BOCC sandbox or a production account where you want to show the widget from.
 
 ### Run
 Starts the test page on `localhost:8080`
