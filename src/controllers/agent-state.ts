@@ -7,6 +7,7 @@ export function initializeAgentStateHandlers(adApi: AgentDesktopClientAPI) {
 
     const getAgentStateButton = document.getElementById('get_agent_state_button')!
     const setAgentStateButton = document.getElementById('set_agent_state_button')!
+    const getAgentNotReadyReasonsButton = document.getElementById('get_agent_not_ready_reasons_button')!
 
     setupHoverEffect(getAgentStateButton, [])
     getAgentStateButton.onclick = () => {
@@ -18,5 +19,10 @@ export function initializeAgentStateHandlers(adApi: AgentDesktopClientAPI) {
         const state = agentStateInput.value
         const notReadyReason = notReadyReasonInput.value
         adApi.setAgentState(state as any, notReadyReason)
+    }
+
+    setupHoverEffect(getAgentNotReadyReasonsButton, [])
+    getAgentNotReadyReasonsButton.onclick = () => {
+        adApi.getAgentNotReadyReasons()
     }
 }

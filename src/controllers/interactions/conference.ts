@@ -11,6 +11,7 @@ export function initializeConferenceInteractionHandlers(adApi: AgentDesktopClien
     const inviteToCallConferenceButton = document.getElementById('add_to_call_conference_button')!
     const removeFromCallConferenceButton = document.getElementById('remove_from_call_conference_button')!
     const destroyCallConferenceButton = document.getElementById('destroy_call_conference_button')!
+    const mergeIntoConferenceButton = document.getElementById('merge_into_conference_button')!
 
 
     setupHoverEffect(inviteToCallConferenceButton, [conferencePhoneNumberInput, conferenceTransferDataTextarea, conferenceInteractionIdInput])
@@ -38,6 +39,11 @@ export function initializeConferenceInteractionHandlers(adApi: AgentDesktopClien
     destroyCallConferenceButton.onclick = () => {
         const itemId = conferenceInteractionIdInput.value
         adApi.destroyCallConference(itemId)
+    }
+
+    setupHoverEffect(mergeIntoConferenceButton, [])
+    mergeIntoConferenceButton.onclick = () => {
+        adApi.mergeAllCallsIntoConference()
     }
 
 

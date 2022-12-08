@@ -7,6 +7,7 @@ import {initializeSessionHandlers} from './controllers/session'
 import {initializePhoneDeviceHandlers} from './controllers/phone-device'
 import {initializeAgentStateHandlers} from './controllers/agent-state'
 import {initializeStartInteractionHandlers} from './controllers/interactions/start-interaction'
+import {initializeChatHandlers} from './controllers/interactions/chat'
 import {initializeTransferInteractionHandlers} from './controllers/interactions/transfer'
 import {initializeConferenceInteractionHandlers} from "./controllers/interactions/conference";
 import {initializeActiveInteractionHandlers} from './controllers/interactions/active-interaction'
@@ -31,7 +32,7 @@ const adApi = new window.brightpattern.AdApi({
     mountRoot: adcMountNode,
     standalone: !!(new URLSearchParams(location.search)).get('standalone'),
 })
-// @ts-ignore
+// @ts-expect-error Add API instance to the global scope so you can access it through the browser console for testing purposes
 window.adApi = adApi
 
 const hamburger = new Hamburger({hamburger: '.hamburger', menu: '.menu', menuItem: '.menu-item'})
@@ -68,6 +69,7 @@ initializeRescheduleHandlers(adApi)
 initializeWidgetAndConfigHandlers(adApi)
 
 initializeStartInteractionHandlers(adApi)
+initializeChatHandlers(adApi)
 initializeTransferInteractionHandlers(adApi)
 initializeConferenceInteractionHandlers(adApi)
 initializeActiveInteractionHandlers(adApi)
