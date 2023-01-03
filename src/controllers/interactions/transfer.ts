@@ -17,7 +17,7 @@ export function initializeTransferInteractionHandlers(adApi: AgentDesktopClientA
     blindTransferButton.onclick = () => {
         const phoneNumber = transferPhoneNumberInput.value
         const itemId = interactionIdInput.value
-        let transferData: any | null = null
+        let transferData: any = undefined
         try {
             transferData = JSON.parse(transferDataTextarea.value)
         } catch (e) {
@@ -26,30 +26,27 @@ export function initializeTransferInteractionHandlers(adApi: AgentDesktopClientA
         adApi.blindTransfer(phoneNumber, transferData, itemId)
     }
 
-
-setupHoverEffect(consultCallButton, [transferPhoneNumberInput])
-consultCallButton.onclick = () => {
-    const phoneNumber = transferPhoneNumberInput.value
-    adApi.consultCall(phoneNumber)
-}
-
-
-
-setupHoverEffect(transferButton, [mainItemIdInput, consultCallIdInput, transferDataTextarea])
-transferButton.onclick = () => {
-    const mainItemId = mainItemIdInput.value
-    const consultCallId = consultCallIdInput.value
-    let transferData: any | null = null
-    try {
-        transferData = JSON.parse(transferDataTextarea.value)
-    } catch (e) {
-        alert('You have syntax error in the transfer data structure. Cannot parse JSON.')
+    setupHoverEffect(consultCallButton, [transferPhoneNumberInput])
+    consultCallButton.onclick = () => {
+        const phoneNumber = transferPhoneNumberInput.value
+        adApi.consultCall(phoneNumber)
     }
-    adApi.transfer(transferData, mainItemId, consultCallId)
-}
+
+    setupHoverEffect(transferButton, [mainItemIdInput, consultCallIdInput, transferDataTextarea])
+    transferButton.onclick = () => {
+        const mainItemId = mainItemIdInput.value
+        const consultCallId = consultCallIdInput.value
+        let transferData: any = undefined
+        try {
+            transferData = JSON.parse(transferDataTextarea.value)
+        } catch (e) {
+            alert('You have syntax error in the transfer data structure. Cannot parse JSON.')
+        }
+        adApi.transfer(transferData, mainItemId, consultCallId)
+    }
 
     adApi.on('ON_REQUEST_TRANSFER_DATA', () => {
-        let transferData: any | null = null
+        let transferData: any = undefined
         try {
             transferData = JSON.parse(transferDataTextarea.value)
         } catch (e) {
@@ -59,5 +56,9 @@ transferButton.onclick = () => {
             return null
         }
         return transferData
+    })
+
+    adApi.on('ON_LOAD_TRANSFER_DATA', (itemId, data) => {
+        console.info(`@@@ get transfer data for item ${itemId}: \n\n${JSON.stringify(data)}`)
     })
 }

@@ -17,7 +17,7 @@ export function initializeConferenceInteractionHandlers(adApi: AgentDesktopClien
     setupHoverEffect(inviteToCallConferenceButton, [conferencePhoneNumberInput, conferenceTransferDataTextarea, conferenceInteractionIdInput])
     inviteToCallConferenceButton.onclick = () => {
         const phoneNumber = conferencePhoneNumberInput.value
-        let transferData: any | null = null
+        let transferData: any = undefined
         try {
             transferData = JSON.parse(conferenceTransferDataTextarea.value)
         } catch (e) {
@@ -41,9 +41,15 @@ export function initializeConferenceInteractionHandlers(adApi: AgentDesktopClien
         adApi.destroyCallConference(itemId)
     }
 
-    setupHoverEffect(mergeIntoConferenceButton, [])
+    setupHoverEffect(mergeIntoConferenceButton, [conferenceTransferDataTextarea])
     mergeIntoConferenceButton.onclick = () => {
-        adApi.mergeAllCallsIntoConference()
+        let transferData: any = undefined
+        try {
+            transferData = JSON.parse(conferenceTransferDataTextarea.value)
+        } catch (e) {
+            alert('You have syntax error in the transfer data structure. Cannot parse JSON.')
+        }
+        adApi.mergeAllCallsIntoConference(transferData)
     }
 
 

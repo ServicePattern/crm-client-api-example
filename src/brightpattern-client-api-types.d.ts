@@ -532,7 +532,7 @@ export declare class AgentDesktopClientAPI {
     inviteToCallConference(phone: string, customTransferData?: CustomTransferData, interactionId?: string): Promise<OperationResult>
     removeFromCallConference(partyId: string, interactionId?: string): Promise<OperationResult>
     destroyCallConference(interactionId?: string): Promise<OperationResult>
-    mergeAllCallsIntoConference(): Promise<OperationResult>
+    mergeAllCallsIntoConference(customTransferData?: CustomTransferData): Promise<OperationResult>
     getTeams(): Promise<OperationResult<Team[]>>
     getTeamMembers(teamId: string): Promise<OperationResult<User[]>>
     getServicesList(): Promise<OperationResult<ServiceData[]>>
