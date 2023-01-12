@@ -38,6 +38,7 @@ export const requestMessages = [
     'UPDATE_NOTE',
     'REPLACE_NOTE',
     'GET_CONFIG',
+    'GET_VARIABLES',
     'SET_VARIABLE',
     'ADD_INTERACTION_ASSOCIATED_OBJECT',
     'SET_INTERACTION_ACTIVE_SCREEN',
@@ -501,6 +502,7 @@ export type InitOptions = {
     // @ts-ignore
     mountRoot?: any // HTMLElement
     standalone?: boolean
+    disableNewInteractionPopup?: boolean
 }
 
 export declare class AgentDesktopClientAPI {
@@ -549,6 +551,7 @@ export declare class AgentDesktopClientAPI {
     replaceNote(note: string, interactionId?: string): Promise<OperationResult>
     getConfig(): Promise<OperationResult<IntegrationConfig>>
     setVariable(key: string, value: string, interactionId?: string): Promise<OperationResult>
+    getVariables(keys: string[], interactionId?: string): Promise<OperationResult<Record<string, string>>>
     addInteractionAssociatedObject(object: InteractionAssociatedObjectData, interactionId?: string): Promise<OperationResult>
     setInteractionActiveScreen(screenData: InteractionScreen, interactionId?: string): Promise<OperationResult>
     getPhoneDevicesList(): Promise<OperationResult<PhoneDevice[]>>

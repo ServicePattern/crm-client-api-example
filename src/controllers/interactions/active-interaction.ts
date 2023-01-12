@@ -6,8 +6,10 @@ export function initializeActiveInteractionHandlers(adApi: AgentDesktopClientAPI
     const dtmfInput = document.getElementById('dtmf_input')! as HTMLInputElement
     const variableNameInput = document.getElementById('variable_name_input')! as HTMLInputElement
     const variableValueInput = document.getElementById('variable_value_input')! as HTMLInputElement
+    const getVariablesNamesInput = document.getElementById('get_variables_names_input')! as HTMLInputElement
 
     const setVariableButton = document.getElementById('set_variable_button')!
+    const getVariablesButton = document.getElementById('get_variables_button')!
     const switchActiveInteractionButton = document.getElementById('switch_active_interaction_button')!
     const acceptInteractionButton = document.getElementById('accept_interaction_button')!
     const rejectInteractionButton = document.getElementById('reject_interaction_button')!
@@ -95,4 +97,12 @@ setVariableButton.onclick = () => {
     const itemId = activeInteractionIdInput.value
     adApi.setVariable(variableName, variableValue, itemId)
 }
+
+    setupHoverEffect(getVariablesButton, [getVariablesNamesInput, activeInteractionIdInput])
+    getVariablesButton.onclick = () => {
+        const variablesNames = getVariablesNamesInput.value.split(',').map(str => str.trim())
+        const itemId = activeInteractionIdInput.value
+        adApi.getVariables(variablesNames, itemId)
+    }
+
 }

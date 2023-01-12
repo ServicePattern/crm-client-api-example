@@ -35,6 +35,15 @@
                        autocomplete="off"
                 >
             </div>
+            <div class="col-span-2">
+                <label class="input-label" for="get_variables_names_input">
+                    Variable names
+                </label>
+                <input class='input' id="get_variables_names_input" type="text"
+                       placeholder="Comma-separated names"
+                       autocomplete="on"
+                >
+            </div>
         </div>
         <div class="flex flex-wrap -mx-1 bg-gray-50 pt-4 mb-4 px-2 rounded">
             <div class="mx-1 mb-4 shadow-md w-auto p-2 inline-block rounded bg-white">
@@ -81,6 +90,7 @@
             </button>
             <button class='mx-1 mb-4 button' id="send_dtmf_button">sendDtmf</button>
             <button class='mx-1 mb-4 button' id="set_variable_button">setVariable</button>
+            <button class='mx-1 mb-4 button' id="get_variables_button">getVariables</button>
             <input type='reset' class="button_helper self-end inline-block w-auto mx-1 mb-4"
                    value="Reset form"/>
         </div>
