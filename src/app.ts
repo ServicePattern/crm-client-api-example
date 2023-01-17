@@ -26,11 +26,13 @@ import './app.css'
 
 const integrationKey = 'test-adapter'
 const adcMountNode = document.getElementById('adc_mount_node')!
+const urlParams = new URLSearchParams(location.search)
 
 const adApi = new window.brightpattern.AdApi({
     integrationKey,
     mountRoot: adcMountNode,
-    standalone: !!(new URLSearchParams(location.search)).get('standalone'),
+    standalone: !!urlParams.get('standalone'),
+    disableNewInteractionPopup: !!urlParams.get('no-popup'),
 })
 // @ts-expect-error Add API instance to the global scope so you can access it through the browser console for testing purposes
 window.adApi = adApi

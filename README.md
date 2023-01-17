@@ -28,13 +28,26 @@ yarn watch
 BRIGHTPATTERN_ORIGIN='https://example.brightpattern.com' yarn start
 ```
 
-## Standalone mode
+## Options
+
+### No Comm.Widget UI
+
 You can switch between view with `Communicator app` and without by adding the `standalone` URL search query.
 
-### Example:
+### Disable new interaction popup
+
+In order to disable new interaction popup from Agent Helper application, you need to add `no-popup` to the URL string.
+
+## Example:
 
 #### API with Communicator app:
 - `http://localhost:8080`
 
 #### Standalone API (without Communicator app)
 - `http://localhost:8080?standalone=true`
+
+#### Disabled popup
+- `http://localhost:8080?no-popup=true`
+
+### Standalone + disabled popup
+- `http://localhost:8080?standalone=true&no-popup=true`
