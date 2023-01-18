@@ -526,7 +526,7 @@ export declare class AgentDesktopClientAPI {
     sendDtmf(dtmf: string, interactionId?: string): Promise<OperationResult>
     consultCall(phone: string): Promise<OperationResult>
     blindTransfer(phone: string, customTransferData?: CustomTransferData, interactionId?: string): Promise<OperationResult>
-    transfer(customTransferData?: CustomTransferData, mainCallId?: string, consultCallId?: string): Promise<OperationResult>
+    transfer(customTransferData?: CustomTransferData): Promise<OperationResult>
     leaveInteraction(interactionId?: string): Promise<OperationResult>
     completeInteraction(interactionId?: string): Promise<OperationResult>
     leaveAndCompleteInteraction(disposition?: string, note?: string, interactionId?: string): Promise<OperationResult>

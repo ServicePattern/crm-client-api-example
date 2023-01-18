@@ -4,8 +4,6 @@ import {setupHoverEffect} from "../../helpers";
 export function initializeTransferInteractionHandlers(adApi: AgentDesktopClientAPI) {
     const interactionIdInput = document.getElementById('interaction_id_input')! as HTMLInputElement
     const transferPhoneNumberInput = document.getElementById('transfer_phone_number_input')! as HTMLInputElement
-    const mainItemIdInput = document.getElementById('main_item_id_input')! as HTMLInputElement
-    const consultCallIdInput = document.getElementById('consult_call_id_input')! as HTMLInputElement
 
     const transferDataTextarea = document.getElementById('transfer_data_textarea')! as HTMLTextAreaElement
 
@@ -32,17 +30,15 @@ export function initializeTransferInteractionHandlers(adApi: AgentDesktopClientA
         adApi.consultCall(phoneNumber)
     }
 
-    setupHoverEffect(transferButton, [mainItemIdInput, consultCallIdInput, transferDataTextarea])
+    setupHoverEffect(transferButton, [transferDataTextarea])
     transferButton.onclick = () => {
-        const mainItemId = mainItemIdInput.value
-        const consultCallId = consultCallIdInput.value
         let transferData: any = undefined
         try {
             transferData = JSON.parse(transferDataTextarea.value)
         } catch (e) {
             alert('You have syntax error in the transfer data structure. Cannot parse JSON.')
         }
-        adApi.transfer(transferData, mainItemId, consultCallId)
+        adApi.transfer(transferData)
     }
 
     adApi.on('ON_REQUEST_TRANSFER_DATA', () => {
