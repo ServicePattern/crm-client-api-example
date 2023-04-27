@@ -22,6 +22,8 @@ export const requestMessages = [
     'INVITE_TO_CALL_CONFERENCE',
     'REMOVE_FROM_CALL_CONFERENCE',
     'DESTROY_CALL_CONFERENCE',
+    'INVITE_TO_CHAT_CONFERENCE',
+    'REMOVE_FROM_CHAT_CONFERENCE',
     'MERGE_ALL_CALLS_INTO_CONFERENCE',
     'GET_TEAMS',
     'GET_TEAM_MEMBERS',
@@ -246,8 +248,10 @@ export const dispositionTypes = [
 ] as const
 export type DispositionType = typeof dispositionTypes[number]
 
-export const userStates = ['offline', 'available', 'dnd', 'away', 'busy']
-export type UserState = typeof userStates[number]
+export type UserState = AgentState | 'offline'
+
+export const chatPartyTypes = ['internal', 'external'] as const
+export type ChatPartyType = typeof chatPartyTypes[number]
 
 export type LoginStateData = {
     isLoggedIn: boolean
@@ -310,6 +314,7 @@ export type InteractionData = {
     callParties: CallParty[]
     callMuted: boolean
     callRecording: boolean
+    chatParties: ChatParty[]
     attachedData: AttachedData
     phoneNumber?: string
     email?: string
@@ -394,6 +399,16 @@ export type CallParty = {
     name: string
     phone: string
     userId?: string
+}
+
+export type ChatParty = {
+    id: string
+    type: ChatPartyType
+    name: string
+    userId?: string
+    contactId?: string
+    email?: string
+    phone?: string
 }
 
 export type ScreenRecordingState = {
@@ -535,6 +550,8 @@ export declare class AgentDesktopClientAPI {
     removeFromCallConference(partyId: string, interactionId?: string): Promise<OperationResult>
     destroyCallConference(interactionId?: string): Promise<OperationResult>
     mergeAllCallsIntoConference(customTransferData?: CustomTransferData): Promise<OperationResult>
+    inviteToChatConference(partyId: string, interactionId?: string): Promise<OperationResult>
+    removeFromChatConference(partyId: string, interactionId?: string): Promise<OperationResult>
     getTeams(): Promise<OperationResult<Team[]>>
     getTeamMembers(teamId: string): Promise<OperationResult<User[]>>
     getServicesList(): Promise<OperationResult<ServiceData[]>>
