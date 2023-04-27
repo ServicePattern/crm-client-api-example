@@ -12,6 +12,8 @@ export function initializeConferenceInteractionHandlers(adApi: AgentDesktopClien
     const removeFromCallConferenceButton = document.getElementById('remove_from_call_conference_button')!
     const destroyCallConferenceButton = document.getElementById('destroy_call_conference_button')!
     const mergeIntoConferenceButton = document.getElementById('merge_into_conference_button')!
+    const inviteToChatConferenceButton = document.getElementById('invite_to_chat_conference')!
+    const removeFromChatConferenceButton = document.getElementById('remove_from_chat_conference')!
 
 
     setupHoverEffect(inviteToCallConferenceButton, [conferencePhoneNumberInput, conferenceTransferDataTextarea, conferenceInteractionIdInput])
@@ -52,5 +54,17 @@ export function initializeConferenceInteractionHandlers(adApi: AgentDesktopClien
         adApi.mergeAllCallsIntoConference(transferData)
     }
 
+    setupHoverEffect(inviteToChatConferenceButton, [partyIdInput, conferenceInteractionIdInput])
+    inviteToChatConferenceButton.onclick = () => {
+        const partyId = partyIdInput.value
+        const itemId = conferenceInteractionIdInput.value
+        adApi.inviteToChatConference(partyId, itemId)
+    }
 
+    setupHoverEffect(removeFromChatConferenceButton, [partyIdInput, conferenceInteractionIdInput])
+    removeFromChatConferenceButton.onclick = () => {
+        const partyId = partyIdInput.value
+        const itemId = conferenceInteractionIdInput.value
+        adApi.removeFromChatConference(partyId, itemId)
+    }
 }
