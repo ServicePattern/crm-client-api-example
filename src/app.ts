@@ -24,7 +24,8 @@ import {initializeResizeButtonHandler} from './controllers/resize-button'
 
 import './app.css'
 
-const integrationKey = 'test-adapter'
+const DEFAULT_INTEGRATION_KEY = 'test-adapter'
+const integrationKey = prompt('Integration type: \n servicenow \n salesforce \n dynamicscrm \n omnichannel', DEFAULT_INTEGRATION_KEY) || DEFAULT_INTEGRATION_KEY
 const adcMountNode = document.getElementById('adc_mount_node')!
 const urlParams = new URLSearchParams(location.search)
 
