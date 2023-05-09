@@ -14,8 +14,12 @@
                 <label class="input-label" for="active-associated_object_textarea">
                     Associated object
                 </label>
-                <textarea class='textarea' id="active-associated_object_textarea"
-                          placeholder="Associated object" rows="8">
+                <textarea
+                    class='textarea'
+                    id="active-associated_object_textarea"
+                    placeholder="Associated object"
+                    rows="8"
+                >
 {
 "id": "some-random-id",
 "type": "contact",
@@ -23,7 +27,34 @@
 "displayType": "Contact",
 "customFields": {}
 }
-</textarea>
+                </textarea>
+                <button
+                    class="border-b border-dashed border-purple-700 text-purple-700 mr-1"
+                    id="active_associated_object_paste_service_now_contact_object"
+                >
+                    Servicenow contact
+                </button>
+
+                <button
+                    class="border-b border-dashed border-purple-700 text-purple-700 mr-1"
+                    id="active_associated_object_paste_service_now_task_object"
+                >
+                    Servicenow Task
+                </button>
+
+                <button
+                    class="border-b border-dashed border-purple-700 text-purple-700 mr-1"
+                    id="active_associated_object_paste_salesforce_case_object"
+                >
+                    Salesforce Case
+                </button>
+
+                <button
+                    class="border-b border-dashed border-purple-700 text-purple-700 mr-1"
+                    id="active_associated_object_paste_salesforce_contact_object"
+                >
+                    Salesforce Contact
+                </button>
             </div>
             <div class="mb-4">
                 <label class="input-label" for="active_screen_textarea">Interaction active

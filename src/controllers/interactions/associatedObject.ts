@@ -40,4 +40,61 @@ export function initializeAssociatedObjectInteractionHandlers(adApi: AgentDeskto
         const itemId = activeAssociatedInteractionIdInput.value
         adApi.setInteractionActiveScreen(activeScreenData, itemId)
     }
+
+
+    const btnPasteServiceNowContactObject = document.getElementById('active_associated_object_paste_service_now_contact_object')!
+    const btnPasteServiceNowTaskObject = document.getElementById('active_associated_object_paste_service_now_task_object')!
+    const btnPasteSalesforceCaseObject = document.getElementById('active_associated_object_paste_salesforce_case_object')!
+    const btnPasteSalesforceContactObject = document.getElementById('active_associated_object_paste_salesforce_contact_object')!
+
+    btnPasteServiceNowContactObject.addEventListener('click', pasteServiceNowContactObject)
+    btnPasteServiceNowTaskObject.addEventListener('click', pasteServiceNowTaskObject)
+    btnPasteSalesforceCaseObject.addEventListener('click', pasteSalesforceCaseObject)
+    btnPasteSalesforceContactObject.addEventListener('click', pasteSalesforceContactObject)
+
+    function pasteServiceNowContactObject() {
+        activeAssociatedObjectTextarea.value = JSON.stringify({
+            "id": "1",
+            "type": "contact",
+            "displayName": "Pavel Karpovich",
+            "displayType": "Contact",
+            "customFields": {
+                "isServiceNowContact": "true"
+            }
+        }, null, 4)
+    }
+
+    function pasteServiceNowTaskObject() {
+        activeAssociatedObjectTextarea.value = JSON.stringify({
+            "id": "2",
+            "type": "task",
+            "displayName": "TD-101",
+            "displayType": "Task",
+            "customFields": {
+                "isServiceNowTask": "true"
+            }
+        }, null, 4)
+    }
+    function pasteSalesforceCaseObject() {
+        activeAssociatedObjectTextarea.value = JSON.stringify({
+            "id": "3",
+            "type": "case",
+            "displayName": "CS-404",
+            "displayType": "Case",
+            "customFields": {
+                "isCase": "true"
+            }
+        }, null, 4)
+    }
+    function pasteSalesforceContactObject() {
+        activeAssociatedObjectTextarea.value = JSON.stringify({
+            "id": "4",
+            "type": "contact",
+            "displayName": "Nikolai Maslak",
+            "displayType": "Contact",
+            "customFields": {
+                "isContact": "true"
+            }
+        }, null, 4)
+    }
 }
