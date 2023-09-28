@@ -32,7 +32,6 @@ module.exports = {
     },
     devServer: {
       contentBase: './public',
-      https: true,
     },
     plugins: [
         new MiniCssExtractPlugin({
