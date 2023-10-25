@@ -24,58 +24,79 @@ import {initializeResizeButtonHandler} from './controllers/resize-button'
 
 import './app.css'
 
-const DEFAULT_INTEGRATION_KEY = 'test-adapter'
-const integrationKey = prompt('Integration type: \n servicenow \n salesforce \n dynamicscrm \n omnichannel', DEFAULT_INTEGRATION_KEY) || DEFAULT_INTEGRATION_KEY
+
 const adcMountNode = document.getElementById('adc_mount_node')!
 const urlParams = new URLSearchParams(location.search)
 
-const adApi = new window.brightpattern.AdApi({
-    integrationKey,
-    mountRoot: adcMountNode,
-    standalone: !!urlParams.get('standalone'),
-    disableNewInteractionPopup: !!urlParams.get('no-popup'),
-})
-// @ts-expect-error Add API instance to the global scope so you can access it through the browser console for testing purposes
-window.adApi = adApi
-
-const hamburger = new Hamburger({hamburger: '.hamburger', menu: '.menu', menuItem: '.menu-item'})
-hamburger.initializeEventListener()
-
-const menu = new Menu(hamburger, {
-    menu: '.menu',
-    menuItems: '.menu-item',
-    section: '.section',
-    multipleSelect: '#menu_multiple_select_checkbox'
-})
-
-menu.initializeEventListeners()
-
-const tab = new Tab('.tab', '.tab-item', '.tab-content')
-tab.initializeEventListeners()
+const brightpatternDomain = urlParams.get('bpatternDomain') || 'localhost:3000'
+const integrationKey = urlParams.get('integrationKey') || 'test-adapter'
 
 
-const logger = new Logger(adApi, '#log')
-logger.initialize()
-logger.initializeClearLogOnClick('#clear_log')
+loadCommWidgetApi().then(initializeIntegration)
 
 
-initializeResizeButtonHandler()
+function loadCommWidgetApi() {
+    return new Promise((resolve, reject) => {
+        const scriptTag = document.createElement('script')
+        scriptTag.addEventListener('load', resolve)
+        scriptTag.addEventListener('error', reject)
+        scriptTag.type = 'application/javascript'
+        scriptTag.src = `https://${brightpatternDomain}/agent/communicator/adapters/api.js`
+        document.head.appendChild(scriptTag)
+    })
+}
 
-initializeSessionHandlers(adApi)
-initializePhoneDeviceHandlers(adApi)
-initializeAgentStateHandlers(adApi)
-initializeTeamsHandlers(adApi)
-initializeServicesAndDIDHandlers(adApi)
-initializeScreenRecordingHandlers(adApi)
-initializeKnowledgeBaseHandlers(adApi)
-initializeRescheduleHandlers(adApi)
-initializeWidgetAndConfigHandlers(adApi)
+function initializeIntegration() {
 
-initializeStartInteractionHandlers(adApi)
-initializeChatHandlers(adApi)
-initializeTransferInteractionHandlers(adApi)
-initializeConferenceInteractionHandlers(adApi)
-initializeActiveInteractionHandlers(adApi)
-initializeAssociatedObjectInteractionHandlers(adApi)
-initializeNotesAndDispositionsHandlers(adApi)
-initializeEndInteractionHandlers(adApi)
+    const adApi = new window.brightpattern.AdApi({
+        integrationKey,
+        mountRoot: adcMountNode,
+        standalone: !!urlParams.get('standalone'),
+        disableNewInteractionPopup: !!urlParams.get('no-popup'),
+    })
+    // @ts-expect-error Add API instance to the global scope so you can access it through the browser console for testing purposes
+    window.adApi = adApi
+    
+    const hamburger = new Hamburger({hamburger: '.hamburger', menu: '.menu', menuItem: '.menu-item'})
+    hamburger.initializeEventListener()
+    
+    const menu = new Menu(hamburger, {
+        menu: '.menu',
+        menuItems: '.menu-item',
+        section: '.section',
+        multipleSelect: '#menu_multiple_select_checkbox'
+    })
+    
+    menu.initializeEventListeners()
+    
+    const tab = new Tab('.tab', '.tab-item', '.tab-content')
+    tab.initializeEventListeners()
+    
+    
+    const logger = new Logger(adApi, '#log')
+    logger.initialize()
+    logger.initializeClearLogOnClick('#clear_log')
+    
+    
+    initializeResizeButtonHandler()
+    
+    initializeSessionHandlers(adApi)
+    initializePhoneDeviceHandlers(adApi)
+    initializeAgentStateHandlers(adApi)
+    initializeTeamsHandlers(adApi)
+    initializeServicesAndDIDHandlers(adApi)
+    initializeScreenRecordingHandlers(adApi)
+    initializeKnowledgeBaseHandlers(adApi)
+    initializeRescheduleHandlers(adApi)
+    initializeWidgetAndConfigHandlers(adApi)
+    
+    initializeStartInteractionHandlers(adApi)
+    initializeChatHandlers(adApi)
+    initializeTransferInteractionHandlers(adApi)
+    initializeConferenceInteractionHandlers(adApi)
+    initializeActiveInteractionHandlers(adApi)
+    initializeAssociatedObjectInteractionHandlers(adApi)
+    initializeNotesAndDispositionsHandlers(adApi)
+    initializeEndInteractionHandlers(adApi)
+    
+}

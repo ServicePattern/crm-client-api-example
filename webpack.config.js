@@ -4,7 +4,6 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const brightpatternOrigin = process.env.BRIGHTPATTERN_ORIGIN || 'https://localhost:3000';
 
 module.exports = {
     entry: path.resolve(__dirname, 'src', 'app.ts'),
@@ -41,9 +40,6 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'src/index.html'),
-            templateParameters: {
-                brightpatternOrigin
-            }
         }),
     ],
     resolve: {

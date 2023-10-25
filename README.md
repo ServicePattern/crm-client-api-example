@@ -1,34 +1,35 @@
 
-## Environment variables:
-`BRIGHTPATTERN_ORIGIN`
-- Is used as the origin to fetch `communicator/adapters/api.js`
-- Default value for BRIGHTPATTERN_ORIGIN is 'https://localhost:3000'
-
 ## Setup and run
 ### Setup:
 Compiles app in `/public` folder 
 
 ```bash
 yarn install
-BRIGHTPATTERN_ORIGIN='https://example.brightpattern.com' yarn build 
+yarn build 
 ```
-where https://example.brightpattern.com is the domain of BPCC sandbox or a production account where you want to show the widget from.
 
 ### Run
 Starts the test page on `localhost:8080`
 ```bash
-BRIGHTPATTERN_ORIGIN='https://example.brightpattern.com' yarn start
+yarn install
+yarn start
 ```
 
 
 ### Run with the watcher
 Starts the test page on `localhost:8080` and auto-compile changed files.
 ```bash
+yarn install
 yarn watch
-BRIGHTPATTERN_ORIGIN='https://example.brightpattern.com' yarn start
+```
+```bash
+yarn start
 ```
 
 ## Options
+
+### Configure Bright Pattern instance domain
+You need to provider `bpatternDomain` URL parameter to provide domain of your instance (tenant URL).
 
 ### No Comm.Widget UI
 
@@ -41,13 +42,13 @@ In order to disable new interaction popup from Agent Helper application, you nee
 ## Example:
 
 #### API with Communicator app:
-- `http://localhost:8080`
+- `http://localhost:8080?bpatternDomain=example.brightpattern.com`
 
 #### Standalone API (without Communicator app)
-- `http://localhost:8080?standalone=true`
+- `http://localhost:8080?bpatternDomain=example.brightpattern.com&standalone=true`
 
 #### Disabled popup
-- `http://localhost:8080?no-popup=true`
+- `http://localhost:8080?bpatternDomain=example.brightpattern.com&no-popup=true`
 
 ### Standalone + disabled popup
-- `http://localhost:8080?standalone=true&no-popup=true`
+- `http://localhost:8080?bpatternDomain=example.brightpattern.com&standalone=true&no-popup=true`
