@@ -1,0 +1,12 @@
+
+.tree-item {
+  @apply ml-4 list-none;
+}
+
+.tree-node {
+  @apply flex items-center px-2 hover:bg-secondary cursor-pointer;
+}
+
+.tree-leaf {
+  @apply tree-item px-2 hover:bg-secondary;
+}

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+/** Must not have dependencies (imports) */
 
 export const requestMessages = [
     'GET_LOGIN_STATE',
@@ -56,6 +57,10 @@ export const requestMessages = [
     'SEND_CHAT_MESSAGE',
     'SUGGEST_CHAT_MESSAGE',
     'GET_AGENT_NOT_READY_REASONS',
+    'ACTIVATE_PAGE',
+    'GET_INTERACTIONS_STATE',
+    'SET_CALL_RECORDING_MUTE',
+    'SET_DIAL_CANDIDATES',
 ] as const
 export type RequestMessage = typeof requestMessages[number]
 
@@ -69,6 +74,7 @@ export const callbackMessages = {
     'ON_AGENT_STATE_CHANGE': {needResponse: false},
     'ON_REQUEST_TRANSFER_DATA': {needResponse: true},
     'ON_LOAD_TRANSFER_DATA': {needResponse: false},
+    'ON_GET_KNOWLEDGE_BASE_FOLDER': {needResponse: true},
     'ON_SEARCH_KNOWLEDGE_BASE': {needResponse: true},
     'ON_GET_KNOWLEDGE_BASE_ARTICLE': {needResponse: true},
     'ON_OPEN_RECORD': {needResponse: false},
@@ -83,6 +89,9 @@ export const callbackMessages = {
     'ON_CALL_AUDIO_QUALITY_ALERT': {needResponse: false},
     'ON_WEB_SCREEN_POP_CUSTOM': {needResponse: true},
     'ON_SAVE_ACTIVITY_RECORD': {needResponse: false},
+    'ON_VALIDATE_ASSOCIATED_RECORDS': {needResponse: true},
+    'ON_REQUEST_RECORD_INFO': {needResponse: true},
+    'ON_REQUEST_RECORD_ON_SCREEN': {needResponse: true},
 } as const
 export type CallbackMessage = keyof typeof callbackMessages
 
@@ -91,18 +100,27 @@ type FilterByHavingResponse<T> = {
     [Key in keyof T]: T[Key] extends {needResponse: true} ? Key : never
 }
 
+const typedKeys = <T extends {[key: string]: unknown}>(data: T): Array<keyof T> =>
+    Object.keys.call<typeof data, Array<typeof data>, Array<keyof T>>(data, data)
+
 export type CallbackMessageWithResponse = FilterByHavingResponse<typeof callbackMessages>[keyof typeof callbackMessages]
 
-export const responseSuffix = '_RESPONSE' as const
+export const RESPONSE_SUFFIX = '_RESPONSE' as const
 
-export const requestResponseMessages = requestMessages.map(msg => msg + responseSuffix)
-export const callbackResponseMessages = Object.keys(callbackMessages).reduce<string[]>((all, msg) => {
-    if ((callbackMessages as unknown as Record<string, {needResponse: boolean}>)[msg].needResponse) {
-        all.push(msg + responseSuffix)
-    }
-    return all
-}, [])
+export const requestResponseMessages = requestMessages.map<`${RequestMessage}${typeof RESPONSE_SUFFIX}`>(message => {
+    return `${message}${RESPONSE_SUFFIX}`
+})
+export const callbackResponseMessages = typedKeys(callbackMessages)
+    .filter<CallbackMessageWithResponse>((message: CallbackMessage): message is CallbackMessageWithResponse => {
+        return callbackMessages[message].needResponse
+    })
+    .map<`${CallbackMessageWithResponse}${typeof RESPONSE_SUFFIX}`>(message => {
+        return `${message}${RESPONSE_SUFFIX}`
+    })
 
+export type CallbackResponseMessage = keyof {
+    [Key in keyof typeof callbackMessages as typeof callbackMessages[Key] extends {needResponse: true} ? `${Key}${typeof RESPONSE_SUFFIX}` : never]: true
+}
 
 export type CallbackMethodsReturnTypeMap = {
     'ON_LOGIN': void
@@ -114,6 +132,7 @@ export type CallbackMethodsReturnTypeMap = {
     'ON_AGENT_STATE_CHANGE': void
     'ON_REQUEST_TRANSFER_DATA': CustomTransferData
     'ON_LOAD_TRANSFER_DATA': void
+    'ON_GET_KNOWLEDGE_BASE_FOLDER': ExternalKBItemData[]
     'ON_SEARCH_KNOWLEDGE_BASE': ExternalKBSearchResultData[]
     'ON_GET_KNOWLEDGE_BASE_ARTICLE': ExternalKBArticleData | null
     'ON_OPEN_RECORD': void
@@ -128,6 +147,9 @@ export type CallbackMethodsReturnTypeMap = {
     'ON_CALL_AUDIO_QUALITY_ALERT': void
     'ON_WEB_SCREEN_POP_CUSTOM': boolean
     'ON_SAVE_ACTIVITY_RECORD': void
+    'ON_VALIDATE_ASSOCIATED_RECORDS': RecordsValidationResult
+    'ON_REQUEST_RECORD_INFO': InteractionAssociatedObjectData | null
+    'ON_REQUEST_RECORD_ON_SCREEN': InteractionAssociatedObjectData | null
 }
 
 const resultStatus = ['error', 'success'] as const
@@ -191,7 +213,7 @@ export type OperationResult<ReturnType = null> =
 
 export type SyncAsyncResult<ReturnType = void> = ReturnType | Promise<ReturnType>
 
-export const agentStates = ['supervising', 'ready', 'not_ready', 'busy', 'after_call_work'] as const
+export const agentStates = ['supervising', 'ready', 'not_ready', 'busy', 'after_call_work', 'reserved', 'ringing'] as const
 export type AgentState = typeof agentStates[number]
 
 export const interactionStates = [
@@ -220,6 +242,7 @@ export const chatChannelTypes = [
     'viber',
     'twitter',
     'wechat',
+    'whatsapp',
 ] as const
 export type ChatChannelType = typeof chatChannelTypes[number]
 
@@ -300,17 +323,16 @@ export type InteractionAssociatedObject = {
 
 export type InteractionAssociatedObjectsData = {
     list: InteractionAssociatedObject[]
-    selected: string | null
+    selected: string[]
 }
 
 export type AttachedData = Record<string, string>
 
 export type InteractionData = {
     interactionId: string
+    globalInteractionId?: string
     state: InteractionState
     type: InteractionType
-    subject: string
-    associatedObjects: InteractionAssociatedObjectsData
     callParties: CallParty[]
     callMuted: boolean
     callRecording: boolean
@@ -324,13 +346,51 @@ export type InteractionData = {
     duration?: number
     description?: string
     disposition?: string
-    globalInteractionId?: string
     service?: string
     playbackUrl?: string
     recordingUrl?: string
     DNIS?: string
     ANI?: string
     origination?: InteractionOrigination
+
+    /** @deprecated */
+    subject: string
+    /** @deprecated */
+    associatedObjects: InteractionAssociatedObjectsData
+}
+
+export type InteractionActivityData = {
+    interactionId: string
+    globalInteractionId?: string
+    state: InteractionState
+    type: InteractionType
+    associatedObjects: InteractionAssociatedObjectsData
+    attachedData: AttachedData
+    phoneNumber?: string
+    email?: string
+    callDirection?: CallDirection
+    startTime?: number
+    endTime?: number
+    duration?: number
+    description?: string
+    disposition?: string
+    service?: string
+    playbackUrl?: string
+    recordingUrl?: string
+    DNIS?: string
+    ANI?: string
+    origination?: InteractionOrigination
+
+    /** @deprecated */
+    subject: string
+    /** @deprecated */
+    callParties: CallParty[]
+    /** @deprecated */
+    callMuted: boolean
+    /** @deprecated */
+    callRecording: boolean
+    /** @deprecated */
+    chatParties: ChatParty[]
 }
 
 export type InteractionScreen = Record<string, string | number | boolean | null | undefined>
@@ -346,20 +406,32 @@ export type ExternalKBArticleData = {
     language: string
     createdByUser: string
     lastEditedByUser: string
-    customFields: Record<string, string>
+    customFields: string[]
 }
-export type ExternalKBArticle = {
-    source: string
-} & ExternalKBArticleData
+export type ExternalKBArticle = ExternalKBArticleData & {source: string}
 
-export type ExternalKBSearchResultData = {
+export type ExternalKBArticleItem = {
     id: string
+    type: 'article'
+    title: string
     text: string
+}
+export type ExternalKBFolderItem = {
+    id: string
+    type: 'folder'
     title: string
 }
-export type ExternalKBSearchResult = {
-    source: string
-} & ExternalKBSearchResultData
+
+export type ExternalKBSearchResultData = ExternalKBArticleItem
+export type ExternalKBSearchResult = ExternalKBSearchResultData & {source: string}
+
+export type ExternalKBItemData = ExternalKBArticleItem | ExternalKBFolderItem
+export type ExternalKBItem = ExternalKBItemData & {source: string}
+
+export type KBFolderOptions = {
+    language?: string
+    folderId?: string
+}
 
 export type SearchRecordsQuery = {
     text: string
@@ -475,8 +547,49 @@ export const interactionOriginations = [
     'conference',
     'auto',
     'integration-api',
+    'chat-center',
 ] as const
 export type InteractionOrigination = typeof interactionOriginations[number]
+
+export type InteractionsState = {
+    activeInteractionId: string | null
+    interactions: InteractionData[]
+}
+
+export type OpenRecordOptions = {
+    inNewTab: boolean
+    source: 'user' | 'scenario'
+}
+
+export const phoneTypes = ['mobile', 'business', 'home', 'fax', 'other'] as const
+type PhoneType = typeof phoneTypes[number]
+
+export type PhoneData = {
+    number: string
+    type: PhoneType
+    displayType?: string
+}
+
+export type DialCandidate = {
+    id: string
+    displayName: string
+    phones: PhoneData[]
+    associatedObjects: InteractionAssociatedObjectData[]
+    email?: string
+}
+
+export type RecordsValidationResult = {
+    valid: boolean
+    message?: string
+}
+
+export type RecordInfoRequest = {
+    id: string
+    type: string
+}
+
+export type InitialObjects = InteractionAssociatedObjectData | InteractionAssociatedObjectData[]
+
 
 export type InitiateResult = {
     id: string | null
@@ -493,10 +606,11 @@ export type OnAgentStateChangeHandler = (state: AgentState, notReadyReason?: str
 export type OnRequestTransferDataHandler = (interactionId: string) => SyncAsyncResult<CustomTransferData>
 export type OnLoadTransferDataHandler = (interactionId: string, data: CustomTransferData) => SyncAsyncResult
 export type OnWidgetMinimizedChangeHandler = (widgetMinimized: boolean) => SyncAsyncResult
-export type OnSearchKnowledgeBaseHandler = (query: string, language?: string) => SyncAsyncResult<ExternalKBSearchResultData[]>
-export type OnGetKnowledgeBaseArticleHandler = (id: string) => SyncAsyncResult<ExternalKBArticleData | null>
-export type OnOpenRecordHandler = (record: InteractionAssociatedObjectData, interactionId?: string) => SyncAsyncResult
-export type OnSearchRecordsHandler = (search: SearchRecordsQuery, interactionId?: string) => SyncAsyncResult
+export type OnGetKnowledgeBaseFolderHandler = (options: KBFolderOptions) => SyncAsyncResult<ExternalKBItemData[]>
+export type OnSearchKnowledgeBaseHandler = (query: string, language?: string, folderId?: string) => SyncAsyncResult<ExternalKBSearchResultData[]>
+export type OnGetKnowledgeBaseArticleHandler = (articleId: string) => SyncAsyncResult<ExternalKBArticleData | null>
+export type OnOpenRecordHandler = (record: InteractionAssociatedObjectData, interactionId?: string, options?: OpenRecordOptions) => SyncAsyncResult
+export type OnSearchRecordsHandler = (search: SearchRecordsQuery, interactionId?: string, inNewTab?: boolean) => SyncAsyncResult
 export type OnShowScreenHandler = (screen: InteractionScreen, interactionId?: string) => SyncAsyncResult
 export type OnScreenRecordingStateChangeHandler = (screenRecordingState: ScreenRecordingState) => SyncAsyncResult
 export type OnServerErrorHandler = (error: ServerErrorData) => SyncAsyncResult
@@ -504,8 +618,11 @@ export type OnSoftphoneStatusChangeHandler = (ready: boolean, error?: string) =>
 export type OnAudioDeviceChangeHandler = (inputDevice?: string, outputDevice?: string) => SyncAsyncResult
 export type OnPhoneCapabilitiesChangeHandler = (caps: PhoneCapabilities) => SyncAsyncResult
 export type OnCallAudioQualityAlertHandler = (callId: string, alert: boolean) => SyncAsyncResult
-export type OnWebScreenPopCustomHandler = (itemId: string, webScreenPop: WebScreenPop) => SyncAsyncResult<boolean>
-export type OnSaveActivityRecordHandler = (interaction: InteractionData) => SyncAsyncResult
+export type OnWebScreenPopCustomHandler = (interactionId: string, webScreenPop: WebScreenPop) => SyncAsyncResult<boolean>
+export type OnSaveActivityRecordHandler = (activity: InteractionActivityData) => SyncAsyncResult
+export type OnValidateAssociatedRecordsHandler = (interactionId: string, records: InteractionAssociatedObjectsData) => SyncAsyncResult<RecordsValidationResult>
+export type OnRequestRecordInfoHandler = (payload: RecordInfoRequest) => SyncAsyncResult<InteractionAssociatedObjectData | null>
+export type OnRequestRecordOnScreenHandler = () => SyncAsyncResult<InteractionAssociatedObjectData | null>
 
 export type MessageLogger = (message: string, data: any) => void
 
@@ -535,9 +652,9 @@ export declare class AgentDesktopClientAPI {
     setAgentState(state: AgentState, notReadyReason?: string): Promise<OperationResult>
     acceptInteraction(interactionId?: string): Promise<OperationResult>
     rejectInteraction(interactionId?: string): Promise<OperationResult>
-    startCall(phonenumber: string, initialObject?: InteractionAssociatedObjectData): Promise<OperationResult<InitiateResult>>
-    startChat(channel: ChatChannelType, address: string, initialObject?: InteractionAssociatedObjectData): Promise<OperationResult<InitiateResult>>
-    startEmail(email: string, initialObject?: InteractionAssociatedObjectData): Promise<OperationResult<InitiateResult>>
+    startCall(phonenumber: string, associatedObjects?: InitialObjects): Promise<OperationResult<InitiateResult>>
+    startChat(channel: ChatChannelType, address: string, associatedObjects?: InitialObjects): Promise<OperationResult<InitiateResult>>
+    startEmail(email: string, associatedObjects?: InitialObjects): Promise<OperationResult<InitiateResult>>
     sendDtmf(dtmf: string, interactionId?: string): Promise<OperationResult>
     consultCall(phone: string): Promise<OperationResult>
     blindTransfer(phone: string, customTransferData?: CustomTransferData, interactionId?: string): Promise<OperationResult>
@@ -583,6 +700,10 @@ export declare class AgentDesktopClientAPI {
     sendChatMessage(message: string, interactionId?: string): Promise<OperationResult>
     suggestChatMessage(message: string, allowOverwrite?: boolean, interactionId?: string): Promise<OperationResult>
     getAgentNotReadyReasons(): Promise<OperationResult<string[]>>
+    activatePage(): Promise<OperationResult>
+    getInteractionsState(): Promise<OperationResult<InteractionsState>>
+    setCallRecordingMute(state: boolean, interactionId?: string): Promise<OperationResult>
+    setDialCandidates(candidates: DialCandidate[]): Promise<OperationResult>
 
     on(message: 'ON_LOGIN', handler: OnLoginHandler): void
     on(message: 'ON_LOGOUT', handler: OnLogoutHandler): void
@@ -593,6 +714,7 @@ export declare class AgentDesktopClientAPI {
     on(message: 'ON_AGENT_STATE_CHANGE', handler: OnAgentStateChangeHandler): void
     on(message: 'ON_REQUEST_TRANSFER_DATA', handler: OnRequestTransferDataHandler): void
     on(message: 'ON_LOAD_TRANSFER_DATA', handler: OnLoadTransferDataHandler): void
+    on(message: 'ON_GET_KNOWLEDGE_BASE_FOLDER', handler: OnGetKnowledgeBaseFolderHandler): void
     on(message: 'ON_SEARCH_KNOWLEDGE_BASE', handler: OnSearchKnowledgeBaseHandler): void
     on(message: 'ON_GET_KNOWLEDGE_BASE_ARTICLE', handler: OnGetKnowledgeBaseArticleHandler): void
     on(message: 'ON_OPEN_RECORD', handler: OnOpenRecordHandler): void
@@ -607,6 +729,9 @@ export declare class AgentDesktopClientAPI {
     on(message: 'ON_CALL_AUDIO_QUALITY_ALERT', handler: OnCallAudioQualityAlertHandler): void
     on(message: 'ON_WEB_SCREEN_POP_CUSTOM', handler: OnWebScreenPopCustomHandler): void
     on(message: 'ON_SAVE_ACTIVITY_RECORD', handler: OnSaveActivityRecordHandler): void
+    on(message: 'ON_VALIDATE_ASSOCIATED_RECORDS', handler: OnValidateAssociatedRecordsHandler): void
+    on(message: 'ON_REQUEST_RECORD_INFO', handler: OnRequestRecordInfoHandler): void
+    on(message: 'ON_REQUEST_RECORD_ON_SCREEN', handler: OnRequestRecordOnScreenHandler): void
 
     remove(message: 'ON_LOGIN', handler: OnLoginHandler): void
     remove(message: 'ON_LOGOUT', handler: OnLogoutHandler): void
@@ -617,6 +742,7 @@ export declare class AgentDesktopClientAPI {
     remove(message: 'ON_AGENT_STATE_CHANGE', handler: OnAgentStateChangeHandler): void
     remove(message: 'ON_REQUEST_TRANSFER_DATA', handler: OnRequestTransferDataHandler): void
     remove(message: 'ON_LOAD_TRANSFER_DATA', handler: OnLoadTransferDataHandler): void
+    remove(message: 'ON_GET_KNOWLEDGE_BASE_FOLDER', handler: OnGetKnowledgeBaseFolderHandler): void
     remove(message: 'ON_SEARCH_KNOWLEDGE_BASE', handler: OnSearchKnowledgeBaseHandler): void
     remove(message: 'ON_GET_KNOWLEDGE_BASE_ARTICLE', handler: OnGetKnowledgeBaseArticleHandler): void
     remove(message: 'ON_OPEN_RECORD', handler: OnOpenRecordHandler): void
@@ -631,6 +757,9 @@ export declare class AgentDesktopClientAPI {
     remove(message: 'ON_CALL_AUDIO_QUALITY_ALERT', handler: OnCallAudioQualityAlertHandler): void
     remove(message: 'ON_WEB_SCREEN_POP_CUSTOM', handler: OnWebScreenPopCustomHandler): void
     remove(message: 'ON_SAVE_ACTIVITY_RECORD', handler: OnSaveActivityRecordHandler): void
+    remove(message: 'ON_VALIDATE_ASSOCIATED_RECORDS', handler: OnValidateAssociatedRecordsHandler): void
+    remove(message: 'ON_REQUEST_RECORD_INFO', handler: OnRequestRecordInfoHandler): void
+    remove(message: 'ON_REQUEST_RECORD_ON_SCREEN', handler: OnRequestRecordOnScreenHandler): void
 }
 
 interface AgentDesktopClientAPIClassType {

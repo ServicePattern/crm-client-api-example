@@ -29,6 +29,7 @@
     "start": "webpack serve --config=webpack.config.js --open"
   },
   "dependencies": {
-    "focus-trap": "^6.3.0"
+    "focus-trap": "^6.3.0",
+    "lorem-ipsum": "^2.0.8"
   }
 }

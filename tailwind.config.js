@@ -4,11 +4,19 @@ module.exports = {
         content: [
             './src/**/*.html',
             './src/**/*.js',
+            './src/**/*.ts',
         ]
     },
     darkMode: false, // or 'media' or 'class'
     theme: {
-        extend: {},
+        extend: {
+            height: {
+                '40vh': '40vh',
+            },
+            colors: {
+                secondary: '#cccccc45',
+            },
+        },
     },
     variants: {
         extend: {},

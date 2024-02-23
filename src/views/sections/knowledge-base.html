@@ -1,41 +1,8 @@
 <h2 class="title">Knowledge Base</h2>
 <form onsubmit="return false">
-  <div class="grid grid-cols-2 gap-4">
-      <div class="row">
-          <label class="input-label" for="search_kb_result_textarea">Search KB result:</label>
-          <textarea class='textarea' id="search_kb_result_textarea" rows="15"
-                    placeholder="Array of KB items">
-[
-{
-"id": "random-id-1",
-"title": "Demo article",
-"text": "This is KB Article content"
-},
-{
-"id": "random-id-2",
-"title": "How to use KB articles",
-"text": "You can use KB articles when a client asks you a common question"
-}
-]
-</textarea>
-      </div>
-      <div class="row">
-          <label class="input-label" for="kb_article_full_data_textarea">KB Article full
-              data:</label>
-          <textarea class='textarea' id="kb_article_full_data_textarea" rows="12"
-                    placeholder="KB Article data">
-{
-"id": "random-id-2",
-"title": "How to use KB articles",
-"answer": "You can use KB articles when a client asks you a common question",
-"keywords": "agent,kb,article",
-"notes": "use it only to teach agents-newcomers",
-"language": "ru",
-"createdByUser": "System admin",
-"lastEditedByUser": "Pol Andersen",
-"customFields": {}
-}
-          </textarea>
+  <div class="grid gap-4">
+      <div class="row h-40vh">
+        <div id="kb_tree_root"></div>
       </div>
   </div>
 </form>

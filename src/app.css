@@ -4,6 +4,7 @@
 @import './styles/buttons.css';
 @import './styles/form-controls.css';
 @import './styles/log.css';
+@import './styles/knowledge-base.css';
 
 @tailwind base;
 @tailwind components;
