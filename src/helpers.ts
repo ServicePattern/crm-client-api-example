@@ -20,16 +20,22 @@ export function assertDefined<D>(data: D, errorMessage?: string): asserts data i
     }
 }
 
-export function findNode<N extends object, L extends object>(treeRoot: TreeStructure<N, L>, nodeId: string): TreeItem<N, L> | undefined {
-    function traverse(node: TreeItem<N, L>): TreeItem<N, L> | undefined {
-        if (node.id === nodeId) {
-            return node
+export function findNode<N extends object, L extends object>(treeRoot: TreeStructure<N, L>, nodeId: string): TreeItem<N, L> | null {
+    function traverse(children: TreeItem<N, L>[]): TreeItem<N, L> | null {
+        for (const item of children) {
+            if (item.id === nodeId) {
+                return item
+            }
+            if (item.type === 'node') {
+                const ret = traverse(Object.values(item.children))
+                if (ret !== null) {
+                    return ret
+                }
+            }
         }
-        if (node.type === 'node') {
-            return Object.values(node.children).find(traverse)
-        }
+        return null
     }
-    return Object.values(treeRoot).find(traverse)
+    return traverse(Object.values(treeRoot))
 }
 
 export function flatTree<N extends object, L extends object>(treeRoot: TreeStructure<N, L>): TreeLeaf<L>[] {

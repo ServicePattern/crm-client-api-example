@@ -62,7 +62,7 @@ export function initializeKnowledgeBaseHandlers(adApi: AgentDesktopClientAPI) {
                 'partners_1': {
                     type: 'node',
                     displayName: 'Business partners',
-                    id: 'partners_2',
+                    id: 'partners_1',
                     ref: {},
                     children: {
                         'article_4': {
@@ -171,10 +171,12 @@ export function initializeKnowledgeBaseHandlers(adApi: AgentDesktopClientAPI) {
     adApi.on('ON_GET_KNOWLEDGE_BASE_FOLDER', ({folderId}: KBFolderOptions): ExternalKBItemData[] => {
         const currentTree = kbTree.getTree()
         const foundNode = folderId ? findNode(currentTree, folderId) : undefined
+        console.log('%%%% foundNode:', foundNode)
         if (folderId && (!foundNode || foundNode.type !== 'node')) {
             return []
         }
         const requestedRoot = foundNode?.type == 'node' ? foundNode.children : currentTree
+        console.log('%%% requestedRoot:', requestedRoot)
         return Object.values(requestedRoot)
         .map<ExternalKBItemData>(item => {
             if (item.type === 'node') {
