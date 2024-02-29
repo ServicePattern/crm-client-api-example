@@ -12,6 +12,9 @@ module.exports = {
         path: path.resolve(__dirname, 'public'),
         filename: 'app.js',
     },
+    optimization: {
+        minimize: false,
+    },
     module: {
         rules: [
             {
