@@ -56,7 +56,6 @@ __metadata:
     webpack: "npm:^5.31.0"
     webpack-cli: "npm:^4.4.0"
     webpack-dev-server: "npm:^3.11.2"
-    yarn: "npm:^1.22.10"
   languageName: unknown
   linkType: soft
 
@@ -7274,16 +7273,6 @@ __metadata:
     y18n: "npm:^4.0.0"
     yargs-parser: "npm:^13.1.2"
   checksum: 10c0/6612f9f0ffeee07fff4c85f153d10eba4072bf5c11e1acba96153169f9d771409dfb63253dbb0841ace719264b663cd7b18c75c0eba91af7740e76094239d386
-  languageName: node
-  linkType: hard
-
-"yarn@npm:^1.22.10":
-  version: 1.22.19
-  resolution: "yarn@npm:1.22.19"
-  bin:
-    yarn: bin/yarn.js
-    yarnpkg: bin/yarn.js
-  checksum: 10c0/a6f9cdf67cca7e11141a18ffc1736a24dd569885b2ec0838982fcf21e5138840c66d9ebfc1846b0b35bc7b415cb985c65d79fb43aa1721b865e4f60c5569062a
   languageName: node
   linkType: hard
 
