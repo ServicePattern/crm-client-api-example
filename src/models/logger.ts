@@ -1,4 +1,4 @@
-import {AgentDesktopClientAPI} from "../brightpattern-client-api-types"
+import type {AgentDesktopClientAPI} from '../brightpattern-client-api-types'
 
 const messageClass = {
     'o': 'outgoing',

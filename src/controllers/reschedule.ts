@@ -1,5 +1,5 @@
-import { AgentDesktopClientAPI } from "../brightpattern-client-api-types";
-import {setupHoverEffect} from "../helpers";
+import {setupHoverEffect} from '../helpers'
+import type {AgentDesktopClientAPI} from '../brightpattern-client-api-types'
 
 export function initializeRescheduleHandlers(adApi: AgentDesktopClientAPI) {
     const fromTimeInput = document.getElementById('from_time_input')! as HTMLInputElement

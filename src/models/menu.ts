@@ -1,4 +1,4 @@
-import {HamburgerI} from "./hamburger"
+import type {HamburgerI} from './hamburger'
 
 interface MenuI {
     multiplySelect: boolean

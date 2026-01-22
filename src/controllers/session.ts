@@ -1,5 +1,5 @@
-import {setupHoverEffect} from "../helpers";
-import {AgentDesktopClientAPI, LoginData} from "../brightpattern-client-api-types";
+import {setupHoverEffect} from '../helpers'
+import type {AgentDesktopClientAPI, LoginData} from '../brightpattern-client-api-types'
 
 export function initializeSessionHandlers(adApi: AgentDesktopClientAPI) {
 

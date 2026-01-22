@@ -1,5 +1,5 @@
-import {setupHoverEffect} from "../../helpers";
-import {AgentDesktopClientAPI} from "../../brightpattern-client-api-types";
+import {setupHoverEffect} from '../../helpers'
+import type {AgentDesktopClientAPI} from '../../brightpattern-client-api-types'
 
 export function initializeChatHandlers(adApi: AgentDesktopClientAPI) {
 

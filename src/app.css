@@ -1,3 +1,5 @@
+@import 'tailwindcss';
+
 @import './styles/hamburger.css';
 @import './styles/tab.css';
 @import './styles/menu.css';
@@ -9,6 +11,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@theme {
+    --spacing-40vh: 40vh;
+    --color-secondary: #cccccc45;
+}
 
 * {
     box-sizing: border-box;

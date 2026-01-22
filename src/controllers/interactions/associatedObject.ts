@@ -1,5 +1,5 @@
-import {setupHoverEffect} from "../../helpers";
-import {InteractionAssociatedObject, AgentDesktopClientAPI} from "../../brightpattern-client-api-types";
+import {setupHoverEffect} from '../../helpers'
+import type {InteractionAssociatedObject, AgentDesktopClientAPI} from '../../brightpattern-client-api-types'
 
 export function initializeAssociatedObjectInteractionHandlers(adApi: AgentDesktopClientAPI) {
     const activeAssociatedInteractionIdInput = document.getElementById('active-associated_interaction_id_input')! as HTMLInputElement

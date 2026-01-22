@@ -1,5 +1,5 @@
-import {AgentDesktopClientAPI} from "../brightpattern-client-api-types";
-import {setupHoverEffect} from "../helpers";
+import {setupHoverEffect} from '../helpers'
+import type {AgentDesktopClientAPI} from '../brightpattern-client-api-types'
 
 export function initializeServicesAndDIDHandlers(adApi: AgentDesktopClientAPI) {
     const serviceIdInput = document.getElementById('service_id_input')! as HTMLInputElement

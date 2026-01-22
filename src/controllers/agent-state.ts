@@ -1,5 +1,5 @@
-import { AgentDesktopClientAPI } from "../brightpattern-client-api-types"
-import {setupHoverEffect} from "../helpers";
+import {setupHoverEffect} from '../helpers'
+import type {AgentDesktopClientAPI} from '../brightpattern-client-api-types'
 
 export function initializeAgentStateHandlers(adApi: AgentDesktopClientAPI) {
     const agentStateInput = document.getElementById('agent_state_input')! as HTMLInputElement

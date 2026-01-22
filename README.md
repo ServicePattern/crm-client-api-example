@@ -4,26 +4,15 @@
 Compiles app in `/public` folder 
 
 ```bash
-yarn install
+yarn
 yarn build 
 ```
 
-### Run
-Starts the test page on `localhost:8080`
-```bash
-yarn install
-yarn start
-```
-
-
 ### Run with the watcher
-Starts the test page on `localhost:8080` and auto-compile changed files.
+Starts the test page on `localhost:5173` and auto-compile changed files.
 ```bash
-yarn install
-yarn watch
-```
-```bash
-yarn start
+yarn
+yarn dev
 ```
 
 ## Options
@@ -42,13 +31,13 @@ In order to disable new interaction popup from Agent Helper application, you nee
 ## Example:
 
 #### API with Communicator app:
-- `http://localhost:8080?bpatternDomain=example.brightpattern.com`
+- `http://localhost:5173?bpatternDomain=example.brightpattern.com`
 
 #### Standalone API (without Communicator app)
-- `http://localhost:8080?bpatternDomain=example.brightpattern.com&standalone=true`
+- `http://localhost:5173?bpatternDomain=example.brightpattern.com&standalone=true`
 
 #### Disabled popup
-- `http://localhost:8080?bpatternDomain=example.brightpattern.com&no-popup=true`
+- `http://localhost:5173?bpatternDomain=example.brightpattern.com&no-popup=true`
 
 ### Standalone + disabled popup
-- `http://localhost:8080?bpatternDomain=example.brightpattern.com&standalone=true&no-popup=true`
+- `http://localhost:5173?bpatternDomain=example.brightpattern.com&standalone=true&no-popup=true`

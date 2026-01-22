@@ -1,5 +1,5 @@
-import {AgentDesktopClientAPI} from "../../brightpattern-client-api-types";
-import {setupHoverEffect} from "../../helpers";
+import {setupHoverEffect} from '../../helpers'
+import type {AgentDesktopClientAPI} from '../../brightpattern-client-api-types'
 
 export function initializeConferenceInteractionHandlers(adApi: AgentDesktopClientAPI) {
     const conferencePhoneNumberInput = document.getElementById('conference_phone_number_input')! as HTMLInputElement

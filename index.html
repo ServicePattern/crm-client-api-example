@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>API test</title>
+</head>
+<body>
+<script type="module" src="src/app.ts"></script>
+<main class="main">
+    {{> menu}}
+    <div class="content-wrapper">
+        <section class="content">
+            <header class="flex justify-between items-center">
+                {{> hamburger}}
+                <button class="button_helper reset_size_button py-1 px-2 text-sm font-light">Reset size</button>
+            </header>
+            <div class="controls">
+                <section data-name="session" class="section max-w-lg opened">
+                    {{> sections/session}}
+                </section>
+                <section class="section max-w-lg" data-name="phone-device">
+                    {{> sections/session}}
+                    {{> sections/phone-device}}
+                </section>
+                <section class="section max-w-lg" data-name="agent-state">
+                    {{> sections/agent-state}}
+                </section>
+                <section class="section max-w-lg" data-name="teams">
+                    {{> sections/teams}}
+                </section>
+                <section class="section max-w-lg" data-name="services-did">
+                    {{> sections/services-did}}
+                </section>
+                <section class="section" data-name="interaction">
+                    <h2 class="title justify-self-center">Interactions</h2>
+                    <nav class="tab">
+                        {{> sections/interaction/tabs}}
+                    </nav>
+                    {{> sections/interaction/tab-content/start-interaction}}
+                    {{> sections/interaction/tab-content/chat}}
+                    {{> sections/interaction/tab-content/transfer}}
+                    {{> sections/interaction/tab-content/conference}}
+                    {{> sections/interaction/tab-content/active-interaction}}
+                    {{> sections/interaction/tab-content/active-associated}}
+                    {{> sections/interaction/tab-content/notes}}
+                    {{> sections/interaction/tab-content/end-interaction}}
+                </section>
+                <section class="section" data-name="reschedule">
+                    {{> sections/reschedule}}
+                </section>
+                <section class="section max-w-lg inline-block" data-name="screen-recording">
+                    {{> sections/screen-recording}}
+                </section>
+                <section class="section max-w-lg inline-block" data-name="widget-config">
+                    {{> sections/widget-config}}
+                </section>
+                <section class="section w-full" data-name="knowledge-base">
+                    {{> sections/knowledge-base}}
+                </section>
+            </div>
+        </section>
+        {{> log-container}}
+    </div>
+</main>
+<aside id="adc_mount_node" class="communicator"></aside>
+</body>
+</html>

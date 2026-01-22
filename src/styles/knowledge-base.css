@@ -8,5 +8,5 @@
 }
 
 .tree-leaf {
-  @apply tree-item px-2 hover:bg-secondary;
+  @reference tree-item px-2 hover:bg-secondary;
 }

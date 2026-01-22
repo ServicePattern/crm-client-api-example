@@ -1,5 +1,5 @@
-import {AgentDesktopClientAPI} from "../../brightpattern-client-api-types";
-import {setupHoverEffect} from "../../helpers";
+import {setupHoverEffect} from '../../helpers'
+import type {AgentDesktopClientAPI} from '../../brightpattern-client-api-types'
 
 export function initializeTransferInteractionHandlers(adApi: AgentDesktopClientAPI) {
     const interactionIdInput = document.getElementById('interaction_id_input')! as HTMLInputElement

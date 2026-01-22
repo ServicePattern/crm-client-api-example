@@ -1,5 +1,5 @@
-import * as focusTrap from "focus-trap";
-import {FocusTrap} from "focus-trap";
+import * as focusTrap from 'focus-trap'
+import type {FocusTrap} from 'focus-trap'
 
 export interface HamburgerI {
     toggle(evtOrForceShow?: boolean | Event): void

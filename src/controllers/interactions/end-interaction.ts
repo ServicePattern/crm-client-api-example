@@ -1,5 +1,5 @@
-import {setupHoverEffect} from "../../helpers";
-import {AgentDesktopClientAPI} from "../../brightpattern-client-api-types";
+import {setupHoverEffect} from '../../helpers'
+import type {AgentDesktopClientAPI} from '../../brightpattern-client-api-types'
 
 export function initializeEndInteractionHandlers(adApi: AgentDesktopClientAPI) {
     const completeNoteInput = document.getElementById('complete_note_input')! as HTMLInputElement

@@ -1,5 +1,5 @@
-import { AgentDesktopClientAPI } from "../brightpattern-client-api-types";
-import {setupHoverEffect} from "../helpers";
+import {setupHoverEffect} from '../helpers'
+import type {AgentDesktopClientAPI} from '../brightpattern-client-api-types'
 
 export function initializeScreenRecordingHandlers(adApi: AgentDesktopClientAPI) {
     const screenRecordingMuteCheckbox = document.getElementById('screen_recording_mute_checkbox')! as HTMLInputElement

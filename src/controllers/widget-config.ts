@@ -1,5 +1,5 @@
-import {AgentDesktopClientAPI} from "../brightpattern-client-api-types";
-import {setupHoverEffect} from "../helpers";
+import {setupHoverEffect} from '../helpers'
+import type {AgentDesktopClientAPI} from '../brightpattern-client-api-types'
 
 export function initializeWidgetAndConfigHandlers(adApi: AgentDesktopClientAPI) {
     const getConfigButton = document.getElementById('get_config_button')!
