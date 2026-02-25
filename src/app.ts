@@ -41,7 +41,7 @@ function loadCommWidgetApi() {
         scriptTag.addEventListener('load', resolve)
         scriptTag.addEventListener('error', reject)
         scriptTag.type = 'application/javascript'
-        scriptTag.src = `https://${brightpatternDomain}/agent/communicator/adapters/api.js`
+        scriptTag.src = `https://${brightpatternDomain}/agent/crmembedded/adapters/api.js`
         document.head.appendChild(scriptTag)
     })
 }
