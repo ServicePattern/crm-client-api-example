@@ -3,7 +3,7 @@
 
 export const requestMessages = [
     'GET_LOGIN_STATE',
-    'LOGIN',
+    'OPEN_LOGIN',
     'LOGOUT',
     'GET_AGENT_STATE',
     'SET_AGENT_STATE',
@@ -280,7 +280,6 @@ export type LoginStateData = {
     isLoggedIn: boolean
     agentId?: string
     username?: string
-    sessionId?: string
 }
 
 export type AgentStateData = {
@@ -496,12 +495,6 @@ export type ServerErrorData = {
     message?: string
 }
 
-export type LoginData = {
-    username: string
-    password: string
-    tenant?: string
-}
-
 export type PhoneCapabilities = {
     canDial: boolean
     canAnswer: boolean
@@ -646,7 +639,7 @@ export declare class AgentDesktopClientAPI {
     injectMessageLogger(callback: MessageLogger): void
 
     getLoginState(): Promise<OperationResult<LoginStateData>>
-    login(loginData: LoginData, force?: boolean): Promise<OperationResult>
+    openLogin(): Promise<OperationResult>
     logout(): Promise<OperationResult>
     getAgentState(): Promise<OperationResult<AgentStateData>>
     setAgentState(state: AgentState, notReadyReason?: string): Promise<OperationResult>
