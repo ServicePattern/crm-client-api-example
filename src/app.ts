@@ -30,6 +30,7 @@ const urlParams = new URLSearchParams(location.search)
 
 const brightpatternDomain = urlParams.get('bpatternDomain') || 'localhost:3000'
 const integrationKey = urlParams.get('integrationKey') || 'test-adapter'
+const commWidgetVersion = urlParams.get('version') || '2.0'
 
 
 loadCommWidgetApi().then(initializeIntegration)
@@ -41,7 +42,8 @@ function loadCommWidgetApi() {
         scriptTag.addEventListener('load', resolve)
         scriptTag.addEventListener('error', reject)
         scriptTag.type = 'application/javascript'
-        scriptTag.src = `https://${brightpatternDomain}/agent/crmembedded/adapters/api.js`
+        const app = commWidgetVersion === '1.0' ? 'communicator' : 'crmembedded'
+        scriptTag.src = `https://${brightpatternDomain}/agent/${app}/adapters/api.js`
         document.head.appendChild(scriptTag)
     })
 }

@@ -18,7 +18,12 @@ yarn dev
 ## Options
 
 ### Configure Bright Pattern instance domain
+
 You need to provider `bpatternDomain` URL parameter to provide domain of your instance (tenant URL).
+
+### Comm.Widget 1.0 vs Comm.Widget 2.0
+
+Parameter `version` determines which Comm.Widget and JS API version will be used. Available values: `1.0` or `2.0`. It uses version 2.0 by default
 
 ### No Comm.Widget UI
 
@@ -33,7 +38,16 @@ In order to disable new interaction popup from Agent Helper application, you nee
 #### API with Communicator app:
 - `http://localhost:5173?bpatternDomain=example.brightpattern.com`
 
-#### Standalone API (without Communicator app)
+### API for Comm.Widget 1.0:
+- `http://localhost:5173?bpatternDomain=example.brightpattern.com&version=1.0`
+
+### API for Comm.Widget 2.0:
+- `http://localhost:5173?bpatternDomain=example.brightpattern.com&version=2.0`
+
+#### Standalone Comm.Widget 1.0 API (without Comm.Widget UI)
+- `http://localhost:5173?bpatternDomain=example.brightpattern.com&standalone=true&version=1.0`
+
+#### Standalone Comm.Widget 2.0 API (without Comm.Widget UI)
 - `http://localhost:5173?bpatternDomain=example.brightpattern.com&standalone=true`
 
 #### Disabled popup
