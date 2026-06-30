@@ -30,7 +30,7 @@ const urlParams = new URLSearchParams(location.search)
 
 const brightpatternDomain = urlParams.get('bpatternDomain') || 'localhost:3000'
 const integrationKey = urlParams.get('integrationKey') || 'test-adapter'
-const commWidgetVersion = urlParams.get('version') || '2.0'
+const commWidgetVersion = urlParams.get('version') || '1.0'
 
 
 loadCommWidgetApi().then(initializeIntegration)
