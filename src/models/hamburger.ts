@@ -43,8 +43,6 @@ export class Hamburger implements HamburgerI {
     }
 
     isOpened = () => {
-        console.log('this.hamburger.classList-->', this?.hamburger?.classList.contains('expanded'))
-
         return !!this.hamburger?.classList?.contains('expanded')
     }
 

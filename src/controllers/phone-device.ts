@@ -9,23 +9,22 @@ export function initializePhoneDeviceHandlers(adApi: AgentDesktopClientAPI) {
     const setPhoneDeviceButton = document.getElementById('set_phone_device_button')!
     const getPhoneDevicesListButton = document.getElementById('get_phone_devices_list_button')!
 
+    setupHoverEffect(getPhoneDevicesListButton, [])
+    getPhoneDevicesListButton.onclick = () => {
+        adApi.getPhoneDevicesList()
+    }
 
-setupHoverEffect(getPhoneDevicesListButton, [])
-getPhoneDevicesListButton.onclick = () => {
-    adApi.getPhoneDevicesList()
-}
+    setupHoverEffect(getPhoneDeviceButton, [])
+    getPhoneDeviceButton.onclick = () => {
+        adApi.getPhoneDevice()
+    }
 
-setupHoverEffect(getPhoneDeviceButton, [])
-getPhoneDeviceButton.onclick = () => {
-    adApi.getPhoneDevice()
-}
-
-setupHoverEffect(setPhoneDeviceButton, [phoneDeviceTypeInput, phoneDeviceNumberInput])
-setPhoneDeviceButton.onclick = () => {
-    adApi.setPhoneDevice({
-        type: phoneDeviceTypeInput.value as any,
-        phone: phoneDeviceNumberInput.value,
-    })
-}
+    setupHoverEffect(setPhoneDeviceButton, [phoneDeviceTypeInput, phoneDeviceNumberInput])
+    setPhoneDeviceButton.onclick = () => {
+        adApi.setPhoneDevice({
+            type: phoneDeviceTypeInput.value as any,
+            phone: phoneDeviceNumberInput.value,
+        })
+    }
 
 }

@@ -137,7 +137,7 @@ export function initializeKnowledgeBaseHandlers(adApi: AgentDesktopClientAPI) {
         if (folderId && (!foundNode || foundNode.type !== 'node')) {
             return []
         }
-        const searchRoot = foundNode?.type == 'node' ? foundNode.children : currentTree
+        const searchRoot = foundNode?.type === 'node' ? foundNode.children : currentTree
         const allLeafs = flatTree(searchRoot)
 
         return allLeafs
@@ -164,19 +164,17 @@ export function initializeKnowledgeBaseHandlers(adApi: AgentDesktopClientAPI) {
             lastEditedByUser: 'unknown',
             notes: 'empty',
             language: 'en',
-            customFields: [],
+            customFields: {},
         }
     })
 
     adApi.on('ON_GET_KNOWLEDGE_BASE_FOLDER', ({folderId}: KBFolderOptions): ExternalKBItemData[] => {
         const currentTree = kbTree.getTree()
         const foundNode = folderId ? findNode(currentTree, folderId) : undefined
-        console.log('%%%% foundNode:', foundNode)
         if (folderId && (!foundNode || foundNode.type !== 'node')) {
             return []
         }
-        const requestedRoot = foundNode?.type == 'node' ? foundNode.children : currentTree
-        console.log('%%% requestedRoot:', requestedRoot)
+        const requestedRoot = foundNode?.type === 'node' ? foundNode.children : currentTree
         return Object.values(requestedRoot)
         .map<ExternalKBItemData>(item => {
             if (item.type === 'node') {

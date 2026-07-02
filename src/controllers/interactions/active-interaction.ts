@@ -29,13 +29,6 @@ export function initializeActiveInteractionHandlers(adApi: AgentDesktopClientAPI
         adApi.switchActiveInteraction(itemId)
     }
 
-
-    setupHoverEffect(switchActiveInteractionButton, [activeInteractionIdInput])
-    switchActiveInteractionButton.onclick = () => {
-        const itemId = activeInteractionIdInput.value
-        adApi.switchActiveInteraction(itemId)
-    }
-
     setupHoverEffect(acceptInteractionButton, [activeInteractionIdInput])
     acceptInteractionButton.onclick = () => {
         const itemId = activeInteractionIdInput.value

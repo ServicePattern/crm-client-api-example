@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 /** Must not have dependencies (imports) */
 
 export const requestMessages = [
     'GET_LOGIN_STATE',
+    'LOGIN',
     'OPEN_LOGIN',
     'LOGOUT',
     'GET_AGENT_STATE',
@@ -87,8 +87,10 @@ export const callbackMessages = {
     'ON_AUDIO_DEVICE_CHANGE': {needResponse: false},
     'ON_PHONE_CAPABILITIES_CHANGE': {needResponse: false},
     'ON_CALL_AUDIO_QUALITY_ALERT': {needResponse: false},
+    'ON_SUMMARY_GENERATION_STARTED': {needResponse: false},
+    'ON_SUMMARY_GENERATION_COMPLETED': {needResponse: false},
     'ON_WEB_SCREEN_POP_CUSTOM': {needResponse: true},
-    'ON_SAVE_ACTIVITY_RECORD': {needResponse: false},
+    'ON_SAVE_ACTIVITY_RECORD': {needResponse: true},
     'ON_VALIDATE_ASSOCIATED_RECORDS': {needResponse: true},
     'ON_REQUEST_RECORD_INFO': {needResponse: true},
     'ON_REQUEST_RECORD_ON_SCREEN': {needResponse: true},
@@ -108,8 +110,10 @@ export type CallbackMessageWithResponse = FilterByHavingResponse<typeof callback
 export const RESPONSE_SUFFIX = '_RESPONSE' as const
 
 export const requestResponseMessages = requestMessages.map<`${RequestMessage}${typeof RESPONSE_SUFFIX}`>(message => {
-    return `${message}${RESPONSE_SUFFIX}`
+    return `${message}${RESPONSE_SUFFIX}` as const
 })
+export type RequestResponseMessage = typeof requestResponseMessages[number]
+
 export const callbackResponseMessages = typedKeys(callbackMessages)
     .filter<CallbackMessageWithResponse>((message: CallbackMessage): message is CallbackMessageWithResponse => {
         return callbackMessages[message].needResponse
@@ -121,39 +125,6 @@ export const callbackResponseMessages = typedKeys(callbackMessages)
 export type CallbackResponseMessage = keyof {
     [Key in keyof typeof callbackMessages as typeof callbackMessages[Key] extends {needResponse: true} ? `${Key}${typeof RESPONSE_SUFFIX}` : never]: true
 }
-
-export type CallbackMethodsReturnTypeMap = {
-    'ON_LOGIN': void
-    'ON_LOGOUT': void
-    'ON_NEW_INTERACTION': void
-    'ON_INTERACTION_REMOVED': void
-    'ON_INTERACTION_STATE_CHANGE': void
-    'ON_ACTIVE_INTERACTION_SWITCHED': void
-    'ON_AGENT_STATE_CHANGE': void
-    'ON_REQUEST_TRANSFER_DATA': CustomTransferData
-    'ON_LOAD_TRANSFER_DATA': void
-    'ON_GET_KNOWLEDGE_BASE_FOLDER': ExternalKBItemData[]
-    'ON_SEARCH_KNOWLEDGE_BASE': ExternalKBSearchResultData[]
-    'ON_GET_KNOWLEDGE_BASE_ARTICLE': ExternalKBArticleData | null
-    'ON_OPEN_RECORD': void
-    'ON_SEARCH_RECORDS': void
-    'ON_SHOW_SCREEN': void
-    'ON_SCREEN_RECORDING_STATE_CHANGE': void
-    'ON_WIDGET_MINIMIZED_CHANGE': void
-    'ON_SERVER_ERROR': void
-    'ON_SOFTPHONE_STATUS_CHANGE': void
-    'ON_AUDIO_DEVICE_CHANGE': void
-    'ON_PHONE_CAPABILITIES_CHANGE': void
-    'ON_CALL_AUDIO_QUALITY_ALERT': void
-    'ON_WEB_SCREEN_POP_CUSTOM': boolean
-    'ON_SAVE_ACTIVITY_RECORD': void
-    'ON_VALIDATE_ASSOCIATED_RECORDS': RecordsValidationResult
-    'ON_REQUEST_RECORD_INFO': InteractionAssociatedObjectData | null
-    'ON_REQUEST_RECORD_ON_SCREEN': InteractionAssociatedObjectData | null
-}
-
-const resultStatus = ['error', 'success'] as const
-export type ResultStatus = typeof resultStatus[number]
 
 export const resultErrorCodes = {
     not_enough_privileges: 1,
@@ -243,11 +214,15 @@ export const chatChannelTypes = [
     'twitter',
     'wechat',
     'whatsapp',
+    'ms_teams',
 ] as const
 export type ChatChannelType = typeof chatChannelTypes[number]
 
 export const callDirections = ['inbound', 'outbound'] as const
 export type CallDirection = typeof callDirections[number]
+
+export const interactionKinds = ['unknown', 'direct_call', 'outbound', 'scenario', 'chat'] as const
+export type InteractionKind = typeof interactionKinds[number]
 
 export const phoneDevices = [
     'phone_type_browser',
@@ -280,6 +255,7 @@ export type LoginStateData = {
     isLoggedIn: boolean
     agentId?: string
     username?: string
+    sessionId?: string
 }
 
 export type AgentStateData = {
@@ -337,6 +313,8 @@ export type InteractionData = {
     callRecording: boolean
     chatParties: ChatParty[]
     attachedData: AttachedData
+    internal: boolean
+    interactionKind?: InteractionKind
     phoneNumber?: string
     email?: string
     callDirection?: CallDirection
@@ -350,7 +328,7 @@ export type InteractionData = {
     recordingUrl?: string
     DNIS?: string
     ANI?: string
-    origination?: InteractionOrigination
+    origination?: JSAPI_InteractionOrigination
 
     /** @deprecated */
     subject: string
@@ -365,6 +343,8 @@ export type InteractionActivityData = {
     type: InteractionType
     associatedObjects: InteractionAssociatedObjectsData
     attachedData: AttachedData
+    internal: boolean
+    interactionKind?: InteractionKind
     phoneNumber?: string
     email?: string
     callDirection?: CallDirection
@@ -378,7 +358,11 @@ export type InteractionActivityData = {
     recordingUrl?: string
     DNIS?: string
     ANI?: string
-    origination?: InteractionOrigination
+    origination?: JSAPI_InteractionOrigination
+    /** Values from Activity Form mapped by "integrationField" (special activity form field property) */
+    formValues?: Record<string, string | boolean>
+    /** Other party display name */
+    contactName: string
 
     /** @deprecated */
     subject: string
@@ -405,7 +389,7 @@ export type ExternalKBArticleData = {
     language: string
     createdByUser: string
     lastEditedByUser: string
-    customFields: string[]
+    customFields: Record<string, string>
 }
 export type ExternalKBArticle = ExternalKBArticleData & {source: string}
 
@@ -495,6 +479,12 @@ export type ServerErrorData = {
     message?: string
 }
 
+export type LoginData = {
+    username: string
+    password: string
+    tenant?: string
+}
+
 export type PhoneCapabilities = {
     canDial: boolean
     canAnswer: boolean
@@ -527,9 +517,28 @@ export type WebScreenPop = {
     }
 }
 
-export const interactionOriginations = [
+export type InteractionSummaryResult = InteractionSummary | InteractionSummaryFailed
+
+export type InteractionSummary = {
+    interactionId: string
+    success: true
+    topics: SummaryTopic[]
+}
+
+export type InteractionSummaryFailed = {
+    interactionId: string
+    success: false
+    errorCode: string
+}
+
+export type SummaryTopic = {
+    name: string
+    value: string
+}
+
+export const jsApi_interactionOriginations = [
+    'chat-center',
     'dialpad',
-    'dialpad-search',
     'directory',
     'recent',
     'favorites',
@@ -540,9 +549,12 @@ export const interactionOriginations = [
     'conference',
     'auto',
     'integration-api',
-    'chat-center',
+    'internal-chat-page',
+    'topbar',
+    'supervisor-screen',
+    'transfer-panel',
 ] as const
-export type InteractionOrigination = typeof interactionOriginations[number]
+export type JSAPI_InteractionOrigination = typeof jsApi_interactionOriginations[number]
 
 export type InteractionsState = {
     activeInteractionId: string | null
@@ -569,6 +581,12 @@ export type DialCandidate = {
     phones: PhoneData[]
     associatedObjects: InteractionAssociatedObjectData[]
     email?: string
+    avatarUrl?: string
+}
+
+export type ContactDetails = {
+    firstName?: string
+    lastName?: string
 }
 
 export type RecordsValidationResult = {
@@ -579,6 +597,12 @@ export type RecordsValidationResult = {
 export type RecordInfoRequest = {
     id: string
     type: string
+}
+
+export type ActivityRecordInfo = {
+    id: string | null
+    caseId?: string
+    contactId?: string
 }
 
 export type InitialObjects = InteractionAssociatedObjectData | InteractionAssociatedObjectData[]
@@ -611,8 +635,10 @@ export type OnSoftphoneStatusChangeHandler = (ready: boolean, error?: string) =>
 export type OnAudioDeviceChangeHandler = (inputDevice?: string, outputDevice?: string) => SyncAsyncResult
 export type OnPhoneCapabilitiesChangeHandler = (caps: PhoneCapabilities) => SyncAsyncResult
 export type OnCallAudioQualityAlertHandler = (callId: string, alert: boolean) => SyncAsyncResult
+export type OnSummaryGenerationStartedHandler = (interactionId: string) => SyncAsyncResult
+export type OnSummaryGenerationCompletedHandler = (summaryData: InteractionSummaryResult) => SyncAsyncResult
 export type OnWebScreenPopCustomHandler = (interactionId: string, webScreenPop: WebScreenPop) => SyncAsyncResult<boolean>
-export type OnSaveActivityRecordHandler = (activity: InteractionActivityData) => SyncAsyncResult
+export type OnSaveActivityRecordHandler = (activity: InteractionActivityData) => SyncAsyncResult<ActivityRecordInfo | undefined | void>
 export type OnValidateAssociatedRecordsHandler = (interactionId: string, records: InteractionAssociatedObjectsData) => SyncAsyncResult<RecordsValidationResult>
 export type OnRequestRecordInfoHandler = (payload: RecordInfoRequest) => SyncAsyncResult<InteractionAssociatedObjectData | null>
 export type OnRequestRecordOnScreenHandler = () => SyncAsyncResult<InteractionAssociatedObjectData | null>
@@ -622,23 +648,37 @@ export type MessageLogger = (message: string, data: any) => void
 // TODO: resolve type issues
 export type InitOptions = {
     integrationKey?: string
-    // @ts-ignore
     adcFrame?: any // HTMLIFrameElement
-    // @ts-ignore
     mountRoot?: any // HTMLElement
     standalone?: boolean
     disableNewInteractionPopup?: boolean
+    adaptiveWidth?: boolean
 }
 
-export declare class AgentDesktopClientAPI {
-    // @ts-ignore
-    adcFrame: any // HTMLIFrameElement | null
+export type APIInstanceParams = {
+    integrationKey: string
+    instanceId: string
+    urlParams: string
+    disableNewInteractionPopup: boolean
+    adaptiveWidth: boolean
+}
 
+export type APIPacket<T = unknown[]> = {
+    instanceId: string | 'broadcast'
+    type: string
+    uid: string
+    params: T
+    noHandlers?: true
+}
+
+
+export declare class AgentDesktopClientAPI {
     constructor(options?: InitOptions)
 
     injectMessageLogger(callback: MessageLogger): void
 
     getLoginState(): Promise<OperationResult<LoginStateData>>
+    login(loginData: LoginData, force?: boolean): Promise<OperationResult>
     openLogin(): Promise<OperationResult>
     logout(): Promise<OperationResult>
     getAgentState(): Promise<OperationResult<AgentStateData>>
@@ -720,6 +760,8 @@ export declare class AgentDesktopClientAPI {
     on(message: 'ON_AUDIO_DEVICE_CHANGE', handler: OnAudioDeviceChangeHandler): void
     on(message: 'ON_PHONE_CAPABILITIES_CHANGE', handler: OnPhoneCapabilitiesChangeHandler): void
     on(message: 'ON_CALL_AUDIO_QUALITY_ALERT', handler: OnCallAudioQualityAlertHandler): void
+    on(message: 'ON_SUMMARY_GENERATION_STARTED', handler: OnSummaryGenerationStartedHandler): void
+    on(message: 'ON_SUMMARY_GENERATION_COMPLETED', handler: OnSummaryGenerationCompletedHandler): void
     on(message: 'ON_WEB_SCREEN_POP_CUSTOM', handler: OnWebScreenPopCustomHandler): void
     on(message: 'ON_SAVE_ACTIVITY_RECORD', handler: OnSaveActivityRecordHandler): void
     on(message: 'ON_VALIDATE_ASSOCIATED_RECORDS', handler: OnValidateAssociatedRecordsHandler): void
@@ -748,6 +790,8 @@ export declare class AgentDesktopClientAPI {
     remove(message: 'ON_AUDIO_DEVICE_CHANGE', handler: OnAudioDeviceChangeHandler): void
     remove(message: 'ON_PHONE_CAPABILITIES_CHANGE', handler: OnPhoneCapabilitiesChangeHandler): void
     remove(message: 'ON_CALL_AUDIO_QUALITY_ALERT', handler: OnCallAudioQualityAlertHandler): void
+    remove(message: 'ON_SUMMARY_GENERATION_STARTED', handler: OnSummaryGenerationStartedHandler): void
+    remove(message: 'ON_SUMMARY_GENERATION_COMPLETED', handler: OnSummaryGenerationCompletedHandler): void
     remove(message: 'ON_WEB_SCREEN_POP_CUSTOM', handler: OnWebScreenPopCustomHandler): void
     remove(message: 'ON_SAVE_ACTIVITY_RECORD', handler: OnSaveActivityRecordHandler): void
     remove(message: 'ON_VALIDATE_ASSOCIATED_RECORDS', handler: OnValidateAssociatedRecordsHandler): void
