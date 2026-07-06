@@ -22,19 +22,17 @@ export function initializeSessionHandlers(adApi: AgentDesktopClientAPI) {
         savedLoginData = undefined
     });
 
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ AAHHA')
+    const tenantInput = document.getElementById('tenant_input')! as HTMLInputElement
+    const usernameInput = document.getElementById('username_input')! as HTMLInputElement
+    const passwordInput = document.getElementById('password_input')! as HTMLInputElement
 
-    const tenantInput = document.getElementById('tenant_input') as HTMLInputElement | null
-    const usernameInput = document.getElementById('username_input') as HTMLInputElement | null
-    const passwordInput = document.getElementById('password_input') as HTMLInputElement | null
-
-    const loginButton = document.getElementById('login_button')!
+    const loginButton = document.getElementById('login_button')! as HTMLButtonElement
+    const openLoginButton = document.getElementById('open_login_button')!
     const logoutButton = document.getElementById('logout_button')!
     const getLoginStateButton = document.getElementById('get_login_state_button')!
 
     if (commWidgetVersion !== '1.0') {
-        document.getElementById('login_inputs')?.remove()
-        loginButton.textContent = 'Open Login'
+        loginButton.disabled = true
     }
 
     setupHoverEffect(getLoginStateButton, [])
@@ -42,19 +40,20 @@ export function initializeSessionHandlers(adApi: AgentDesktopClientAPI) {
         adApi.getLoginState()
     }
 
-    setupHoverEffect(loginButton, commWidgetVersion === '1.0' ? [tenantInput!, usernameInput!, passwordInput!] : [])
+    setupHoverEffect(loginButton, [tenantInput, usernameInput, passwordInput])
     loginButton.onclick = () => {
-        if (commWidgetVersion === '1.0') {
-            const username = usernameInput!.value
-            const password = passwordInput!.value
-            const tenant = tenantInput!.value
+        const username = usernameInput!.value
+        const password = passwordInput!.value
+        const tenant = tenantInput!.value
 
-            const loginData: LoginData = {username, password, tenant}
-            savedLoginData = loginData
-            adApi.login(loginData)
-        } else {
-            adApi.openLogin()
-        }
+        const loginData: LoginData = {username, password, tenant}
+        savedLoginData = loginData
+        adApi.login(loginData)
+    }
+
+    setupHoverEffect(openLoginButton, [])
+    openLoginButton.onclick = () => {
+        adApi.openLogin()
     }
 
     setupHoverEffect(logoutButton, [])
