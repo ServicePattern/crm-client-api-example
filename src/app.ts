@@ -25,12 +25,11 @@ import {initializeResizeButtonHandler} from './controllers/resize-button'
 import './app.css'
 
 
-const adcMountNode = document.getElementById('adc_mount_node')!
 const urlParams = new URLSearchParams(location.search)
 
 const brightpatternDomain = urlParams.get('bpatternDomain') || 'localhost:3000'
 const integrationKey = urlParams.get('integrationKey') || 'test-adapter'
-const commWidgetVersion = urlParams.get('version') || '1.0'
+const commWidgetVersion = urlParams.get('version') || '2.0'
 
 
 loadCommWidgetApi().then(initializeIntegration)
@@ -52,7 +51,6 @@ function initializeIntegration() {
 
     const adApi = new window.brightpattern.AdApi({
         integrationKey,
-        mountRoot: adcMountNode,
         standalone: !!urlParams.get('standalone'),
         disableNewInteractionPopup: !!urlParams.get('no-popup'),
     })

@@ -40,6 +40,9 @@ html, body {
     height: 100%;
     @apply shadow-md;
 }
+#adc_frame {
+    min-width: 500px !important;
+}
 
 .content {
     display: flex;
